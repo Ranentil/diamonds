@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Web
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "diamonds", "diamonds\diamonds.csproj", "{476AA79C-8ED7-4E9A-8FDA-45C8494268DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{476AA79C-8ED7-4E9A-8FDA-45C8494268DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{476AA79C-8ED7-4E9A-8FDA-45C8494268DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{476AA79C-8ED7-4E9A-8FDA-45C8494268DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{476AA79C-8ED7-4E9A-8FDA-45C8494268DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
