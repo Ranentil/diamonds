@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Web
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "diamonds", "diamonds\diamonds.csproj", "{476AA79C-8ED7-4E9A-8FDA-45C8494268DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Diamonds", "diamonds\Diamonds.csproj", "{476AA79C-8ED7-4E9A-8FDA-45C8494268DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Web.WebPages.OAuth;
-using diamonds.Models;
+using Diamonds.Models;
 
-namespace diamonds
+namespace Diamonds
 {
     public static class AuthConfig
     {
