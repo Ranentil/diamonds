@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Diamonds.Models.Entities
@@ -13,8 +12,8 @@ namespace Diamonds.Models.Entities
         public int userId { get; set; }
         public string description { get; set; }
 
-        public Gallery Gallery { get; set; }
-        public User User { get; set; }
+        public virtual Gallery Gallery { get; set; }
+        public virtual User User { get; set; }
     }
 
     public class PhotoMapping : EntityTypeConfiguration<Photo>

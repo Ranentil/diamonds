@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Diamonds.Models.Entities
@@ -14,7 +13,7 @@ namespace Diamonds.Models.Entities
         public DateTime startDate { get; set; }
         public Nullable<DateTime> endDate { get; set; }
 
-        public ICollection<Photo> Photos { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
     }
 
     public class GalleryMapping : EntityTypeConfiguration<Gallery>

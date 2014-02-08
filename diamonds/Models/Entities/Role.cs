@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Diamonds.Models.Entities
@@ -12,7 +11,7 @@ namespace Diamonds.Models.Entities
         public int id { get; set; }
         public string name { get; set; }
 
-        public ICollection<User> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 
     public class RoleMapping : EntityTypeConfiguration<Role>

@@ -176,15 +176,22 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\DMembershipProvider.cs" />
+    <Compile Include="Models\Entities\Action.cs" />
+    <Compile Include="Models\Entities\Comment.cs" />
     <Compile Include="Models\Entities\DiamondsEntities.cs" />
     <Compile Include="Models\EmptyStringModelBinder.cs" />
+    <Compile Include="Models\Entities\Event.cs" />
     <Compile Include="Models\Entities\Gallery.cs" />
+    <Compile Include="Models\Entities\Lineup.cs" />
     <Compile Include="Models\Entities\News.cs" />
     <Compile Include="Models\Entities\Photo.cs" />
     <Compile Include="Models\Entities\Player.cs" />
