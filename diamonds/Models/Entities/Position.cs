@@ -9,11 +9,14 @@ namespace Diamonds.Models.Entities
     {
         public byte id { get; set; }
         public string name { get; set; }
-        public string player { get; set; }
+        public int playerLid { get; set; }
+
+        public string player { get { return Player.pl; } }
 
         public virtual ICollection<Player> Players { get; set; }
         public virtual ICollection<Action> Actions { get; set; }
         public virtual ICollection<Lineup> Lineups { get; set; }
+        public virtual Localization Player { get; set; }
     }
 
     public class PositionMapping : EntityTypeConfiguration<Position>

@@ -17,7 +17,10 @@ namespace Diamonds.Models.Entities
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Configurations.Add(new CommentMapping());
+            modelBuilder.Configurations.Add(new EventMapping());
             modelBuilder.Configurations.Add(new GalleryMapping());
+            modelBuilder.Configurations.Add(new LocalizationMapping());
             modelBuilder.Configurations.Add(new NewsMapping());
             modelBuilder.Configurations.Add(new PhotoMapping());
             modelBuilder.Configurations.Add(new PlayerMapping());
@@ -26,7 +29,12 @@ namespace Diamonds.Models.Entities
             modelBuilder.Configurations.Add(new UserMapping());
         }
 
+        public DbSet<Action> Actions { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Event> Events { get; set; }
         public DbSet<Gallery> Galleries { get; set; }
+        public DbSet<Lineup> Lineups { get; set; }
+        public DbSet<Localization> Localizations { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Player> Players { get; set; }

@@ -202,7 +202,6 @@ C:\Users\Ewa\Dropbox\Softball\diamonds2\diamonds\bin\System.Web.WebPages.dll
 C:\Users\Ewa\Dropbox\Softball\diamonds2\diamonds\bin\System.Web.WebPages.Razor.dll
 C:\Users\Ewa\Dropbox\Softball\diamonds2\diamonds\bin\WebGrease.dll
 C:\Users\Ewa\Dropbox\Softball\diamonds2\diamonds\bin\BCrypt.Net.pdb
-C:\Users\Ewa\Dropbox\Softball\diamonds2\diamonds\bin\BCrypt.Net.xml
 C:\Users\Ewa\Dropbox\Softball\diamonds2\diamonds\bin\EntityFramework.xml
 C:\Users\Ewa\Dropbox\Softball\diamonds2\diamonds\bin\Newtonsoft.Json.xml
 C:\Users\Ewa\Dropbox\Softball\diamonds2\diamonds\bin\System.Net.Http.Formatting.xml
