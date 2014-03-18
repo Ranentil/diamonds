@@ -17,8 +17,8 @@ body {
 a {
     color: #333;
     outline: none;
-    padding-left: 3px;
-    padding-right: 3px;
+    /*padding-left: 3px;
+    padding-right: 3px;*/
     text-decoration: underline;
 }
 
@@ -115,9 +115,9 @@ h5, h6 {
     }
 
 header {
-    background-color: rgba(38, 18, 40, 0.9);
-    position:absolute;
-    z-index: 2;
+    background-color: rgba(38, 18, 40, 0.8);
+    position: absolute;
+    z-index: 100;
     width: 100%;
 }
 
@@ -125,20 +125,25 @@ header {
         margin: 0 auto;
     }
 
-nav {
-    padding: 15px 0 15px;
-}
-
 #featured-photos {
     background-color: rgb(38, 18, 40);
     text-align: center;
 }
-
-    #featured-photos img {
+    #featured-photos ul {
+        margin: 0;
+        padding: 0;
+    }
+    #featured-photos li {
+        height: 420px;
         width: 100%;
         max-width: 1600px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: auto 100%;
     }
-
+    #featured-photos ul li {
+        float: left;
+    }
 footer {
     clear: both;
     background-color: #e2e2e2;
@@ -174,14 +179,17 @@ footer {
     margin: 0 0 10px;
     text-align: right;
 }
-
     #login a {
-        background-color: #d3dce0;
+        font-weight: 500;
+        color: #aaa;
         margin-left: 10px;
         margin-right: 3px;
         padding: 2px 3px;
         text-decoration: none;
     }
+        #login a:hover {
+            background-color: rgba(207, 157, 247, 0.3);
+        }
 
     #login a.username {
         background: none;
@@ -205,28 +213,87 @@ footer {
 ul#menu {
     font-size: 1.2em;
     font-weight: 600;
-    margin: 0 0 5px;
-    padding: 0;
+    margin: 0;
     text-align: right;
+    padding: 15px 0 20px;
 }
 
-    ul#menu li {
+    ul#menu > li {
         display: inline;
         list-style: none;
-        padding-left: 15px;
+        position: relative;
+        padding: 15px 0 20px 20px;
     }
-
-        ul#menu li a {
-            background: none;
-            color: #999;
-            text-decoration: none;
-        }
-
-        ul#menu li a:hover {
+    ul#menu a {
+        background: none;
+        color: #999;
+        text-decoration: none;
+    }
+        ul#menu a:hover {
             color: #eee;
             text-decoration: none;
         }
 
+    ul#menu ul {
+        display: none;
+        background-color: rgba(38, 18, 40, 0.8);
+        text-align: left;
+        padding: 0 10px 4px;
+        position: absolute;
+        top: 58px;
+        left: 0;
+    }
+        ul#menu ul li {
+            padding: 4px;
+        }
+        ul#menu ul a {
+            font-size: 0.8em;
+            white-space: nowrap;
+        }
+
+
+/* site-navigation
+----------------------------------------------------------*/
+
+ul#site-nav {
+    font-size: 0.9em;
+    margin: -20px 0 20px;
+    padding: 0;
+}
+
+    ul#site-nav > li {
+        display: inline;
+        list-style: none;
+        color: #222;
+        position: relative;
+    }
+
+        ul#site-nav > li:not(:first-child):before {
+            content: ">";
+            padding: 4px;
+        }
+
+    ul#site-nav a {
+        background: none;
+        color: #222;
+        text-decoration: none;
+        padding: 0;
+    }
+        ul#site-nav a:hover {
+            color: #666;
+            text-decoration: none;
+        }
+
+    ul#site-nav ul {
+        display: none;
+        position: absolute;
+        left: 0;
+        list-style: none;
+        padding:2px;
+    }
+        ul#site-nav ul li {
+            padding: 2px 12px;
+        }
 
 /* page elements
 ----------------------------------------------------------*/
@@ -337,16 +404,6 @@ aside {
     width: 25%;
 }
 
-    aside ul {
-        list-style: none;
-        padding: 0;
-    }
-
-        aside ul li {
-            background: url("../Images/bullet.png") no-repeat 0 50%;
-            padding: 2px 0 2px 20px;
-        }
-
 .label {
     font-weight: 700;
 }
@@ -451,7 +508,7 @@ input, textarea {
     border: 1px solid #e2e2e2;
     background: #fff;
     color: #333;
-    font-size: 1.2em;
+    font-size: 1.1em;
     margin: 5px 0 6px 0;
     padding: 5px;
     width: 300px;
@@ -459,7 +516,7 @@ input, textarea {
 
 textarea {
     font-family: inherit;
-    width: 500px;
+    resize: none;
 }
 
     input:focus, textarea:focus {
@@ -607,4 +664,9 @@ td {
 
 tr.pager td {
     padding: 0 0.25em 0 0;
+}
+
+table.edit textarea {
+    width: 400px;
+    height: 280px;
 }

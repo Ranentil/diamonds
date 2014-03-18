@@ -25,8 +25,11 @@ namespace Diamonds
 
             ModelBinders.Binders.DefaultBinder = new EmptyStringModelBinder();
 
-            RegisterGlobalFilters(GlobalFilters.Filters);
-            RegisterRoutes(RouteTable.Routes);
+            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AuthConfig.RegisterAuth();
         }
 
         public static void RegisterRoutes(RouteCollection routes)

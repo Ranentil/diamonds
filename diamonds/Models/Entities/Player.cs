@@ -12,6 +12,7 @@ namespace Diamonds.Models.Entities
         public string lastName { get; set; }
         public string nickName { get; set; }
         public short number { get; set; }
+        public bool isActive { get; set; }
 
         public virtual ICollection<Position> Positions { get; set; }
         public virtual ICollection<Lineup> Lineups { get; set; }

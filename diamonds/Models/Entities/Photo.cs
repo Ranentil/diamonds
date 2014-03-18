@@ -12,14 +12,24 @@ namespace Diamonds.Models.Entities
         public int id { get; set; }
         public int galleryId { get; set; }
         public int userId { get; set; }
-        public int descriptionLid { get; set; }
+        public string descriptionPl { get; set; }
+        public string descriptionEn { get; set; }
+        public short no { get; set; }
 
-        public string description { get { return Description.pl; } }
+        public string description { get { return lang(descriptionPl, descriptionEn); } }
 
         public virtual Gallery Gallery { get; set; }
         public virtual User User { get; set; }
-        public virtual Localization Description { get; set; }
         public virtual ICollection<News> News { get; set; }
+
+
+        private string lang(string pl, string en)
+        {
+            if (HttpContext.Current.Response.Cookies["lang"].Value == "en" || pl == "")
+                if (en != "")
+                    return en;
+            return pl;
+        }
 
         public Photo(HttpPostedFileBase fileJpg, int galleryId)
         {
@@ -31,7 +41,7 @@ namespace Diamonds.Models.Entities
         {
             get
             {
-                return Path.Combine(HttpContext.Current.Server.MapPath("~/App_Data/Galleries"), Gallery.id.ToString();)
+                return Path.Combine(HttpContext.Current.Server.MapPath("~/App_Data/Galleries"), Gallery.id.ToString());
             }
         }
 
@@ -45,9 +55,12 @@ namespace Diamonds.Models.Entities
 
         public void saveFileJpg(HttpPostedFileBase file)
         {
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-            file.SaveAs(jpgPath);
+            if (file != null)
+            {
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+                file.SaveAs(jpgPath);
+            }
         }
 
         public bool hasFileJpg()

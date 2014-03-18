@@ -1,0 +1,75 @@
+﻿@model Diamonds.Models.Entities.News
+
+@{
+    string title = Model.id == 0 ? "Tworzenie" : "Edycja";
+    ViewBag.Title = title + " Aktualności";
+}
+
+@section scripts{
+<script type="text/javascript" src="@Url.Content("~/Scripts/tinymce/tinymce.min.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("ul#site-nav li").hover(function () {
+            $(this).children('ul').hide();
+            $(this).children("ul").slideDown("fast");
+        },
+        function () {
+            $('ul', this).slideUp("fast");
+        });
+        tinymce.init({
+            selector: "textarea", menubar: false, statusbar: false, plugins: [
+        "advlist autolink lists link image charmap print preview anchor",
+        "searchreplace visualblocks code",
+        "insertdatetime media contextmenu paste"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link @*image*@"
+
+        });
+    });
+</script>
+}
+
+<ul id="site-nav">
+    <li>@Html.ActionLink("Panel Administracyjny", "Admin", "Profile")</li>
+    <li>@Html.ActionLink("Aktualności", "Index", "News")
+        <ul>
+            <li>@Html.ActionLink("Galeria", "Index", "Gallery")</li>
+            <li>@Html.ActionLink("Wydarzenia", "Index", "Event")</li>
+        </ul>
+    </li>
+    <li>@title</li>
+</ul>
+
+@using (Html.BeginForm()) 
+{
+<fieldset>
+    <legend>@title Aktualności</legend>
+    @Html.HiddenFor(m => m.id)
+    @Html.HiddenFor(m => m.addDate)
+    @Html.HiddenFor(m => m.userId)
+
+    <table class="edit">
+        <tr>
+            <td>@Html.LabelFor(m => m.titlePl, "Tytuł PL")</td>
+            <td>@Html.EditorFor(m => m.titlePl) @Html.ValidationMessageFor(m => m.titlePl)</td>
+            <td>@Html.LabelFor(m => m.titleEn, "Tytuł EN")</td>
+            <td>@Html.EditorFor(m => m.titleEn) @Html.ValidationMessageFor(m => m.titleEn)</td>
+        </tr>
+        <tr>
+            <td colspan="2">@Html.LabelFor(m => m.textPl, "Treść PL")
+                @Html.TextAreaFor(m => m.textPl) @Html.ValidationMessageFor(m => m.textPl)</td>
+            <td colspan="2">@Html.LabelFor(m => m.titleEn, "Treść EN")
+                @Html.TextAreaFor(m => m.textEn) @Html.ValidationMessageFor(m => m.textEn)</td>
+        </tr>
+    </table>
+    <table class="edit">
+        <tr>
+            <td>@Html.LabelFor(m => m.isPublished, "Opublikować?")</td>
+            <td>@Html.CheckBoxFor(m => m.isPublished)</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Zapisz" /></td>
+        </tr>
+    </table>
+</fieldset>
+}

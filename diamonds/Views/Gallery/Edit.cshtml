@@ -1,0 +1,74 @@
+﻿@model Diamonds.Models.Entities.Gallery
+
+@{
+    string title = Model.id == 0 ? "Tworzenie" : "Edycja";
+    ViewBag.Title = title + " Galerii";
+}
+
+@section scripts{
+@Scripts.Render("~/bundles/jqueryui")
+@Styles.Render("~/Content/themes/base/css")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("ul#site-nav li").hover(function () {
+            $(this).children('ul').hide();
+            $(this).children("ul").slideDown("fast");
+        },
+        function () {
+            $('ul', this).slideUp("fast");
+        });
+        $("#startDate").datepicker();
+        $("#endDate").datepicker();
+    });
+</script>
+}
+
+<ul id="site-nav">
+    <li>@Html.ActionLink("Panel Administracyjny", "Admin", "Profile")</li>
+    <li>@Html.ActionLink("Galeria", "Index", "Gallery")
+        <ul>
+            <li>@Html.ActionLink("Aktualności", "Index", "News")</li>
+            <li>@Html.ActionLink("Wydarzenia", "Index", "Event")</li>
+        </ul>
+    </li>
+    <li>@title</li>
+</ul>
+
+@using (Html.BeginForm()) 
+{
+<fieldset>
+    <legend>@title Galerii</legend>
+    @Html.HiddenFor(m => m.id)
+
+    <table class="edit">
+        <tr>
+            <td>@Html.LabelFor(m => m.namePl, "Nazwa PL")</td>
+            <td>@Html.EditorFor(m => m.namePl) @Html.ValidationMessageFor(m => m.namePl)</td>
+            <td>@Html.LabelFor(m => m.nameEn, "Nazwa EN")</td>
+            <td>@Html.EditorFor(m => m.nameEn) @Html.ValidationMessageFor(m => m.nameEn)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.placePl, "Miejsce PL")</td>
+            <td>@Html.EditorFor(m => m.placePl) @Html.ValidationMessageFor(m => m.placePl)</td>
+            <td>@Html.LabelFor(m => m.placeEn, "Miejsce EN")</td>
+            <td>@Html.EditorFor(m => m.placeEn) @Html.ValidationMessageFor(m => m.placeEn)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.startDate, "Data rozpoczęcia (wymagane)")</td>
+            <td>@Html.EditorFor(m => m.startDate) @Html.ValidationMessageFor(m => m.startDate)</td>
+            <td>@Html.LabelFor(m => m.endDate, "Data zakończenia")</td>
+            <td>@Html.EditorFor(m => m.endDate) @Html.ValidationMessageFor(m => m.endDate)</td>
+        </tr>
+        @if (title == "Edycja")
+        {
+        <tr>
+            <td>@Html.LabelFor(m => m.isPublished, "Opublikowane")</td>
+            <td>@Html.CheckBoxFor(m => m.isPublished)</td>
+        </tr>
+        }
+        <tr>
+            <td colspan="2"><input type="submit" value="Zapisz" /></td>
+        </tr>
+    </table>
+</fieldset>
+}

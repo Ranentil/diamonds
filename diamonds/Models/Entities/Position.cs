@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Data.Entity.ModelConfiguration;
 
 namespace Diamonds.Models.Entities
@@ -9,14 +10,23 @@ namespace Diamonds.Models.Entities
     {
         public byte id { get; set; }
         public string name { get; set; }
-        public int playerLid { get; set; }
+        public string playerPl { get; set; }
+        public string playerEn { get; set; }
 
-        public string player { get { return Player.pl; } }
+        public string player { get { return lang(playerPl, playerEn); } }
 
         public virtual ICollection<Player> Players { get; set; }
         public virtual ICollection<Action> Actions { get; set; }
         public virtual ICollection<Lineup> Lineups { get; set; }
-        public virtual Localization Player { get; set; }
+
+
+        private string lang(string pl, string en)
+        {
+            if (HttpContext.Current.Response.Cookies["lang"].Value == "en" || pl == "")
+                if (en != "")
+                    return en;
+            return pl;
+        }
     }
 
     public class PositionMapping : EntityTypeConfiguration<Position>

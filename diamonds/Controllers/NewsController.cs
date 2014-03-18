@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,48 +25,55 @@ namespace Diamonds.Controllers
 
         public ViewResult Create()
         {
-            return View();
+            return View("Edit", new News());
         }
 
         //
         // POST: /News/Create/
 
         [HttpPost]
-        public ActionResult Create(News news, HttpPostedFileBase fileJPG)
+        public ActionResult Create(News news)
         {
             if (ModelState.IsValid)
             {
+                news.User = db.Users.Single(u => u.email == User.Identity.Name);
+                news.addDate = DateTime.Now;
+
                 db.News.Add(news);
                 db.SaveChanges();
 
-                if (fileJPG != null)
-                {
-                    Photo photo = new Photo(fileJPG, 0);
-                    photo.User = db.Users.Single(u => u.email == User.Identity.Name);
-                }
-
-                return RedirectToAction("Index");
+                TempData["Message"] = "Pomyślnie zapisano artykuł.";
+                return RedirectToAction("Edit", new { id = news.id });
             }
+            TempData["Error"] = "Coś poszło nie tak! Nie zapisano artykułu.";
             return View("Edit", news);
         }
 
         //
         // GET: /News/Edit/
 
-        public ViewResult Edit()
+        public ViewResult Edit(int id)
         {
-            return View();
+            News news = db.News.Single(n => n.id == id);
+            return View(news);
         }
 
         //
         // POST: /News/Edit:/
 
+        [HttpPost]
         public ActionResult Edit(News news)
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index");
+                db.News.Attach(news);
+                db.Entry(news).State = EntityState.Modified;
+                db.SaveChanges();
+
+                TempData["Message"] = "Pomyślnie zapisano artykuł.";
+                return RedirectToAction("Edit", new { id = news.id });
             }
+            TempData["Error"] = "Coś poszło nie tak! Nie zapisano zmian.";
             return View(news);
         }
 

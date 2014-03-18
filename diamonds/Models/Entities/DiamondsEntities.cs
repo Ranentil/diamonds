@@ -20,7 +20,6 @@ namespace Diamonds.Models.Entities
             modelBuilder.Configurations.Add(new CommentMapping());
             modelBuilder.Configurations.Add(new EventMapping());
             modelBuilder.Configurations.Add(new GalleryMapping());
-            modelBuilder.Configurations.Add(new LocalizationMapping());
             modelBuilder.Configurations.Add(new NewsMapping());
             modelBuilder.Configurations.Add(new PhotoMapping());
             modelBuilder.Configurations.Add(new PlayerMapping());
