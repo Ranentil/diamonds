@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace DrukFirmowy2.Models
+namespace Diamonds.Models
 {
 
     public class ChangePasswordModel

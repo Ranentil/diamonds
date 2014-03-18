@@ -17,17 +17,18 @@ namespace Diamonds.Controllers
 
         public ActionResult Index()
         {
-            List<Gallery> galleries = db.Galleries.Where(g => g.isPublished).OrderBy(g => g.startDate).ToList();
+            List<Gallery> galleries = db.Galleries.Where(g => g.isPublished)
+                .OrderByDescending(g => g.startDate).ToList();
             return View(galleries); 
         }
 
         //
-        // GET: /Gallery/Photos/galeryId
+        // GET: /Gallery/Details
 
-        public ViewResult Photos(int id)
+        public ActionResult Details()
         {
-            Gallery gallery = db.Galleries.Single(g => g.id == id);
-            return View(gallery);
+            List<Gallery> galleries = db.Galleries.OrderByDescending(g => g.startDate).ToList();
+            return View(galleries); 
         }
 
         //
@@ -85,28 +86,63 @@ namespace Diamonds.Controllers
         }
 
         //
-        // GET: /Gallery/Photo/
+        // GET: /Gallery/Photos/galleryId
 
-        public FileResult Photo(int id)
-        {
-            Photo photo = db.Photos.Single(p => p.id == id);
-            return File(photo.jpgPath, "image/jpeg");
-        }
-
-        //
-        // GET: /Gallery/PhotoEdit/
-
-        public ViewResult PhotosEdit(int id)
+        public ViewResult Photos(int id)
         {
             Gallery gallery = db.Galleries.Single(g => g.id == id);
             return View(gallery);
         }
 
         //
-        // POST: /Gallery/Edit:/
+        // GET: /Gallery/Photo/photoId
+
+        public FileResult Photo(int id, string size)
+        {
+            Photo photo = db.Photos.Single(p => p.id == id);
+            return File(photo.jpgPath, "image/jpeg");
+        }
+
+        //
+        // GET: /Gallery/AddPhotos/galleryId
+
+        public ViewResult AddPhotos(int id)
+        {
+            Gallery gallery = db.Galleries.Single(g => g.id == id);
+            return View(gallery);
+        }
+
+        //
+        // POST: /Gallery/AddPhotos/
 
         [HttpPost]
-        public ActionResult PhotosEdit(int id, IEnumerable<Photo> photos)
+        public ActionResult AddPhotos(int id, IEnumerable<HttpPostedFileBase> files)
+        {
+            Gallery gallery = db.Galleries.Single(g => g.id == id);
+            foreach (var file in files)
+            {
+                Photo photo = new Photo(file);
+                gallery.Photos.Add(photo);
+            }
+            db.SaveChanges();
+
+            return View(gallery);
+        }
+
+        //
+        // GET: /Gallery/PhotoEdit/galleryId
+
+        public ViewResult EditPhotos(int id)
+        {
+            Gallery gallery = db.Galleries.Single(g => g.id == id);
+            return View(gallery);
+        }
+
+        //
+        // POST: /Gallery/Edit/
+
+        [HttpPost]
+        public ActionResult EditPhotos(int id, IEnumerable<Photo> photos)
         {
             Gallery gallery = db.Galleries.Single(g => g.id == id);
 
@@ -115,7 +151,7 @@ namespace Diamonds.Controllers
                 
                 db.SaveChanges();
 
-                TempData["Message"] = "Pomyślnie zapisano zdjęcie.";
+                TempData["Message"] = "Pomyślnie zapisano zdjęcia.";
                 return RedirectToAction("Index");
             }
             TempData["Error"] = "Coś poszło nie tak! Nie zapisano zdjęcia.";

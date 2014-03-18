@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "Dodawanie zdjęć";
+}
+
+@using (Html.BeginForm())
+{
+    <input type="file" id="photos" name="photos" multiple="multiple" />
+    <input type="submit" value="Wyślij" />
+}

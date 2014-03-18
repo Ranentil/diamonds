@@ -46,7 +46,7 @@ namespace Diamonds.Models
                 DiamondsEntities db = new DiamondsEntities();
 
                 User newUser = new User();
-                newUser.login = username;
+                newUser.name = username;
                 newUser.setPassword(password);
                 newUser.email = email;
                 newUser.createDate = newUser.lastLoginDate = DateTime.Now;
@@ -101,7 +101,7 @@ namespace Diamonds.Models
 
             if (user != null)
             {
-                MembershipUser memUser = new MembershipUser("DMembershipProvider", user.login, user.id, user.email,
+                MembershipUser memUser = new MembershipUser("DMembershipProvider", user.name, user.id, user.email,
                     string.Empty, string.Empty, true, false, DateTime.MinValue,
                     DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
                 return memUser;
@@ -121,9 +121,9 @@ namespace Diamonds.Models
             MembershipUserCollection userColl = new MembershipUserCollection();
             DiamondsEntities db = new DiamondsEntities();
             totalRecords = db.Users.Count();
-            foreach (User user in db.Users.OrderBy(u => u.login).Skip(pageIndex * pageSize).Take(pageSize))
+            foreach (User user in db.Users.OrderBy(u => u.name).Skip(pageIndex * pageSize).Take(pageSize))
             {
-                userColl.Add(new MembershipUser("DMembershipProvider", user.login, user.id, user.email,
+                userColl.Add(new MembershipUser("DMembershipProvider", user.name, user.id, user.email,
                                 string.Empty, string.Empty, true, false, DateTime.MinValue,
                                 DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue));
             }

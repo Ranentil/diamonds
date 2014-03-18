@@ -1,3 +1,25 @@
-﻿@{
-    ViewBag.Title = "Galeria zdjęć";
+﻿@model IEnumerable<Diamonds.Models.Entities.Gallery>
+@{
+    ViewBag.Title = "Galerie zdjęć";
+}
+
+@section scripts{
+}
+
+<ul id="site-nav">
+    <li>@Html.ActionLink("Galeria", "Index", "Gallery")
+    </li>
+</ul>
+
+
+@foreach (var gallery in Model)
+{
+<div id="gallery">
+    <img src="@Url.Action("Photo", new { id = gallery.cover, size = "small" })" />
+    <div>
+        @gallery.name<br />
+        @gallery.place<br />
+        @gallery.startDate.ToShortDateString()
+    </div>
+</div>
 }

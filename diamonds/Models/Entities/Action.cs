@@ -9,14 +9,14 @@ namespace Diamonds.Models.Entities
     {
         public int id { get; set; }
         public int battingPlayerId { get; set; }
-        public byte balls { get; set; }
-        public byte strikes { get; set; }
-        public byte batting { get; set; }
-        public byte toPositionId { get; set; }
-        public byte first { get; set; }
-        public byte second { get; set; }
-        public byte third { get; set; }
-        public byte home { get; set; }
+        public Nullable<byte> balls { get; set; }
+        public Nullable<byte> strikes { get; set; }
+        public Nullable<byte> batting { get; set; }
+        public Nullable<byte> toPositionId { get; set; }
+        public Nullable<byte> first { get; set; }
+        public Nullable<byte> second { get; set; }
+        public Nullable<byte> third { get; set; }
+        public Nullable<byte> home { get; set; }
 
         public virtual Player BattingPlayer { get; set; }
         public virtual Position ToPosition { get; set; }

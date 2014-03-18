@@ -11,8 +11,8 @@ namespace Diamonds.Models.Entities
         public int eventId { get; set; }
         public string team { get; set; }
         public int playerId { get; set; }
-        public byte battingOrder { get; set; }
-        public byte positionId { get; set; }
+        public Nullable<byte> battingOrder { get; set; }
+        public Nullable<byte> positionId { get; set; }
 
         public virtual Event Event { get; set; }
         public virtual Player Player { get; set; }

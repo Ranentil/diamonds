@@ -1,0 +1,37 @@
+﻿@model Diamonds.Models.Entities.Gallery
+@{
+    ViewBag.Title = "Edycja Zdjęć";
+    int i = -1;
+}
+
+@section scripts{
+    <script type="text/javascript">
+
+    </script>
+}
+
+<ul id="site-nav">
+    <li>@Html.ActionLink("Panel Administracyjny", "Admin", "Profile")</li>
+    <li>@Html.ActionLink("Galeria", "Index", "Gallery")
+        <ul>
+            <li>@Html.ActionLink("Aktualności", "Index", "News")</li>
+            <li>@Html.ActionLink("Wydarzenia", "Index", "Event")</li>
+        </ul>
+    </li>
+    <li>Edycja Zdjęć</li>
+</ul>
+
+@using (Html.BeginForm())
+{
+<div id="edit">
+    @foreach (var photo in Model.Photos)
+    {
+    i++;
+    <div style="float: left;">
+        <img src="@Url.Action("Photo", new { id = photo.id })" />
+        @Html.Hidden("["+i+"].no")
+        @Html.Hidden("["+i+"].id")
+    </div>
+    }
+</div>
+}

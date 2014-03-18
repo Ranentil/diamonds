@@ -15,10 +15,16 @@
         margin: 10px;
         text-align: center;
     }
+    .site-title a, .site-title a:hover, .site-title a:active {
+        left: 2%;
+    }
+    .site-title img {
+        height: 70px;
+    }
 
     /* login */
     #login {
-        font-size: .85em;
+        font-size: .7em;
         margin: 0 0 12px;
         text-align: center;
     }
@@ -53,16 +59,21 @@
     }
 
     ul#menu {
-        margin: 0;
-        padding: 0;
-        text-align: center;
+        font-size: 0.7em;
+        padding: 0 2px;
     }
-
+        ul#menu ul {
+            top: 26px;
+        }
         ul#menu li {
             margin: 0;
             padding: 0;
         }
 
+    /* slideshow*/
+    #featured-photos li {
+        height: 240px;
+    }
 
     /* main layout
     ----------------------------------------------------------*/

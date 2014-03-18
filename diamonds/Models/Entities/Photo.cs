@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using System.Web;
 using System.Data.Entity.ModelConfiguration;
+using Diamonds.Models;
 
 namespace Diamonds.Models.Entities
 {
@@ -21,19 +22,10 @@ namespace Diamonds.Models.Entities
         public virtual Gallery Gallery { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<News> News { get; set; }
-
-
-        private string lang(string pl, string en)
+        public virtual ICollection<Gallery> Galleries { get; set; }
+        
+        public Photo(HttpPostedFileBase fileJpg)
         {
-            if (HttpContext.Current.Response.Cookies["lang"].Value == "en" || pl == "")
-                if (en != "")
-                    return en;
-            return pl;
-        }
-
-        public Photo(HttpPostedFileBase fileJpg, int galleryId)
-        {
-            this.galleryId = galleryId;
             saveFileJpg(fileJpg);
         }
 
@@ -59,22 +51,32 @@ namespace Diamonds.Models.Entities
             {
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
-                file.SaveAs(jpgPath);
+                file.SaveAs(Path.Combine(path, id.ToString() + "_o.jpg"));
             }
         }
 
-        public bool hasFileJpg()
+        public bool hasFileJpg
         {
-            return File.Exists(jpgPath);
+            get
+            {
+                return File.Exists(jpgPath);
+            }
         }
 
         public void deleteFileJpg()
         {
-            if (hasFileJpg())
+            if (hasFileJpg)
             {
                 FileInfo file = new FileInfo(jpgPath);
                 file.Delete();
             }
+        }
+
+        private string lang(string pl, string en)
+        {
+            if (HttpContext.Current.Response.Cookies["lang"].Value == "en" && en != "" || pl == "")
+                return en;
+            return pl;
         }
         
     }
@@ -88,6 +90,7 @@ namespace Diamonds.Models.Entities
             this.HasRequired(e => e.User).WithMany(e => e.Photos).HasForeignKey(e => e.userId);
 
             this.HasMany(e => e.News).WithOptional(e => e.Photo).HasForeignKey(e => e.photoId);
+            this.HasMany(e => e.Galleries).WithOptional(e => e.Cover).HasForeignKey(e => e.cover);
         }
     }
 }

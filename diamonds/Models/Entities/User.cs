@@ -10,20 +10,21 @@ namespace Diamonds.Models.Entities
         public int id { get; set; }
         public string email { get; set; }
         public string password { get; set; }
-        public string login { get; set; }
-        public string displayName { get; set; }
+        public string name { get; set; }
         public DateTime createDate { get; set; }
         public DateTime lastLoginDate { get; set; }
-        public int roleId { get; set; }
+        public short roleId { get; set; }
 
         public virtual Role Role { get; set; }
         public virtual ICollection<News> News { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
 
-        private const string prefixSalt = "3Yq(xsliMzZc<Ed]-A/I4)X471`}5~rV$y()p)FM*K)d4- ptx&BKjnwq][|Noba";
-        private const string suffixSalt = "r*iKDO^Jlf1ig|h&sE|8c`P=Hj#*O~%LYw#a(B#FBO^gub5-@+UKwz@>>IOX2wwv";
+        private const string prefixSalt = "3Yq(xsli7zRc<Ed]-A/I4)Y471`}5~rV$y()p)NM*K)d4- ptx&BKjnwq][|N5ba";
+        private const string suffixSalt = "0*iKDO^J4f1ng|h&sE|8c`P=Kj#*O~%LYw#a(B#FBO^gu85-@+UKwz@>>IOX2wwv";
         private const double DateSalt = 54.7896;
+
+        public User() { }
 
         public void setPassword(string password)
         {

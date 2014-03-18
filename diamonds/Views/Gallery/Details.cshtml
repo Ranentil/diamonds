@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Diamonds.Models.Entities.Gallery>
+@{
+    ViewBag.Title = "Galerie zdjęć";
+}
+
+@section scripts{
+}
+
+<ul id="site-nav">
+    <li>@Html.ActionLink("Panel Administracyjny", "Admin", "Profile")</li>
+    <li>@Html.ActionLink("Galeria", "Index", "Gallery")
+        <ul>
+            <li>@Html.ActionLink("Aktualności", "Index", "News")</li>
+            <li>@Html.ActionLink("Wydarzenia", "Index", "Event")</li>
+        </ul>
+    </li>
+</ul>
+
+<fieldset>
+    <legend>Galerie zdjęć</legend>
+
+    <table>
+        @foreach (var gallery in Model)
+        {
+        <tr>
+            <td>@(gallery.Cover.hasFileJpg ? "<a href=\"" + Url.Action("EditPhotos", new { id = gallery.id }) + "\"><img src=\"" + Url.Action("Photo", new { id = gallery.cover }) + "\"></a>" : "")</td>
+            <td>@gallery.namePl<br />@gallery.nameEn</td>
+            <td>@gallery.placePl<br />@gallery.placeEn</td>
+            <td>@gallery.startDate<br />@gallery.endDate</td>
+            <td>@Html.ActionLink("Edytuj", "Edit", new { id = gallery.id })</td>
+        </tr>
+        }
+    </table>
+</fieldset>

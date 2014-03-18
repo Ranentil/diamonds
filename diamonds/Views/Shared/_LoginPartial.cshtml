@@ -1,7 +1,7 @@
 ﻿@if (Request.IsAuthenticated) {
     <text>
-        Witaj, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+        Witaj, @Html.ActionLink(User.Identity.Name, "Index", "Profile", null, new { @class = "username" })!
+        @using (Html.BeginForm("LogOff", "Profile", FormMethod.Post, new { id = "logoutForm" })) {
             @Html.AntiForgeryToken()
             <a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a>
         }
@@ -9,7 +9,7 @@
 } else {
     <ul>
         <li>Zaloguj przez fb</li>
-        <li>@Html.ActionLink("Zarejestruj", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Zaloguj", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Zarejestruj", "Register", "Profile")</li>
+        <li>@Html.ActionLink("Zaloguj", "LogOn", "Profile")</li>
     </ul>
 }

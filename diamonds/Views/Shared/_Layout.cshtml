@@ -69,7 +69,7 @@
                     <div class="message-error">@TempData["Error"]</div>
                 }
             </section>
-            <section class="content-wrapper main-content clear-fix">
+            <section class="main-content content-wrapper clear-fix">
                 @RenderBody()
             </section>
         </div>
@@ -97,7 +97,7 @@
                     $('ul', this).slideUp("fast");
                 });
 
-                $("#featured-photos ul").bxSlider({ mode: 'fade', auto: true, pause: 7000, speed: 1000 });
+                $("#featured-photos ul").bxSlider();
             });
         </script>
 
