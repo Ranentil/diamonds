@@ -13,9 +13,10 @@ namespace Diamonds.Models.Entities
         public string name { get; set; }
         public DateTime createDate { get; set; }
         public DateTime lastLoginDate { get; set; }
-        public short roleId { get; set; }
+        public short roleGroupId { get; set; }
 
-        public virtual Role Role { get; set; }
+        public virtual RoleGroup RoleGroup { get; set; }
+        public virtual ICollection<user_role> user_role { get; set; }
         public virtual ICollection<News> News { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
@@ -25,6 +26,16 @@ namespace Diamonds.Models.Entities
         private const double DateSalt = 54.7896;
 
         public User() { }
+
+        public User(string name, string email, string password)
+        {
+            this.name = name;
+            this.email = email;
+            this.setPassword(password);
+            this.lastLoginDate = DateTime.Parse("1900-01-01 00:00:00");
+            this.createDate = DateTime.Now;
+            this.roleGroupId = 1;
+        }
 
         public void setPassword(string password)
         {
@@ -41,6 +52,32 @@ namespace Diamonds.Models.Entities
 
             return false;
         }
+
+        public bool hasAccess(string code)
+        {
+            user_role ur = this.user_role.SingleOrDefault(r => r.Role.code == code);
+
+            if (ur != null)
+            {
+                if (ur.value)
+                    return true;
+                else
+                    return false;
+            }
+
+            RoleGroup rolegroup = this.RoleGroup;
+
+            rolegroup_role rgr = rolegroup.rolegroup_role.SingleOrDefault(r => r.Role.code == code);
+            if (rgr != null)
+            {
+                if (rgr.value)
+                    return true;
+                else
+                    return false;
+            }
+
+            return false;
+        }
     }
 
     public class UserMapping : EntityTypeConfiguration<User>
@@ -48,7 +85,7 @@ namespace Diamonds.Models.Entities
         public UserMapping()
             : base()
         {
-            this.HasRequired(e => e.Role).WithMany(e => e.Users).HasForeignKey(e => e.roleId);
+            this.HasRequired(e => e.RoleGroup).WithMany(e => e.Users).HasForeignKey(e => e.roleGroupId);
 
             this.HasMany(e => e.News).WithRequired(e => e.User).HasForeignKey(e => e.userId);
             this.HasMany(e => e.Photos).WithRequired(e => e.User).HasForeignKey(e => e.userId);

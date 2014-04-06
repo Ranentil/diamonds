@@ -12,10 +12,10 @@ namespace Diamonds.Models.Entities
     {
         public int id { get; set; }
         public int galleryId { get; set; }
+        public short no { get; set; }
         public int userId { get; set; }
         public string descriptionPl { get; set; }
         public string descriptionEn { get; set; }
-        public short no { get; set; }
 
         public string description { get { return lang(descriptionPl, descriptionEn); } }
 

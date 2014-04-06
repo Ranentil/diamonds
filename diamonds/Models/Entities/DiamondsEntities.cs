@@ -24,7 +24,10 @@ namespace Diamonds.Models.Entities
             modelBuilder.Configurations.Add(new PhotoMapping());
             modelBuilder.Configurations.Add(new PlayerMapping());
             modelBuilder.Configurations.Add(new PositionMapping());
+            modelBuilder.Configurations.Add(new rolegroup_roleMapping());
+            modelBuilder.Configurations.Add(new RoleGroupMapping());
             modelBuilder.Configurations.Add(new RoleMapping());
+            modelBuilder.Configurations.Add(new user_roleMapping());
             modelBuilder.Configurations.Add(new UserMapping());
         }
 
@@ -38,7 +41,10 @@ namespace Diamonds.Models.Entities
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<rolegroup_role> rolegroup_role { get; set; }
+        public DbSet<RoleGroup> RoleGroups { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<user_role> user_role { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }

@@ -1,0 +1,52 @@
+﻿@model Diamonds.Models.Entities.RoleGroup
+@{
+    string title = Model.id == 0 ? "Tworzenie" : "Edycja";
+    ViewBag.Title = title + " grup uprawnień";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+@Html.Partial("_LeftMenuPartial")
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>@title grupy</legend>
+
+        @Html.HiddenFor(model => model.id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.name, "Nazwa")
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+
+        <table style="width: auto; margin-top: 20px;">
+            <tr>
+                <th>Grupa</th>
+                <th>Dostęp</th>
+            </tr>
+
+        @{int i = 0;}
+        @foreach (Diamonds.Models.PermissionModels.RoleGroupAccess item in ViewBag.RoleGroupAccess)
+        {
+            <tr>
+                <td>@item.Role.name</td>
+                <td>
+                    <input type="hidden" name="roles[@i].Role.roleId" value="@item.Role.roleId" />
+                    @Html.RadioButton("roles[" + i + "].value", 1, item.isAccess)TAK
+                    @Html.RadioButton("roles[" + i++ + "].value", 0, item.isDenied)NIE
+                </td>
+            </tr>
+        }
+        </table>
+        <p>
+            <input type="submit" value="Zapisz" />
+        </p>
+    </fieldset>
+}

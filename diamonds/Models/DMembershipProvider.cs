@@ -80,7 +80,7 @@ namespace Diamonds.Models
 
             if (user != null)
             {
-                MembershipUser memUser = new MembershipUser("DMembershipProvider", user.email, user.id, user.email,
+                MembershipUser memUser = new MembershipUser("DMembershipProvider", user.name, user.id, user.email,
                     string.Empty, string.Empty, true, false, DateTime.MinValue,
                     DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
                 return memUser;

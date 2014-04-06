@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Diamonds.Models.Entities.User>
+@{
+    ViewBag.Title = "Lista użytkowników";
+    int i = 1;
+}
+
+@Html.Partial("_LeftMenuPartial")
+
+<fieldset>
+    <legend>Lista użytkowników</legend>
+
+    <table>
+        <tr>
+            <th>lp</th>
+            <th>nazwa</th>
+            <th>email</th>
+            <th>rola</th>
+            <th></th>
+        </tr>
+        @foreach (var user in Model)
+        {
+        <tr>
+            <td>@(i++)</td>
+            <td>@user.name</td>
+            <td>@user.email</td>
+            <td>@user.RoleGroup.name</td>
+            <td>@Html.ActionLink("Uprawnienia", "Edit", new { id = user.id })<td>
+        </tr>
+        }
+    </table>
+</fieldset>

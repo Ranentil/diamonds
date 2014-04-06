@@ -1,0 +1,15 @@
+﻿<div class="left-menu">
+    <ul>
+        <li>@Html.ActionLink("Lista użytkowników", "Index")</li>
+        <li>@Html.ActionLink("Lista uprawnień", "Roles")
+            <ul>
+                <li>@Html.ActionLink("Dodaj nową rolę", "RoleCreate")</li>
+            </ul>
+        </li>
+        <li>@Html.ActionLink("Grupy uprawnień", "RoleGroups")
+            <ul>
+                <li>@Html.ActionLink("Dodaj nową grupę", "RoleGroupCreate")</li>
+            </ul>
+        </li>
+    </ul>
+</div>

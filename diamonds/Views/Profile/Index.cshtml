@@ -2,3 +2,29 @@
     ViewBag.Title = "Profil";
 }
 
+<div class="left-menu">
+    <ul>
+        <li>@Html.ActionLink("Profil", "Index")
+            <ul>
+                <li>@Html.ActionLink("Edytuj profil", "Edit")</li>
+            </ul>
+        </li>
+        @if (User.IsInRole("MODERATOR"))
+        {
+        <li>Panel Administracyjny
+            <ul>
+                <li>@Html.ActionLink("Aktualności", "Index", "News")</li>
+                <li>@Html.ActionLink("Dodaj nową aktualność", "Create", "News")</li>
+                
+                @if (User.IsInRole("ADMIN"))
+                {
+                <li>@Html.ActionLink("Użytkownicy", "Index", "User")</li>
+                }
+            </ul>
+        </li>
+        }
+    </ul>
+</div>
+
+Tutaj będzie centrum wiadomości, ostatnich komentarzy.<br />
+Dla użytkowników i Diamentów mogą być polecane strony do obejrzenia.

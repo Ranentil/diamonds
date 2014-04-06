@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Microsoft.Web.WebPages.OAuth;
 using Diamonds.Models;
 using Diamonds.Models.Entities;
 
@@ -16,7 +17,7 @@ namespace Diamonds.Controllers
         private DiamondsEntities db = new DiamondsEntities();
 
         //
-        // GET: /Admin/
+        // GET: /Index/
 
         public ActionResult Index()
         {
@@ -24,14 +25,33 @@ namespace Diamonds.Controllers
             return View(user);
         }
 
-        [HttpPost, AllowAnonymous]
+        public ViewResult Edit()
+        {
+            
+            return View();
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Edit(LocalPasswordModel model)
+        {
+            
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        public ViewResult LogOn()
+        {
+            return View();
+        }
+
+        [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
         public ActionResult LogOn(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.UserName, model.Password))
+                if (Membership.ValidateUser(model.Email, model.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                         return Redirect(returnUrl);
@@ -57,12 +77,7 @@ namespace Diamonds.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User();
-                user.name = model.UserName;
-                user.setPassword(model.Password);
-                user.email = model.Email;
-                user.lastLoginDate = DateTime.MinValue;
-                user.createDate = DateTime.Now;
+                User user = new User(model.UserName, model.Email, model.Password);
                 db.Users.Add(user);
                 db.SaveChanges();
 
@@ -81,5 +96,11 @@ namespace Diamonds.Controllers
             return View();
         }
 
+        public enum ManageMessageId
+        {
+            ChangePasswordSuccess,
+            SetPasswordSuccess,
+            RemoveLoginSuccess,
+        }
     }
 }

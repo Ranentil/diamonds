@@ -7,12 +7,18 @@ namespace Diamonds.Models.Entities
 {
     public partial class Role
     {
-        // Admin Moderator Diament Photographer User
-        public short id { get; set; }
+        public short roleId { get; set; }
         public string name { get; set; }
         public string code { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<rolegroup_role> rolegroup_role { get; set; }
+        public virtual ICollection<user_role> user_role { get; set; }
+
+        public Role()
+        {
+            this.rolegroup_role = new HashSet<rolegroup_role>();
+            this.user_role = new HashSet<user_role>();
+        }
     }
 
     public class RoleMapping : EntityTypeConfiguration<Role>
@@ -20,7 +26,8 @@ namespace Diamonds.Models.Entities
         public RoleMapping()
             : base()
         {
-            this.HasMany(e => e.Users).WithRequired(e => e.Role).HasForeignKey(e => e.roleId);
+            this.HasMany(e => e.rolegroup_role).WithRequired(e => e.Role).HasForeignKey(e => e.roleId);
+            this.HasMany(e => e.user_role).WithRequired(e => e.Role).HasForeignKey(e => e.roleId);
         }
     }
 }

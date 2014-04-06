@@ -11,8 +11,13 @@ namespace Diamonds.Models.Entities
         public string text { get; set; }
         public DateTime addDate { get; set; }
         public int userId { get; set; }
+        public int? newsId { get;set; }
+        public int? photoId { get; set; }
 
         public virtual User User { get; set; }
+        //public virtual ICollection<News> News { get; set; }
+        //public virtual ICollection<Photo> Photos { get; set; }
+
     }
 
     public class CommentMapping : EntityTypeConfiguration<Comment>

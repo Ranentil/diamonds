@@ -132,7 +132,7 @@ namespace Diamonds.Controllers
         //
         // GET: /Gallery/PhotoEdit/galleryId
 
-        public ViewResult EditPhotos(int id)
+        public ViewResult PhotosEdit(int id)
         {
             Gallery gallery = db.Galleries.Single(g => g.id == id);
             return View(gallery);
@@ -142,7 +142,7 @@ namespace Diamonds.Controllers
         // POST: /Gallery/Edit/
 
         [HttpPost]
-        public ActionResult EditPhotos(int id, IEnumerable<Photo> photos)
+        public ActionResult PhotosEdit(int id, IEnumerable<Photo> photos)
         {
             Gallery gallery = db.Galleries.Single(g => g.id == id);
 
@@ -156,6 +156,26 @@ namespace Diamonds.Controllers
             }
             TempData["Error"] = "Coś poszło nie tak! Nie zapisano zdjęcia.";
             return View(gallery);
+        }
+
+        //
+        // GET: /Gallery/PhotoEdit/galleryId
+
+        public ViewResult PhotoEdit(int id)
+        {
+            Photo photo = db.Photos.Single(g => g.id == id);
+            return View(photo);
+        }
+
+        //
+        // POST: /Gallery/Edit/
+
+        [HttpPost]
+        public ActionResult PhotoEdit()
+        {
+
+            TempData["Error"] = "Coś poszło nie tak! Nie zapisano zdjęcia.";
+            return View();
         }
 
     }

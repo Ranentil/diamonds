@@ -190,6 +190,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Custom\HomeModel.cs" />
+    <Compile Include="Models\DRoleProvider.cs" />
     <Compile Include="Models\DMembershipProvider.cs" />
     <Compile Include="Models\Entities\Action.cs" />
     <Compile Include="Models\Entities\Comment.cs" />
@@ -200,12 +201,16 @@
     <Compile Include="Models\Entities\Lineup.cs" />
     <Compile Include="Models\Entities\Localization.cs" />
     <Compile Include="Models\Entities\News.cs" />
+    <Compile Include="Models\PermissionModels.cs" />
     <Compile Include="Models\Entities\Photo.cs" />
     <Compile Include="Models\Entities\Player.cs" />
     <Compile Include="Models\Entities\Position.cs" />
     <Compile Include="Models\Entities\Role.cs" />
+    <Compile Include="Models\Entities\RoleGroup.cs" />
+    <Compile Include="Models\Entities\rolegroup_role.cs" />
     <Compile Include="Models\Entities\User.cs" />
     <Compile Include="Models\Custom\ImageHandler.cs" />
+    <Compile Include="Models\Entities\user_role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -503,12 +508,23 @@
     <Content Include="Views\Profile\Register.cshtml" />
     <Content Include="Views\Gallery\AddPhotos.cshtml" />
     <Content Include="Views\Gallery\Details.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Roles.cshtml" />
+    <Content Include="Views\Gallery\PhotoEdit.cshtml" />
+    <Content Include="Views\Profile\LogOn.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Profile\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Profile\_SetPasswordPartial.cshtml" />
+    <None Include="Views\User\RoleEdit.cshtml" />
+    <Content Include="Views\User\RoleGroupEdit.cshtml" />
+    <Content Include="Views\User\RoleGroups.cshtml" />
+    <Content Include="Views\User\_LeftMenuPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Live\" />
     <Folder Include="Views\Team\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
