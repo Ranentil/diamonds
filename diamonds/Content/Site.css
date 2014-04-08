@@ -403,6 +403,10 @@ h5 {
         top: 44px;
         left: 32%;
     }
+    .featured div p {
+        display: block;
+        padding-top:16px;
+    }
     .featured div a {
         display: block;
         font-size: 11pt;
@@ -425,9 +429,27 @@ h5 {
     .widget div div {
         padding: 38px 10px 4px;
     }
+    .widget div p {
+        display: block;
+        padding-top:40px;
+    }
     .widget div img {
         width: 100%;
     }
+
+/* calendar wigget */
+.widget .calendar div {
+    padding: 0;
+}
+/*.calendar .ui-datepicker-prev {
+    float: left;
+}
+.calendar .ui-datepicker-next {
+    float: right;
+}
+.calendar .ui-datepicker-title {
+    text-align: center;
+}*/
 
 /* gallery widget */
 .widget-gallery {

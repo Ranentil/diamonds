@@ -173,6 +173,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\ControllerAttribute.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -226,10 +227,7 @@
     <Content Include="Content\images\layout\bx_loader.gif" />
     <Content Include="Content\images\layout\bx_controls.png" />
     <Content Include="Content\images\layout\lang-pl.png" />
-    <Content Include="Content\images\slider\photo1.jpg" />
     <Content Include="Content\images\layout\logo.png" />
-    <Content Include="Content\images\slider\photo2.jpg" />
-    <Content Include="Content\images\slider\photo3.jpg" />
     <Content Include="Content\jquery.bxslider.css" />
     <Content Include="Content\jquery.fancybox-buttons.css" />
     <Content Include="Content\jquery.fancybox-thumbs.css" />
@@ -307,6 +305,7 @@
     <Content Include="Scripts\jquery.fancybox.js" />
     <Content Include="Scripts\jquery.fancybox.pack.js" />
     <Content Include="Scripts\jquery.mousewheel-3.0.6.pack.js" />
+    <Content Include="Scripts\jquery-ui-datepicker-pl.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />

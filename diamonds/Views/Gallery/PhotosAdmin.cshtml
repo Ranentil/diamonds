@@ -16,7 +16,7 @@
         {
         <tr>
             <td>
-            @if (photo.hasFileJpg)
+            @if (photo.hasJpg)
             {
             <img src="@Url.Action("Photo", new { id = photo.id, size = "small" })" />
             }

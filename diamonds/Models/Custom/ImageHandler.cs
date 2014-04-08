@@ -18,13 +18,15 @@ namespace Diamonds.Models
         /// <summary>
         /// Method to resize, convert and save the image.
         /// </summary>
-        /// <param name="image">Bitmap image.</param>
         /// <param name="maxWidth">resize width.</param>
         /// <param name="maxHeight">resize height.</param>
         /// <param name="quality">quality setting value.</param>
-        /// <param name="filePath">file path.</param>      
-        public void SaveImage(Bitmap image, int maxWidth, int maxHeight, int quality, string filePath)
+        /// <param name="originalPath">Bitmap image.</param>
+        /// <param name="savingPath">file path.</param>      
+        public void SaveImage(int maxWidth, int maxHeight, int quality, string originalPath, string savingPath)
         {
+            var image = Image.FromFile(originalPath);
+
             // Get the image's original width and height
             int originalWidth = image.Width;
             int originalHeight = image.Height;
@@ -62,7 +64,7 @@ namespace Diamonds.Models
             // Save the image as a JPEG file with quality level.
             EncoderParameter encoderParameter = new EncoderParameter(encoder, quality);
             encoderParameters.Param[0] = encoderParameter;
-            newImage.Save(filePath, imageCodecInfo, encoderParameters);
+            newImage.Save(savingPath, imageCodecInfo, encoderParameters);
         }
 
         /// <summary>

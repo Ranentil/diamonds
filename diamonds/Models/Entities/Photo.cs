@@ -4,6 +4,9 @@ using System.Linq;
 using System.IO;
 using System.Web;
 using System.Data.Entity.ModelConfiguration;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using Diamonds.Models;
 
 namespace Diamonds.Models.Entities
@@ -35,53 +38,35 @@ namespace Diamonds.Models.Entities
             this.userId = userId;
         }
 
-        public string path
-        {
-            get
-            {
-                return Path.Combine(HttpContext.Current.Server.MapPath("~/App_Data/Galleries"), galleryId.ToString());
-            }
-        }
+        public string path { get { return Path.Combine(HttpContext.Current.Server.MapPath("~/App_Data/Galleries"), galleryId.ToString()); } }
 
-        public string jpgPath
-        {
-            get
-            {
-                return Path.Combine(path, id.ToString() + ".jpg");
-            }
-        }
+        public string jpgPath { get { return Path.Combine(path, id.ToString() + ".jpg"); } }
 
-        public void saveFileJpg(HttpPostedFileBase file)
+        public string thumbPath { get { return Path.Combine(path, id.ToString() + "_thumb.jpg"); } }
+
+        public string originalPath { get { return Path.Combine(path, id.ToString() + "_original.jpg"); } }
+
+        public bool hasJpg { get { return File.Exists(jpgPath) || File.Exists(originalPath); } }
+
+        public void saveJpg(HttpPostedFileBase file)
         {
             if (file != null)
             {
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
-                file.SaveAs(Path.Combine(path, id.ToString() + "_original.jpg"));
-            }
-        }
-
-        public bool hasFileJpg
-        {
-            get
-            {
-                return File.Exists(jpgPath);
+                file.SaveAs(originalPath);
+                new ImageHandler().SaveImage(150, 150, 100, originalPath, thumbPath);
+                new ImageHandler().SaveImage(1200, 1000, 100, originalPath, jpgPath);
             }
         }
 
         public void deleteFileJpg()
         {
-            if (hasFileJpg)
+            if (hasJpg)
             {
                 FileInfo file = new FileInfo(jpgPath);
                 file.Delete();
             }
-        }
-
-        private static Image LoadImageNoLock(string path)
-        {
-            var ms = new MemoryStream(File.ReadAllBytes(path));
-            return Image.FromStream(ms);
         }
 
         private string lang(string pl, string en)

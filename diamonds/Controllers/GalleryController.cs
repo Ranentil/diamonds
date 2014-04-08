@@ -109,7 +109,8 @@ namespace Diamonds.Controllers
         public FileResult Photo(int id, string size)
         {
             Photo photo = db.Photos.Single(p => p.id == id);
-            return File(photo.jpgPath, "image/jpeg");
+            string path = size == "small" ? photo.thumbPath : size == "big" ? photo.originalPath : photo.jpgPath;
+            return File(path, "image/jpeg");
         }
 
         //
@@ -134,7 +135,7 @@ namespace Diamonds.Controllers
                 Photo photo = new Photo(id, user.id, file);
                 gallery.Photos.Add(photo);
                 db.SaveChanges();
-                photo.saveFileJpg(file);
+                photo.saveJpg(file);
             }
 
             return View(gallery);

@@ -19,6 +19,7 @@ namespace Diamonds.Models.Entities
             base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new CommentMapping());
             modelBuilder.Configurations.Add(new EventMapping());
+            modelBuilder.Configurations.Add(new EventTypeMapping());
             modelBuilder.Configurations.Add(new GalleryMapping());
             modelBuilder.Configurations.Add(new NewsMapping());
             modelBuilder.Configurations.Add(new PhotoMapping());
@@ -34,6 +35,7 @@ namespace Diamonds.Models.Entities
         public DbSet<Action> Actions { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<EventType> EventTypes { get; set; }
         public DbSet<Gallery> Galleries { get; set; }
         public DbSet<Lineup> Lineups { get; set; }
         public DbSet<Localization> Localizations { get; set; }

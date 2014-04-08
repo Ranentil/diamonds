@@ -57,9 +57,10 @@
         </header>
         <div id="featured-photos">
             <ul>
-                <li style="background-image:url('@Url.Content("~/Content/images/slider/photo1.jpg")')"></li>
-                <li style="background-image:url('@Url.Content("~/Content/images/slider/photo2.jpg")')"></li>
-                <li style="background-image:url('@Url.Content("~/Content/images/slider/photo3.jpg")')"></li>
+                @foreach (var photo in ViewBag.Slider)
+                {
+                <li style="background-image:url('@Url.Action("Photo", "Gallery", new { id = photo.id, size = "big" })')"></li>
+                }
             </ul>
         </div>
         <div id="body">
