@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Diamonds.Models.Entities.Player>
+@{
+    ViewBag.Title = "Administracja zawodnikami";
+}
+
+<fieldset>
+    <legend>Administracja zawodnikami</legend>
+
+    <table>
+        <tr>
+            <th>zdjęcie</th>
+            <th>numer</th>
+            <th>imię</th>
+            <th>nick</th>
+            <th>nazwisko</th>
+            <th>pozycja</th>
+            <th>aktywny</th>
+            <th></th>
+        </tr>
+        @foreach (var player in Model)
+        {
+        <tr>
+            <td>
+            @if (player.Photo != null)
+            {
+            <img src="@Url.Action("Photo", new { id = player.photoId, size = "small" })" />
+            }
+            </td>
+            <td>@player.number</td>
+            <td>@player.firstName</td>
+            <td>@player.nickName</td>
+            <td>@player.lastName</td>
+            <td>
+                @foreach (var position in player.Positions)
+                {
+                    @position.name;
+                }
+            </td>
+            <td>@Html.CheckBox("isActive", player.isActive, new { disabled = "disabled" })</td>
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new { id = player.id})
+            </td>
+        </tr>
+        }
+
+        </table>
+</fieldset>

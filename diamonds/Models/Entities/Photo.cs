@@ -23,17 +23,23 @@ namespace Diamonds.Models.Entities
         public virtual User User { get; set; }
         public virtual ICollection<News> News { get; set; }
         public virtual ICollection<Gallery> Galleries { get; set; }
-        
-        public Photo(HttpPostedFileBase fileJpg)
+        public virtual ICollection<Player> Players { get; set; }
+
+        public Photo() { }
+
+        public Photo(int galleryId, int userId, HttpPostedFileBase fileJpg)
         {
-            saveFileJpg(fileJpg);
+            this.galleryId = galleryId;
+            this.descriptionPl = "";
+            this.descriptionEn = "";
+            this.userId = userId;
         }
 
         public string path
         {
             get
             {
-                return Path.Combine(HttpContext.Current.Server.MapPath("~/App_Data/Galleries"), Gallery.id.ToString());
+                return Path.Combine(HttpContext.Current.Server.MapPath("~/App_Data/Galleries"), galleryId.ToString());
             }
         }
 
@@ -51,7 +57,7 @@ namespace Diamonds.Models.Entities
             {
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
-                file.SaveAs(Path.Combine(path, id.ToString() + "_o.jpg"));
+                file.SaveAs(Path.Combine(path, id.ToString() + "_original.jpg"));
             }
         }
 
@@ -72,10 +78,18 @@ namespace Diamonds.Models.Entities
             }
         }
 
+        private static Image LoadImageNoLock(string path)
+        {
+            var ms = new MemoryStream(File.ReadAllBytes(path));
+            return Image.FromStream(ms);
+        }
+
         private string lang(string pl, string en)
         {
-            if (HttpContext.Current.Response.Cookies["lang"].Value == "en" && en != "" || pl == "")
-                return en;
+            var cookie = HttpContext.Current.Request.Cookies["diamonds-lang"];
+            if (cookie != null && cookie.Value == "en" || pl == "")
+                if (en != "")
+                    return en;
             return pl;
         }
         
@@ -90,7 +104,8 @@ namespace Diamonds.Models.Entities
             this.HasRequired(e => e.User).WithMany(e => e.Photos).HasForeignKey(e => e.userId);
 
             this.HasMany(e => e.News).WithOptional(e => e.Photo).HasForeignKey(e => e.photoId);
-            this.HasMany(e => e.Galleries).WithOptional(e => e.Cover).HasForeignKey(e => e.cover);
+            this.HasMany(e => e.Galleries).WithOptional(e => e.Cover).HasForeignKey(e => e.coverId);
+            this.HasMany(e => e.Players).WithOptional(e => e.Photo).HasForeignKey(e => e.photoId);
         }
     }
 }

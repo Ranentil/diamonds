@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Diamonds.Models.Entities.Event>
+@{
+    ViewBag.Title = "Wydarzenia";
+}
+
+@section scripts{
+}
+
+@foreach (var item in Model)
+{
+    <div>
+        <div>@item.name</div>
+        <div>@item.startDate.ToString("d MMMM HH:mm")</div>
+        @(item.endDate != null ? "<div>" + item.endDate.ToString("d MMMM HH:mm") + "</div>" : "")
+        <div>@item.EventType.name</div>
+        <div>@Html.ActionLink("Edit", "Edit", new { id = item.id })</div>
+    </div>
+}

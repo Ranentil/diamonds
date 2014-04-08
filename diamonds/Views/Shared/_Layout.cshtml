@@ -12,6 +12,10 @@
     <body>
         <header>
             <div class="content-wrapper">
+                <div class="language float-left">
+                    <a href="#"><img src="@Url.Content("~/Content/images/layout/lang-pl.png")" title="Zmień język na Polski" /></a>
+                    <a href="#"><img src="@Url.Content("~/Content/images/layout/lang-en.png")" title="Change language to English" /></a>
+                </div>
                 <div class="float-left">
                     <p class="site-title"><a href="@Url.Action("Index", "Home", null)"><img src="@Url.Content("~/Content/images/layout/logo.png")" /></a></p>
                 </div>
@@ -21,31 +25,31 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("Drużyna", "Index", "Team")
+                            <li><a href="@Url.Action("Index", "Team")">@ViewBag.Lang["menu-druzyna"]</a>
                                 <ul>
-                                    <li>@Html.ActionLink("Rekrutacja", "Index", "Team")</li>
-                                    <li>@Html.ActionLink("Historia drużyny", "Index", "Team")</li>
-                                    <li>@Html.ActionLink("Skład", "Index", "Team")</li>
-                                    <li>@Html.ActionLink("Wyniki", "Index", "Team")</li>
-                                    <li>@Html.ActionLink("Boisko", "Index", "Team")</li>
-                                    <li>@Html.ActionLink("Dokumenty", "Index", "Team")</li>
+                                    <li><a href="@Url.Action("Index", "Team")">@ViewBag.Lang["menu-rekrutajca"]</a></li>
+                                    <li><a href="@Url.Action("Index", "Team")">@ViewBag.Lang["menu-historia"]</a></li>
+                                    <li><a href="@Url.Action("Index", "Team")">@ViewBag.Lang["menu-sklad"]</a></li>
+                                    <li><a href="@Url.Action("Index", "Team")">@ViewBag.Lang["menu-wyniki"]</a></li>
+                                    <li><a href="@Url.Action("Index", "Team")">@ViewBag.Lang["menu-boisko"]</a></li>
+                                    <li><a href="@Url.Action("Index", "Team")">@ViewBag.Lang["menu-dokumenty"]</a></li>
                                 </ul>
                             </li>
-                            <li>@Html.ActionLink("Galeria", "Index", "Gallery")</li>
+                            <li><a href="@Url.Action("Index", "Gallery")">@ViewBag.Lang["menu-galeria"]</a></li>
                             <li>@Html.ActionLink("Softball", "Index", "Home")
                                 <ul>
-                                    <li>@Html.ActionLink("Czym jest softball?", "Index", "Home")</li>
-                                    <li>@Html.ActionLink("Prezentacja zasad", "Index", "Home")</li>
-                                    <li>@Html.ActionLink("Słownik", "Index", "Home")</li>
+                                    <li><a href="@Url.Action("Index", "Home")">@ViewBag.Lang["menu-co-to-softball"]</a></li>
+                                    <li><a href="@Url.Action("Index", "Home")">@ViewBag.Lang["menu-prezentacja-zasad"]</a></li>
+                                    <li><a href="@Url.Action("Index", "Home")">@ViewBag.Lang["menu-slownik"]</a></li>
                                 </ul>
                             </li>
-                            <li>@Html.ActionLink("Sponsor", "Sponsor", "Home")
+                            <li><a href="@Url.Action("Sponsor", "Home")">@ViewBag.Lang["menu-sponsor"]</a>
                                 <ul>
-                                    <li>@Html.ActionLink("Oferta", "Index", "Home")</li>
-                                    <li>@Html.ActionLink("1% podatku", "Index", "Home")</li>
+                                    <li><a href="@Url.Action("Index", "Home")">@ViewBag.Lang["menu-oferta"]</a></li>
+                                    <li><a href="@Url.Action("Index", "Home")">@ViewBag.Lang["menu-1podatku"]</a></li>
                                 </ul>
                             </li>
-                            <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                            <li><a href="@Url.Action("Contact", "Home")">@ViewBag.Lang["menu-kontakt"]</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -98,6 +102,15 @@
                 });
 
                 $("#featured-photos ul").bxSlider();
+
+                $(".language a:first-of-type").click(function (e) {
+                    cdCreateCookie('diamonds-lang', 'pl', 365);
+                    location.reload();
+                });
+                $(".language a:last-of-type").click(function (e) {
+                    cdCreateCookie('diamonds-lang', 'en', 365);
+                    location.reload();
+                });
             });
         </script>
 

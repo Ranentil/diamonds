@@ -27,7 +27,8 @@ namespace Diamonds.Models.Entities
         public News() { }
 
         private string lang(string pl, string en) {
-            if (HttpContext.Current.Response.Cookies["lang"].Value == "en" || pl == "")
+            var cookie = HttpContext.Current.Request.Cookies["diamonds-lang"];
+            if (cookie != null && cookie.Value == "en" || pl == "")
                 if (en != "")
                     return en;
             return pl;

@@ -1,0 +1,32 @@
+﻿@model Diamonds.Models.Entities.Gallery
+@{
+    ViewBag.Title = "PhotosAdmin";
+}
+
+<fieldset>
+    <legend>Administracja zdjęciami</legend>
+
+    <table>
+        <tr>
+            <th>zdjęcie</th>
+            <th>opis</th>
+            <th></th>
+        </tr>
+        @foreach (var photo in Model.Photos)
+        {
+        <tr>
+            <td>
+            @if (photo.hasFileJpg)
+            {
+            <img src="@Url.Action("Photo", new { id = photo.id, size = "small" })" />
+            }
+            </td>
+            <td>@photo.descriptionPl<br />@photo.descriptionEn</td>
+            <td>
+                @Html.ActionLink("Edit", "PhotoEdit", new { id = photo.id })
+            </td>
+        </tr>
+        }
+
+    </table>
+</fieldset>

@@ -15,7 +15,7 @@ namespace Diamonds.Models.Entities
         public string placeEn { get; set; }
         public DateTime startDate { get; set; }
         public Nullable<DateTime> endDate { get; set; }
-        public Nullable<int> cover { get; set; }
+        public Nullable<int> coverId { get; set; }
         public bool isPublished { get; set; }
 
         public string name { get { return lang(namePl, nameEn); } }
@@ -31,7 +31,8 @@ namespace Diamonds.Models.Entities
 
         private string lang(string pl, string en)
         {
-            if (HttpContext.Current.Response.Cookies["lang"].Value == "en" || pl == "")
+            var cookie = HttpContext.Current.Request.Cookies["diamonds-lang"];
+            if (cookie != null && cookie.Value == "en" || pl == "")
                 if (en != "")
                     return en;
             return pl;
@@ -43,7 +44,7 @@ namespace Diamonds.Models.Entities
         public GalleryMapping()
             : base()
         {
-            this.HasOptional(e => e.Cover).WithMany(e => e.Galleries).HasForeignKey(e => e.cover);
+            this.HasOptional(e => e.Cover).WithMany(e => e.Galleries).HasForeignKey(e => e.coverId);
             this.HasMany(e => e.Photos).WithRequired(e => e.Gallery).HasForeignKey(e => e.galleryId);
         }
     }

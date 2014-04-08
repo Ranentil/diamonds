@@ -23,12 +23,12 @@ namespace Diamonds.Controllers
         }
 
         //
-        // GET: /Gallery/Details
+        // GET: /Gallery/Admin
 
-        public ActionResult Details()
+        public ActionResult Admin()
         {
             List<Gallery> galleries = db.Galleries.OrderByDescending(g => g.startDate).ToList();
-            return View(galleries); 
+            return View(galleries);
         }
 
         //
@@ -51,7 +51,7 @@ namespace Diamonds.Controllers
                 db.SaveChanges();
 
                 TempData["Message"] = "Pomyślnie zapisano galerię.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Admin");
             }
             TempData["Error"] = "Coś poszło nie tak! Nie zapisano galerii.";
             return View("Edit", gallery);
@@ -79,7 +79,7 @@ namespace Diamonds.Controllers
                 db.SaveChanges();
 
                 TempData["Message"] = "Pomyślnie zapisano galerię.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Admin");
             }
             TempData["Error"] = "Coś poszło nie tak! Nie zapisano galerii.";
             return View(gallery);
@@ -89,6 +89,15 @@ namespace Diamonds.Controllers
         // GET: /Gallery/Photos/galleryId
 
         public ViewResult Photos(int id)
+        {
+            Gallery gallery = db.Galleries.Single(g => g.id == id);
+            return View(gallery);
+        }
+
+        //
+        // GET: /Gallery/PhotosAdmin/galleryId
+
+        public ViewResult PhotosAdmin(int id)
         {
             Gallery gallery = db.Galleries.Single(g => g.id == id);
             return View(gallery);
@@ -116,15 +125,17 @@ namespace Diamonds.Controllers
         // POST: /Gallery/AddPhotos/
 
         [HttpPost]
-        public ActionResult AddPhotos(int id, IEnumerable<HttpPostedFileBase> files)
+        public ActionResult AddPhotos(int id, IEnumerable<HttpPostedFileBase> photos)
         {
             Gallery gallery = db.Galleries.Single(g => g.id == id);
-            foreach (var file in files)
+            foreach (var file in photos)
             {
-                Photo photo = new Photo(file);
+                User user = db.Users.Single(u => u.email == User.Identity.Name);
+                Photo photo = new Photo(id, user.id, file);
                 gallery.Photos.Add(photo);
+                db.SaveChanges();
+                photo.saveFileJpg(file);
             }
-            db.SaveChanges();
 
             return View(gallery);
         }
@@ -152,7 +163,7 @@ namespace Diamonds.Controllers
                 db.SaveChanges();
 
                 TempData["Message"] = "Pomyślnie zapisano zdjęcia.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Admin");
             }
             TempData["Error"] = "Coś poszło nie tak! Nie zapisano zdjęcia.";
             return View(gallery);

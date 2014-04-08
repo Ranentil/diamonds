@@ -1,0 +1,69 @@
+﻿@model Diamonds.Models.Entities.Localization
+@{
+    string title = Model.id == 0 ? "Tworzenie" : "Edycja";
+    ViewBag.Title = title + " localization";
+}
+
+@section scripts{
+<script type="text/javascript" src="@Url.Content("~/Scripts/tinymce/tinymce.min.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("ul#site-nav li").hover(function () {
+            $(this).children('ul').hide();
+            $(this).children("ul").slideDown("fast");
+        },
+        function () {
+            $('ul', this).slideUp("fast");
+        });
+        tinymce.init({
+            selector: "textarea", menubar: false, statusbar: false, forced_root_block: "",
+            force_br_newlines: true, force_p_newlines: false, plugins: [
+        "advlist autolink lists link image charmap print preview anchor",
+        "searchreplace visualblocks code",
+        "insertdatetime media contextmenu paste"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link @*image*@"
+
+        });
+    });
+</script>
+}
+
+<ul id="site-nav">
+    <li>@Html.ActionLink("Panel Administracyjny", "Index", "Profile")</li>
+    <li>@Html.ActionLink("Lokalizacje", "Localizations", "Home")</li>
+    <li>@title</li>
+</ul>
+
+@using (Html.BeginForm()) 
+{
+<fieldset>
+    <legend>@title Lokalizacji</legend>
+    @Html.HiddenFor(m => m.id)
+
+    <table class="edit">
+        <tr>
+            <td>@Html.LabelFor(m => m.name, "Nazwa")</td>
+            <td>
+                @if (User.IsInRole("ADMIN"))
+                {
+                @Html.EditorFor(m => m.name) 
+                } else {
+                @Html.DisplayFor(m => m.name) @Html.HiddenFor(m => m.name)
+                }
+                @Html.ValidationMessageFor(m => m.name)</td>
+        </tr>
+        <tr>
+            <td colspan="2">@Html.LabelFor(m => m.pl, "Treść PL")
+                @Html.TextAreaFor(m => m.pl) @Html.ValidationMessageFor(m => m.pl)</td>
+            <td colspan="2">@Html.LabelFor(m => m.en, "Treść EN")
+                @Html.TextAreaFor(m => m.en) @Html.ValidationMessageFor(m => m.en)</td>
+        </tr>
+    </table>
+    <table class="edit">
+        <tr>
+            <td colspan="2"><input type="submit" value="Zapisz" /></td>
+        </tr>
+    </table>
+</fieldset>
+}

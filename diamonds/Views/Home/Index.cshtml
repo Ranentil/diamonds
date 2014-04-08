@@ -7,8 +7,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(".featured div a").hover(function () {
-
         });
+        $(".date").datepicker();
     });
 </script>
 }
@@ -17,10 +17,10 @@
     <div>
         <h5>@Html.ActionLink("Tytuł nagłówek tekstu pierwszego", "Index", "News", new { id = 1 }, null) </h5>
         <img src="~/Content/images/gallery/photo1.jpg" />
-        <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
     </div>
     <div>
-        <h5><a href="#">Aktualności</a></h5>
+        <h5>@Html.ActionLink("Aktualności", "Index", "News")</h5>
         <img src="~/Content/images/gallery/photo2.jpg" />
         <img src="~/Content/images/gallery/photo1.jpg" />
         <img src="~/Content/images/gallery/photo3.jpg" />
@@ -36,7 +36,7 @@
 <aside class="widget">
     <div>
         <h5>Terminarz</h5>
-        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+        <div class="date"></div>
     </div>
     <div>
         <h5>Wyniki</h5>

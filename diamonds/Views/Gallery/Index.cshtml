@@ -15,7 +15,10 @@
 @foreach (var gallery in Model)
 {
 <div id="gallery">
-    <img src="@Url.Action("Photo", new { id = gallery.cover, size = "small" })" />
+    @if (gallery.Cover != null)
+    {
+    <img src="@Url.Action("Photo", new { id = gallery.coverId, size = "small" })" />
+    }
     <div>
         @gallery.name<br />
         @gallery.place<br />

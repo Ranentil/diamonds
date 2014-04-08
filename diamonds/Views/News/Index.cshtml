@@ -1,5 +1,27 @@
-﻿@{
+﻿@model IEnumerable<Diamonds.Models.Entities.News>
+@{
     ViewBag.Title = "Aktualności";
 }
 
-
+<section class="page content-wrapper">
+    @foreach (var news in Model)
+    {
+    <div>
+        <h5>@news.title
+            @if (User.IsInRole("MODERATOR"))
+            {
+            <span>@Html.ActionLink("Edit", "Edit", new { id = news.id })</span>
+            }
+        </h5>
+        @if (news.Photo != null)
+        {
+        <img src="@news.Photo.path" />
+        }
+        <div>@Html.Raw(news.text)</div>
+        <div class="page-footer" style="text-align: right;">
+            <div>@news.addDate.ToString("d MMMM yy HH:mm")</div>
+            <div>@news.User.name</div>
+        </div>
+    </div>
+    }
+</section>

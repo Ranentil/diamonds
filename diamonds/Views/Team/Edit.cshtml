@@ -1,0 +1,62 @@
+﻿@model Diamonds.Models.Entities.Player
+@{
+    string title = Model.id == 0 ? "Tworzenie" : "Edycja";
+    ViewBag.Title = title + " zawodnika";
+}
+
+@section scripts{
+<script type="text/javascript">
+    $(document).ready(function () {
+    });
+</script>
+}
+
+@using (Html.BeginForm()) 
+{
+<fieldset>
+    <legend>@title zawodnika</legend>
+    @Html.HiddenFor(m => m.id)
+
+    <table class="edit">
+        <tr>
+            <td>@Html.LabelFor(m => m.firstName, "Imię")</td>
+            <td>@Html.EditorFor(m => m.firstName) @Html.ValidationMessageFor(m => m.firstName)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.nickName, "Nick")</td>
+            <td>@Html.EditorFor(m => m.nickName) @Html.ValidationMessageFor(m => m.nickName)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.lastName, "Nazwisko")</td>
+            <td>@Html.EditorFor(m => m.lastName) @Html.ValidationMessageFor(m => m.lastName)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.number, "Numer")</td>
+            <td>@Html.TextAreaFor(m => m.number) @Html.ValidationMessageFor(m => m.number)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.isActive, "Aktywny")</td>
+            <td>@Html.TextAreaFor(m => m.isActive) @Html.ValidationMessageFor(m => m.isActive)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.photoId, "Zdjęcie")</td>
+            <td>
+                @if (Model.Photo != null)
+                {
+                <img src="@Url.Action("Photo", new { id = Model.photoId, size = "small" })" />
+                <a href="#">Edytuj zdęcie</a>
+                }
+                else
+                {
+                <a href="#">Dodaj zdęcie</a>
+                }
+            </td>
+        </tr>
+    </table>
+    <table class="edit">
+        <tr>
+            <td colspan="2"><input type="submit" value="Zapisz" /></td>
+        </tr>
+    </table>
+</fieldset>
+}

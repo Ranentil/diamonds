@@ -16,18 +16,26 @@ namespace Diamonds.Models.Entities
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
         public bool repetitive { get; set; }
-        public byte type { get; set; }
-        public byte status { get; set; }
+        public byte eventTypeId { get; set; }
+        public byte status { get; set; } 
 
         public string name { get { return lang(namePl, nameEn); } }
         public string place { get { return lang(placePl, placeEn); } }
 
+        public virtual EventType EventType { get; set; }
         public virtual ICollection<Lineup> Lineups { get; set; }
 
 
+        public Event() 
+        {
+            this.startDate = DateTime.Now;
+            this.endDate = DateTime.Now;
+        }
+
         private string lang(string pl, string en)
         {
-            if (HttpContext.Current.Response.Cookies["lang"].Value == "en" || pl == "")
+            var cookie = HttpContext.Current.Request.Cookies["diamonds-lang"];
+            if (cookie != null && cookie.Value == "en" || pl == "")
                 if (en != "")
                     return en;
             return pl;
@@ -39,6 +47,7 @@ namespace Diamonds.Models.Entities
         public EventMapping()
             : base()
         {
+            this.HasRequired(e => e.EventType).WithMany(e => e.Events).HasForeignKey(e => e.eventTypeId);
             this.HasMany(e => e.Lineups).WithRequired(e => e.Event).HasForeignKey(e => e.eventId);
         }
     }

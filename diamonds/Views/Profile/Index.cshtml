@@ -4,27 +4,51 @@
 
 <div class="left-menu">
     <ul>
-        <li>@Html.ActionLink("Profil", "Index")
+        <li><a href="@Url.Action("Index")">Profil</a>
             <ul>
-                <li>@Html.ActionLink("Edytuj profil", "Edit")</li>
+                <li><a href="@Url.Action("Edit")">Edytuj profil</a></li>
             </ul>
         </li>
-        @if (User.IsInRole("MODERATOR"))
-        {
-        <li>Panel Administracyjny
+    </ul>
+    @if (User.IsInRole("MODERATOR"))
+    {
+    <h4>Panel Administracyjny</h4>
+    <ul>
+        <li><a href="@Url.Action("Index", "News")">Aktualności</a>
             <ul>
-                <li>@Html.ActionLink("Aktualności", "Index", "News")</li>
-                <li>@Html.ActionLink("Dodaj nową aktualność", "Create", "News")</li>
+                <li><a href="@Url.Action("Create", "News")">Dodaj nową aktualność</a></li>
+            </ul>
+        </li>
+        <li><a href="@Url.Action("Admin", "Gallery")">Galeria</a>
+            <ul>
+                <li><a href="@Url.Action("Create", "Gallery")">Dodaj galerię</a></li>
+            </ul>
+        </li>
+        <li><a href="@Url.Action("Index", "Event")">Wydarzenia</a>
+            <ul>
+                <li><a href="@Url.Action("Create", "Event")">Utwórz wydarzenie</a></li>
+            </ul>
+        </li>
+        <li><a href="@Url.Action("Admin", "Team")">Zawodnicy</a>
+            <ul>
+                <li><a href="@Url.Action("Create", "Team")">Dodaj zawodnika</a></li>
+            </ul>
+        </li>
+        <li>@Html.ActionLink("Localizacje", "Localizations", "Home")
+            @if (User.IsInRole("ADMIN"))
+            {
+            <ul>
+                <li>@Html.ActionLink("Dodaj Lokalizację", "LocalizationCreate", "Home")</li>
+            </ul>
+            }
+        </li>
                 
-                @if (User.IsInRole("ADMIN"))
-                {
-                <li>@Html.ActionLink("Użytkownicy", "Index", "User")</li>
-                }
-            </ul>
-        </li>
+        @if (User.IsInRole("ADMIN"))
+        {
+        <li>@Html.ActionLink("Użytkownicy", "Index", "User")</li>
         }
     </ul>
+    }
 </div>
-
-Tutaj będzie centrum wiadomości, ostatnich komentarzy.<br />
+ Tutaj będzie centrum wiadomości, ostatnich komentarzy.<br />
 Dla użytkowników i Diamentów mogą być polecane strony do obejrzenia.

@@ -17,7 +17,54 @@ namespace Diamonds.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            List<Player> players = db.Players.Where(p => p.isActive).OrderBy(p => p.lastName).ThenBy(p => p.firstName).ToList();
+            return View(players);
+        }
+
+        public ActionResult Admin()
+        {
+            List<Player> players = db.Players.Where(p => p.isActive).OrderBy(p => p.lastName).ThenBy(p => p.firstName).ToList();
+            return View(players);
+        }
+
+        public ViewResult Create()
+        {
+            return View("Edit", new Player());
+        }
+
+        [HttpPost]
+        public ActionResult Create(Player player)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Players.Add(player);
+                db.SaveChanges();
+
+                TempData["Message"] = "Pomyślnie zapisano";
+                return RedirectToAction("Index");
+            }
+            return View("Edit", player);
+        }
+
+        public ViewResult Edit(int id)
+        {
+            Player player = db.Players.Single(p => p.id == id);
+            return View(player);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Player player)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Players.Attach(player);
+                db.Entry(player).State = EntityState.Modified;
+                db.SaveChanges();
+
+                TempData["Message"] = "Pomyślnie zapisano.";
+                return RedirectToAction("Localizations", new { id = player.id });
+            }
+            return View(player);
         }
 
     }

@@ -70,23 +70,23 @@ h4, h5, h6 {
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 24pt;
 }
 
 h2 {
-    font-size: 1.75em;
+    font-size: 21pt;
 }
 
 h3 {
-    font-size: 1.2em;
+    font-size: 14pt;
 }
 
 h4 {
-    font-size: 1.1em;
+    font-size: 12pt;
 }
 
 h5, h6 {
-    font-size: 1em;
+    font-size: 11pt;
 }
 
 
@@ -142,10 +142,18 @@ footer {
     .site-title a, .site-title a:hover, .site-title a:active {
         background: none;
         position: absolute;
-        left: 8%;
+        left: 10%;
     }
 
     .site-title img {
+    }
+
+.language {
+    position:absolute;
+    top: 4px;
+    left:1%;
+}
+    .language img {
     }
 
 /* login
@@ -216,6 +224,7 @@ ul#menu {
         display: none;
         background-color: rgba(38, 18, 40, 0.8);
         text-align: left;
+        margin: 0;
         padding: 0 10px 4px;
         position: absolute;
         top: 58px;
@@ -319,8 +328,8 @@ h5 {
     color: #eee;
     margin: 0 -20px;
     padding: 0 20px;
-    position: absolute;
-    top: 0;
+    /*position: absolute;
+    top: 0;*/
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
     border-radius: 20px;
@@ -357,14 +366,24 @@ h5 {
         line-height: 32px;
         font-weight: bold;
     }
+    .left-menu ul li ul {
+        padding-left: 20px;
+    }
     .left-menu ul li ul li {
         line-height: normal;
         font-weight: normal;
+    }
+    .left-menu h4 {
+        margin: 20px 0 10px 10px;
     }
 
 /* featured */
 .featured {
 }
+    .featured h5 {
+        position: absolute;
+        top: 0;
+    }
     .featured > div {
         position: relative;
         margin-bottom: 16px;
@@ -395,9 +414,13 @@ h5 {
 /* widget */
 .widget {
 }
-.widget > div {
+    .widget > div {
         position: relative;
         margin-bottom: 10px;
+    }
+    .widget h5 {
+        position: absolute;
+        top: 0;
     }
     .widget div div {
         padding: 38px 10px 4px;
@@ -692,6 +715,27 @@ tr.pager td {
 .edit textarea {
     width: 400px;
     height: 280px;
+}
+
+/* pages
+----------------------------------------------------------*/
+h5 span {
+    float: right
+}
+.page-footer {
+    text-align: right;
+}
+    .page-footer div:last-of-type {
+        font-weight: bold;
+        font-style: italic;
+        padding-top: 4px;
+        font-size: 12pt;
+        font-family: 'Book Antiqua';
+    }
+
+/* news */
+.news {
+
 }
 
 /* gallery */

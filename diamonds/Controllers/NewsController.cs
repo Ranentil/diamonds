@@ -17,7 +17,8 @@ namespace Diamonds.Controllers
 
         public ViewResult Index()
         {
-            return View();
+            List<News> news = db.News.Where(n => n.isPublished).OrderByDescending(n => n.addDate).ToList();
+            return View(news);
         }
 
         //
@@ -32,6 +33,7 @@ namespace Diamonds.Controllers
         // POST: /News/Create/
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Create(News news)
         {
             if (ModelState.IsValid)
@@ -45,7 +47,6 @@ namespace Diamonds.Controllers
                 TempData["Message"] = "Pomyślnie zapisano artykuł.";
                 return RedirectToAction("Edit", new { id = news.id });
             }
-            TempData["Error"] = "Coś poszło nie tak! Nie zapisano artykułu.";
             return View("Edit", news);
         }
 
@@ -62,6 +63,7 @@ namespace Diamonds.Controllers
         // POST: /News/Edit:/
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(News news)
         {
             if (ModelState.IsValid)
@@ -73,7 +75,6 @@ namespace Diamonds.Controllers
                 TempData["Message"] = "Pomyślnie zapisano artykuł.";
                 return RedirectToAction("Edit", new { id = news.id });
             }
-            TempData["Error"] = "Coś poszło nie tak! Nie zapisano zmian.";
             return View(news);
         }
 

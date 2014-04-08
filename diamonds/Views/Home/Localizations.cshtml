@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Diamonds.Models.Entities.Localization>
+@{
+    ViewBag.Title = "Localizations";
+}
+
+<fieldset>
+    <legend>Localizations</legend>
+
+    <table>
+        <tr>
+            <th>nazwa</th>
+            <th>pl</th>
+            <th>en</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.name</td>
+            <td>@(item.pl.Length > 100 ? item.pl.Substring(0, 100) : item.pl)</td>
+            <td>@(item.en.Length > 100 ? item.en.Substring(0, 100) : item.en)</td>
+            <td>@Html.ActionLink("Edit", "LocalizationEdit", new { id = item.id })</td>
+        </tr>
+        }
+    </table>
+</fieldset>

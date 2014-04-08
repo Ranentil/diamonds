@@ -1,0 +1,65 @@
+﻿@model Diamonds.Models.Entities.Event
+@{
+    string title = Model.id == 0 ? "Tworzenie" : "Edycja";
+    ViewBag.Title = title + " wydarzenia";
+}
+
+@section scripts{
+<script type="text/javascript">
+    $(document).ready(function () {
+    });
+</script>
+}
+
+@using (Html.BeginForm()) 
+{
+<fieldset>
+    <legend>@title zawodnika</legend>
+    @Html.HiddenFor(m => m.id)
+
+    <table class="edit">
+        <tr>
+            <td>@Html.LabelFor(m => m.namePl, "Nazwa Pl")</td>
+            <td>@Html.EditorFor(m => m.namePl) @Html.ValidationMessageFor(m => m.namePl)</td>
+            <td>@Html.LabelFor(m => m.nameEn, "Nazwa En")</td>
+            <td>@Html.EditorFor(m => m.nameEn) @Html.ValidationMessageFor(m => m.nameEn)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.placePl, "Miejsce PL")</td>
+            <td>@Html.EditorFor(m => m.placePl) @Html.ValidationMessageFor(m => m.placePl)</td>
+            <td>@Html.LabelFor(m => m.placeEn, "Place En")</td>
+            <td>@Html.EditorFor(m => m.placeEn) @Html.ValidationMessageFor(m => m.placeEn)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.startDate, "Start")</td>
+            <td>@Html.EditorFor(m => m.startDate) @Html.ValidationMessageFor(m => m.startDate)</td>
+            <td>@Html.LabelFor(m => m.endDate, "Koniec")</td>
+            <td>@Html.EditorFor(m => m.endDate) @Html.ValidationMessageFor(m => m.endDate)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.repetitive, "Powtarzalne")</td>
+            <td>@Html.CheckBoxFor(m => m.repetitive)@Html.ValidationMessageFor(m => m.repetitive)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.eventTypeId, "Typ")</td>
+            <td>@Html.DropDownList("eventTypeId")@Html.ValidationMessageFor(m => m.eventTypeId)</td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.status, "Status")</td>
+            <td>
+                <select id="status" name="status">
+                    <option value="0">bez zmian</option>
+                    <option value="1">odwołane</option>
+                    <option value="2">przeniesiony na inny termin</option>
+                    <option value="3">przeniesiony z innego terminu</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <table class="edit">
+        <tr>
+            <td colspan="2"><input type="submit" value="Zapisz" /></td>
+        </tr>
+    </table>
+</fieldset>
+}

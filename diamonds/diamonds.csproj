@@ -197,6 +197,7 @@
     <Compile Include="Models\Entities\DiamondsEntities.cs" />
     <Compile Include="Models\EmptyStringModelBinder.cs" />
     <Compile Include="Models\Entities\Event.cs" />
+    <Compile Include="Models\Entities\EventType.cs" />
     <Compile Include="Models\Entities\Gallery.cs" />
     <Compile Include="Models\Entities\Lineup.cs" />
     <Compile Include="Models\Entities\Localization.cs" />
@@ -221,8 +222,10 @@
     <Content Include="Content\fancybox\fancybox_overlay.png" />
     <Content Include="Content\fancybox\fancybox_sprite%402x.png" />
     <Content Include="Content\fancybox\fancybox_sprite.png" />
+    <Content Include="Content\images\layout\lang-en.png" />
     <Content Include="Content\images\layout\bx_loader.gif" />
     <Content Include="Content\images\layout\bx_controls.png" />
+    <Content Include="Content\images\layout\lang-pl.png" />
     <Content Include="Content\images\slider\photo1.jpg" />
     <Content Include="Content\images\layout\logo.png" />
     <Content Include="Content\images\slider\photo2.jpg" />
@@ -507,7 +510,6 @@
     <Content Include="Views\Shared\_SiteNavigation.cshtml" />
     <Content Include="Views\Profile\Register.cshtml" />
     <Content Include="Views\Gallery\AddPhotos.cshtml" />
-    <Content Include="Views\Gallery\Details.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Roles.cshtml" />
@@ -516,6 +518,16 @@
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Profile\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Profile\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Home\LocalizationEdit.cshtml" />
+    <Content Include="Views\Home\Localizations.cshtml" />
+    <Content Include="Views\Event\Edit.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Gallery\Admin.cshtml" />
+    <Content Include="Views\Gallery\PhotosAdmin.cshtml" />
+    <Content Include="Views\Gallery\Photos.cshtml" />
+    <Content Include="Views\Team\Admin.cshtml" />
+    <Content Include="Views\Team\Edit.cshtml" />
+    <Content Include="Views\Team\Index.cshtml" />
     <None Include="Views\User\RoleEdit.cshtml" />
     <Content Include="Views\User\RoleGroupEdit.cshtml" />
     <Content Include="Views\User\RoleGroups.cshtml" />
@@ -524,7 +536,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Live\" />
-    <Folder Include="Views\Team\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

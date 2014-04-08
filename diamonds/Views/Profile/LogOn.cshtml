@@ -8,12 +8,11 @@
 }
 
 <section id="loginForm">
-<h2>Zaloguj się</h2>
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Log in Form</legend>
+        <legend>Zaloguj się</legend>
         <ol>
             <li>
                 @Html.LabelFor(m => m.Email)

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Diamonds.Models.Entities.Gallery>
+@{
+    ViewBag.Title = "Galerie zdjęć";
+}
+
+@section scripts{
+}
+
+<ul id="site-nav">
+    <li>@Html.ActionLink("Galeria", "Index", "Gallery")
+    </li>
+</ul>
+
+<fieldset>
+    <legend>Administracja galeriami</legend>
+
+    <table>
+        <tr>
+            <th>zdjęcie</th>
+            <th>nazwa</th>
+            <th>miejsce</th>
+            <th>początek</th>
+            <th>koniec</th>
+            <th>aktywny</th>
+            <th></th>
+        </tr>
+        @foreach (var gallery in Model)
+        {
+        <tr>
+            <td>
+            @if (gallery.Cover != null)
+            {
+            <img src="@Url.Action("Photo", new { id = gallery.coverId, size = "small" })" />
+            }
+            </td>
+            <td>@gallery.namePl<br />@gallery.nameEn</td>
+            <td>@gallery.placePl<br />@gallery.placeEn</td>
+            <td>
+                @gallery.startDate.ToShortDateString()<br />
+                @(gallery.endDate != null ? ((DateTime)gallery.endDate).ToShortDateString() : "")
+            </td>
+            <td>@Html.CheckBox("isPublished", gallery.isPublished, new { disabled = "disabled" })</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = gallery.id })
+                @Html.ActionLink("Pokaż zdjęcia", "PhotosAdmin", new { id = gallery.id })
+                @Html.ActionLink("Dodaj zdjęcia", "AddPhotos", new { id = gallery.id})
+            </td>
+        </tr>
+        }
+
+    </table>
+</fieldset>

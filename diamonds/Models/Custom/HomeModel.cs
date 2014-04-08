@@ -12,6 +12,7 @@ namespace Diamonds.Models
         public ICollection<News> News;
         public ICollection<Event> Events;
         public ICollection<Gallery> Galleries;
+        public Photo FeaturedPhoto;
 
         public HomeModel() { }
     }

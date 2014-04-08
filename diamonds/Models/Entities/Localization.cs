@@ -15,10 +15,14 @@ namespace Diamonds.Models.Entities
 
         public string text { get { return lang(pl, en); } }
 
+        public Localization() { }
+
         private string lang(string pl, string en)
         {
-            if (HttpContext.Current.Response.Cookies["lang"].Value == "en" && en != "" || pl == "")
-                return en;
+            var cookie = HttpContext.Current.Request.Cookies["diamonds-lang"];
+            if (cookie != null && cookie.Value == "en" || pl == "")
+                if (en != "")
+                    return en;
             return pl;
         }
     }

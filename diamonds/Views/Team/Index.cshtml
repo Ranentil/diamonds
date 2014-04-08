@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Diamonds.Models.Entities.Player>
+@{
+    ViewBag.Title = "Zawodnicy";
+}
+
+@foreach (var player in Model)
+{
+<div id="gallery">
+    @if (player.Photo != null)
+    {
+    <img src="@Url.Action("Photo", new { id = player.photoId, size = "small" })" />
+    }
+    <div>
+        @player.firstName @player.nickName @player.lastName<br />
+        @foreach (var position in player.Positions)
+        {
+            @position.name;
+        }
+    </div>
+</div>
+}
