@@ -10,6 +10,8 @@
     </script>
 }
 
+@Html.Partial("_NavigationBar", new Diamonds.Models.NavigationModel("Gallery", "Edycja Zdjęć", "MODERATOR"))
+
 <ul id="site-nav">
     <li>@Html.ActionLink("Panel Administracyjny", "Admin", "Profile")</li>
     <li>@Html.ActionLink("Galeria", "Index", "Gallery")

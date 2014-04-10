@@ -8,6 +8,9 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
+@Html.Partial("_NavigationBar", new Diamonds.Models.NavigationModel("User", "RoleEdit", "No"))
+
+
 @Html.Partial("_LeftMenuPartial")
 
 @using (Html.BeginForm()) {

@@ -3,6 +3,8 @@
     ViewBag.Title = "Localizations";
 }
 
+@Html.Partial("_NavigationBar", new Diamonds.Models.NavigationModel("Localization", "Lista", "ADMIN"))
+
 <fieldset>
     <legend>Localizations</legend>
 
@@ -19,7 +21,7 @@
             <td>@item.name</td>
             <td>@(item.pl.Length > 100 ? item.pl.Substring(0, 100) : item.pl)</td>
             <td>@(item.en.Length > 100 ? item.en.Substring(0, 100) : item.en)</td>
-            <td>@Html.ActionLink("Edit", "LocalizationEdit", new { id = item.id })</td>
+            <td>@Html.ActionLink("Edit", "Edit", new { id = item.id })</td>
         </tr>
         }
     </table>

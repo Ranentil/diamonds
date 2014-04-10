@@ -31,54 +31,5 @@ namespace Diamonds.Controllers
         {
             return View();
         }
-
-
-        public ViewResult Localizations()
-        {
-            List<Localization> localizations = db.Localizations.OrderBy(l => l.name).ToList();
-            return View(localizations);
-        }
-
-        public ViewResult LocalizationCreate()
-        {
-            return View("LocalizationEdit", new Localization());
-        }
-
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult LocalizationCreate(Localization localization)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Localizations.Add(localization);
-                db.SaveChanges();
-
-                TempData["Message"] = "Pomyślnie zapisano";
-                return RedirectToAction("Localizations");
-            }
-            return View("LocalizationEdit", localization);
-        }
-
-        public ViewResult LocalizationEdit(int id)
-        {
-            Localization localization = db.Localizations.Single(l => l.id == id);
-            return View(localization);
-        }
-
-        [HttpPost]
-        [ValidateInput(false)]
-        public ActionResult LocalizationEdit(Localization localization)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Localizations.Attach(localization);
-                db.Entry(localization).State = EntityState.Modified;
-                db.SaveChanges();
-
-                TempData["Message"] = "Pomyślnie zapisano.";
-                return RedirectToAction("Localizations", new { id = localization.id });
-            }
-            return View(localization);
-        }
     }
 }

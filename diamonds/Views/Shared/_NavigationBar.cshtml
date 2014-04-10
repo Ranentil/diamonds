@@ -1,0 +1,39 @@
+﻿@model Diamonds.Models.NavigationModel
+
+<ul id="site-nav">
+    <li>@Html.ActionLink("Panel Administracyjny", "Index", "Profile")</li>
+    <li>
+        <a href="@Url.Action("Admin", Model.name)">@Model.name</a>
+        <ul>
+            @if (Model.name != "News") 
+            {
+            <li><a href="@Url.Action("Admin", "News")">News</a></li>
+            }
+            @if (Model.name != "Gallery") 
+            {
+            <li><a href="@Url.Action("Admin", "Gallery")">Gallery</a></li>
+            }
+            @if (Model.name != "Event")
+            {
+            <li><a href="@Url.Action("Index", "Event")">Event</a></li>
+            }
+            @if (Model.name != "Team")
+            {
+            <li><a href="@Url.Action("Admin", "Team")">Team</a></li>
+            }
+            @if (Model.name != "Localization")
+            {
+            <li><a href="@Url.Action("Admin", "Localization")">Localization</a></li>
+            }
+            @if (Model.name != "User" && User.IsInRole("ADMIN"))
+            {
+            <li><a href="@Url.Action("Admin", "User")">User</a></li>
+            }
+        </ul>
+    </li>
+    <li>@Model.page</li>
+    @if (User.IsInRole(Model.permission))
+    {
+    <li class="site-nav-new"><a href="@Url.Action("Create", Model.name)">Dodaj</a></li>
+    }
+</ul>

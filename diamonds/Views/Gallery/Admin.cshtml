@@ -6,10 +6,7 @@
 @section scripts{
 }
 
-<ul id="site-nav">
-    <li>@Html.ActionLink("Galeria", "Index", "Gallery")
-    </li>
-</ul>
+@Html.Partial("_NavigationBar", new Diamonds.Models.NavigationModel("Gallery", "Lista", "MODERATOR"))
 
 <fieldset>
     <legend>Administracja galeriami</legend>

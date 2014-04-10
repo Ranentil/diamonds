@@ -55,8 +55,8 @@ namespace Diamonds.Models.Entities
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
                 file.SaveAs(originalPath);
-                new ImageHandler().SaveImage(150, 150, 100, originalPath, thumbPath);
-                new ImageHandler().SaveImage(1200, 1000, 100, originalPath, jpgPath);
+                new ImageHandler(originalPath, thumbPath).SaveThumbnail();
+                new ImageHandler(originalPath, jpgPath).SaveImage(1200, 1000);
             }
         }
 

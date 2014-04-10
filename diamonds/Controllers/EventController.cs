@@ -22,6 +22,13 @@ namespace Diamonds.Controllers
             return View(events);
         }
 
+        public ActionResult Admin()
+        {
+            var date = DateTime.Today;
+            List<Event> events = db.Events.OrderByDescending(e => e.startDate).ToList();
+            return View(events);
+        }
+
         public ViewResult Create()
         {
             ViewBag.eventTypeId = new SelectList(db.EventTypes, "id", "name");

@@ -180,6 +180,7 @@
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\LiveController.cs" />
+    <Compile Include="Controllers\LocalizationController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -191,6 +192,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Custom\HomeModel.cs" />
+    <Compile Include="Models\Custom\NavigationModel.cs" />
     <Compile Include="Models\DRoleProvider.cs" />
     <Compile Include="Models\DMembershipProvider.cs" />
     <Compile Include="Models\Entities\Action.cs" />
@@ -497,7 +499,6 @@
     <Content Include="Views\Gallery\Edit.cshtml" />
     <Content Include="Views\Gallery\PhotosEdit.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
-    <Content Include="Views\Profile\Admin.cshtml" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
@@ -509,7 +510,7 @@
     <Content Include="Views\Shared\_SiteNavigation.cshtml" />
     <Content Include="Views\Profile\Register.cshtml" />
     <Content Include="Views\Gallery\AddPhotos.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Admin.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Roles.cshtml" />
     <Content Include="Views\Gallery\PhotoEdit.cshtml" />
@@ -517,8 +518,8 @@
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Profile\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Profile\_SetPasswordPartial.cshtml" />
-    <Content Include="Views\Home\LocalizationEdit.cshtml" />
-    <Content Include="Views\Home\Localizations.cshtml" />
+    <Content Include="Views\Localization\Edit.cshtml" />
+    <Content Include="Views\Localization\Admin.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Gallery\Admin.cshtml" />
@@ -527,6 +528,9 @@
     <Content Include="Views\Team\Admin.cshtml" />
     <Content Include="Views\Team\Edit.cshtml" />
     <Content Include="Views\Team\Index.cshtml" />
+    <Content Include="Views\Shared\_NavigationBar.cshtml" />
+    <Content Include="Views\News\Admin.cshtml" />
+    <Content Include="Views\Event\Admin.cshtml" />
     <None Include="Views\User\RoleEdit.cshtml" />
     <Content Include="Views\User\RoleGroupEdit.cshtml" />
     <Content Include="Views\User\RoleGroups.cshtml" />

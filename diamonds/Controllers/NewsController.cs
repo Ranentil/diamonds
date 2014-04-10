@@ -22,6 +22,15 @@ namespace Diamonds.Controllers
         }
 
         //
+        // GET: /News/Admin
+
+        public ViewResult Admin()
+        {
+            List<News> news = db.News.Where(n => n.isPublished).OrderByDescending(n => n.addDate).ToList();
+            return View(news);
+        }
+
+        //
         // GET: /News/Create
 
         public ViewResult Create()

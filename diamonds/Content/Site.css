@@ -284,6 +284,17 @@ ul#site-nav {
             padding: 4px;
         }
 
+    ul#site-nav .site-nav-new {
+        margin-left: 20px;
+        padding: 3px 12px;
+        font-weight: bold;
+        background-color: rgba(38, 18, 40, 0.1);
+    }
+    ul#site-nav li.site-nav-new:before {
+        content: "";
+        padding: 0;
+    }
+
     ul#site-nav a {
         color: #222;
         padding: 0;
@@ -292,13 +303,19 @@ ul#site-nav {
             color: #666;
             text-decoration: none;
         }
-
+        
     ul#site-nav ul {
-        display: none;
+        visibility: hidden;
+        margin-left: 18px;
+        background-color: #EFEEEF;
+        border: solid 1px #666;
         position: absolute;
         left: 0;
         list-style: none;
-        padding:2px;
+        padding: 2px;
+    }
+    ul#site-nav li:hover ul {
+        visibility: visible;
     }
         ul#site-nav ul li {
             padding: 2px 12px;

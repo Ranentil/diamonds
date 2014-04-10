@@ -12,9 +12,13 @@ namespace Diamonds.Controllers
     public class UserController : Controller
     {
         private DiamondsEntities db = new DiamondsEntities();
-        
 
         public ActionResult Index()
+        {
+            return RedirectToAction("Admin");
+        }
+
+        public ActionResult Admin()
         {
             List<User> users = db.Users.OrderBy(u => u.name).ToList();
             return View(users);

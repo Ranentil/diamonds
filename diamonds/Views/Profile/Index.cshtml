@@ -14,38 +14,14 @@
     {
     <h4>Panel Administracyjny</h4>
     <ul>
-        <li><a href="@Url.Action("Index", "News")">Aktualności</a>
-            <ul>
-                <li><a href="@Url.Action("Create", "News")">Dodaj nową aktualność</a></li>
-            </ul>
-        </li>
-        <li><a href="@Url.Action("Admin", "Gallery")">Galeria</a>
-            <ul>
-                <li><a href="@Url.Action("Create", "Gallery")">Dodaj galerię</a></li>
-            </ul>
-        </li>
-        <li><a href="@Url.Action("Index", "Event")">Wydarzenia</a>
-            <ul>
-                <li><a href="@Url.Action("Create", "Event")">Utwórz wydarzenie</a></li>
-            </ul>
-        </li>
-        <li><a href="@Url.Action("Admin", "Team")">Zawodnicy</a>
-            <ul>
-                <li><a href="@Url.Action("Create", "Team")">Dodaj zawodnika</a></li>
-            </ul>
-        </li>
-        <li>@Html.ActionLink("Localizacje", "Localizations", "Home")
-            @if (User.IsInRole("ADMIN"))
-            {
-            <ul>
-                <li>@Html.ActionLink("Dodaj Lokalizację", "LocalizationCreate", "Home")</li>
-            </ul>
-            }
-        </li>
-                
+        <li><a href="@Url.Action("Admin", "News")">Aktualności</a></li>
+        <li><a href="@Url.Action("Admin", "Gallery")">Galeria</a></li>
+        <li><a href="@Url.Action("Admin", "Event")">Wydarzenia</a></li>
+        <li><a href="@Url.Action("Admin", "Team")">Zawodnicy</a></li>
+        <li><a href="@Url.Action("Admin", "Localization")">Localizacje</a></li>      
         @if (User.IsInRole("ADMIN"))
         {
-        <li>@Html.ActionLink("Użytkownicy", "Index", "User")</li>
+        <li>@Html.ActionLink("Użytkownicy", "Admin", "User")</li>
         }
     </ul>
     }
