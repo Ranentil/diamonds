@@ -25,36 +25,22 @@ namespace Diamonds.Controllers
             return View(user);
         }
 
-        public ViewResult Edit()
-        {
-            
-            return View();
-        }
-
-        [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Edit(LocalPasswordModel model)
-        {
-            
-            return View(model);
-        }
-
         [AllowAnonymous]
-        public ViewResult LogOn()
+        public ViewResult Login(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
         [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
-        public ActionResult LogOn(LoginModel model, string returnUrl)
+        public ActionResult Login(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 if (Membership.ValidateUser(model.Email, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
-                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
-                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
-                        return Redirect(returnUrl);
+                    return RedirectToLocal(returnUrl);
                 }
                 else
                 {
@@ -64,6 +50,13 @@ namespace Diamonds.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
 
         [AllowAnonymous]
@@ -88,19 +81,33 @@ namespace Diamonds.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Profile/Admin/
-
+        
         public ViewResult Admin()
         {
             return View();
         }
 
-        public enum ManageMessageId
+
+
+        public ViewResult Edit()
         {
-            ChangePasswordSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
+
+            return View();
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Edit(LocalPasswordModel model)
+        {
+
+            return View(model);
+        }
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+                return Redirect(returnUrl);
+            else
+                return RedirectToAction("Index", "Profile");
         }
     }
 }

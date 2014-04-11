@@ -410,10 +410,7 @@ h5 {
         padding-top:34px;
     }
         .featured img:not(:first-of-type) {
-            position: absolute;
             display: none;
-            top: 34px;
-            left: 0;
         }
     .featured div div {
         position: absolute;
@@ -477,6 +474,8 @@ h5 {
     }
     .widget-gallery aside {
         width: 30%;
+    }
+    .widget-gallery a {
     }
     .widget-gallery article img {
         width: 48.3%;

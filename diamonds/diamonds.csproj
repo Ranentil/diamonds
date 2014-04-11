@@ -514,7 +514,7 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Roles.cshtml" />
     <Content Include="Views\Gallery\PhotoEdit.cshtml" />
-    <Content Include="Views\Profile\LogOn.cshtml" />
+    <Content Include="Views\Profile\Login.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Profile\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Profile\_SetPasswordPartial.cshtml" />
