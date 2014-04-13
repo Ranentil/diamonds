@@ -41,7 +41,7 @@ namespace Diamonds.Controllers
                 db.SaveChanges();
 
                 TempData["Message"] = "Pomyślnie zapisano";
-                return RedirectToAction("Index");
+                return RedirectToAction("Admin");
             }
             return View("Edit", player);
         }
@@ -62,7 +62,7 @@ namespace Diamonds.Controllers
                 db.SaveChanges();
 
                 TempData["Message"] = "Pomyślnie zapisano.";
-                return RedirectToAction("Localizations", new { id = player.id });
+                return RedirectToAction("Admin", new { id = player.id });
             }
             return View(player);
         }

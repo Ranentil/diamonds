@@ -19,7 +19,7 @@
     <legend>@title zawodnika</legend>
     @Html.HiddenFor(m => m.id)
 
-    <table class="edit">
+    <table class="edit violet">
         <tr>
             <td>@Html.LabelFor(m => m.firstName, "Imię")</td>
             <td>@Html.EditorFor(m => m.firstName) @Html.ValidationMessageFor(m => m.firstName)</td>
@@ -34,11 +34,11 @@
         </tr>
         <tr>
             <td>@Html.LabelFor(m => m.number, "Numer")</td>
-            <td>@Html.TextAreaFor(m => m.number) @Html.ValidationMessageFor(m => m.number)</td>
+            <td>@Html.EditorFor(m => m.number) @Html.ValidationMessageFor(m => m.number)</td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m => m.isActive, "Aktywny")</td>
-            <td>@Html.TextAreaFor(m => m.isActive) @Html.ValidationMessageFor(m => m.isActive)</td>
+            <td>@Html.EditorFor(m => m.isActive) @Html.ValidationMessageFor(m => m.isActive)</td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m => m.photoId, "Zdjęcie")</td>
@@ -46,11 +46,11 @@
                 @if (Model.Photo != null)
                 {
                 <img src="@Url.Action("Photo", new { id = Model.photoId, size = "small" })" />
-                <a href="#">Edytuj zdęcie</a>
+                <a href="#">Edytuj zdjęcie</a>
                 }
                 else
                 {
-                <a href="#">Dodaj zdęcie</a>
+                <a href="#">Dodaj zdjęcie</a>
                 }
             </td>
         </tr>

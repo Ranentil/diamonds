@@ -1,6 +1,20 @@
-﻿@model Diamonds.Models.Entities.Gallery
+﻿@model ICollection<Diamonds.Models.Entities.Photo>
 
 @{
     ViewBag.Title = "Photos";
 }
 
+<h5>
+    @Model.First().Gallery.name - 
+    @Model.First().Gallery.place - 
+    @Model.First().Gallery.startDate.ToString("d MMMM yyyy")
+</h5>
+@foreach (var photo in Model)
+{
+<div id="gallery">
+    <a href="#">
+        <img src="@Url.Action("Photo", "Gallery", new { id = photo.id, size = "small" })" />
+    </a>
+</div>
+
+}

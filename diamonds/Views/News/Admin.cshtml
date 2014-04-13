@@ -4,3 +4,41 @@
 }
 
 @Html.Partial("_NavigationBar", new Diamonds.Models.NavigationModel("News", "Lista", "MODERATOR"))
+
+<fieldset>
+    <legend>Administracja galeriami</legend>
+
+    <table class="violet">
+        <tr>
+            <th>zdjęcie</th>
+            <th>tytuł</th>
+            <th>tekst</th>
+            <th>data</th>
+            <th>użytkownik</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @if (item.Photo != null)
+                {
+                <a href="@Url.Action("Edit", new { id = item.id })">
+                    <img src="@Url.Action("Photo", "Gallery", new { id = item.photoId })" />
+                </a>
+                }
+            </td>
+            <td>@item.titlePl<br />@item.titleEn</td>
+            <td>
+                @(item.textPl.Length > 200 ? item.textPl.Substring(0, 200) : item.textPl)<br />
+                @(item.textEn.Length > 200 ? item.textPl.Substring(0, 200) : item.textEn)
+            </td>
+            <td>@item.addDate.ToShortDateString()</td>
+            <td>@item.User.name</td>
+            <td>@Html.ActionLink("Edytuj", "Edit", new { id = item.id })</td>
+        </tr>
+        }
+
+    </table>
+</fieldset>

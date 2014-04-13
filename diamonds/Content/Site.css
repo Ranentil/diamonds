@@ -449,6 +449,7 @@ h5 {
     }
     .widget div img {
         width: 100%;
+        padding-top: 34px;
     }
 
 /* calendar wigget */
@@ -464,6 +465,14 @@ h5 {
 .calendar .ui-datepicker-title {
     text-align: center;
 }*/
+
+.markedDay a.ui-state-default {
+    background: purple !important;
+}
+
+.markedDay a.ui-state-hover {
+    background: wheat !important;
+}
 
 /* gallery widget */
 .widget-gallery {
@@ -699,10 +708,12 @@ table {
 
 th {
     text-align: left;
-    background-color: rgba(38, 18, 40, 0.7);
-    color: #eee;
     border: none 0px;
     padding: 4px 8px;
+}
+.violet th {
+    background-color: rgba(38, 18, 40, 0.7);
+    color: #eee;
 }
 
     th a {
@@ -779,13 +790,22 @@ h5 span {
 /* gallery */
 #gallery {
     display: inline;
-    position: relative;
 }
+    #gallery a {
+        position: relative;
+        display: inline-block;
+    }
     #gallery img {
-        width: 25%;
+        padding: 8px;
     }
     #gallery div {
         position: absolute;
-        top: 10%;
-        left: 0;
+        display: none;
+        left: 16px;
+        top: 8%;
+        line-height: 54px;
+        color: white;
+        font-size: 14pt;
+        font-weight: bold;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     }

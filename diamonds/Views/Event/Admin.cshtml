@@ -5,3 +5,32 @@
 
 
 @Html.Partial("_NavigationBar", new Diamonds.Models.NavigationModel("Event", "Lista", "MODERATOR"))
+
+<fieldset>
+    <legend>Administracja wydarzeniami</legend>
+
+    <table class="violet">
+        <tr>
+            <th>nazwa</th>
+            <th>miejsce</th>
+            <th>start/koniec</th>
+            <th>typ</th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>@item.namePl<br />@item.nameEn</td>
+        <td>@item.placePl<br />@item.placeEn</td>
+        <td>
+            @item.startDate.ToString("d MMMM HH:mm")<br />
+            @(item.endDate != null ? item.endDate.ToString("d MMMM HH:mm") : "")
+        </td>
+        <td>@item.EventType.name</td>
+        <td>@Html.ActionLink("Edit", "Edit", new { id = item.id })</td>
+    </tr>
+    }
+
+    </table>
+</fieldset>

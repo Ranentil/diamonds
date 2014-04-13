@@ -10,11 +10,27 @@
     $(document).ready(function () {
         $(".featured div a").hover(function () {
         });
-        if (cdReadCookie("diamonds-lang") != "en") {
-            $(".calendar").datepicker($.datepicker.regional['pl']);
+        
+        $(".calendar").datepicker({
+            beforeShowDay: daysToMark
+        });
+
+        if (cdReadCookie("diamonds-lang") == "en") {
+            $.datepicker.regional[''];
+        };
+
+        function daysToMark(date) {
+        @foreach (var date in Model.Events)
+        {
+            <text>
+            if (date == @(date.startDate.ToString())) {
+                return [true, 'markedDay', ""];
+            }
+            </text>
         }
-        else
-            $(".calendar").datepicker();
+            
+            return [true, '', ""];
+        }
 
         $(".list-of-news a").hover(function () {
             $(this).parent().parent().children("img").hide();
@@ -42,7 +58,6 @@
     </div>
     <div>
         <h5>@Html.ActionLink("Aktualności", "Index", "News")</h5>
-        @* Jest taki pomysł, żeby po najechaniu linku zmieniał się obrazek po lewej, jeśli brak obrazka, jakiś domyślny *@
         @foreach (var item in Model.News)
         {
         <img src="@Url.Action("Photo", "Gallery", new { id = item.photoId, size = "small" })" id="@item.id" />
@@ -57,7 +72,12 @@
 </article>
 
 <aside class="widget">
-    <div class="calendar"></div>
+    <div class="calendar">
+        @foreach (var item in Model.Events)
+        {
+            <div>@item.name</div>
+        }
+    </div>
     <div>
         <h5>Wyniki</h5>
         <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>

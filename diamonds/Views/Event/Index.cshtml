@@ -10,9 +10,13 @@
 {
     <div>
         <div>@item.name</div>
+        <div>@item.place</div>
         <div>@item.startDate.ToString("d MMMM HH:mm")</div>
         @(item.endDate != null ? "<div>" + item.endDate.ToString("d MMMM HH:mm") + "</div>" : "")
         <div>@item.EventType.name</div>
+        @if (User.IsInRole("MODERATOR"))
+        {
         <div>@Html.ActionLink("Edit", "Edit", new { id = item.id })</div>
+        }
     </div>
 }

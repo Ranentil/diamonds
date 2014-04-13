@@ -44,7 +44,7 @@ namespace Diamonds.Controllers
                 db.SaveChanges();
 
                 TempData["Message"] = "Pomyślnie zapisano";
-                return RedirectToAction("Index");
+                return RedirectToAction("Admin");
             }
             ViewBag.eventTypeId = new SelectList(db.EventTypes, "id", "name");
             return View("Edit", item);
@@ -67,7 +67,7 @@ namespace Diamonds.Controllers
                 db.SaveChanges();
 
                 TempData["Message"] = "Pomyślnie zapisano.";
-                return RedirectToAction("Index");
+                return RedirectToAction("Admin");
             }
             ViewBag.eventTypeId = new SelectList(db.EventTypes, "id", "name");
             return View(item);
@@ -80,7 +80,7 @@ namespace Diamonds.Controllers
             db.SaveChanges();
 
             TempData["Message"] = "Usunięto";
-            return RedirectToAction("Index");
+            return RedirectToAction("Admin");
         }
 
     }

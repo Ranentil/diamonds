@@ -17,7 +17,7 @@ namespace Diamonds.Controllers
 
         public ActionResult Index()
         {
-            List<Gallery> galleries = db.Galleries.Where(g => g.isPublished)
+            List<Gallery> galleries = db.Galleries.Where(g => g.isPublished && g.Cover != null)
                 .OrderByDescending(g => g.startDate).ToList();
             return View(galleries); 
         }
@@ -90,8 +90,8 @@ namespace Diamonds.Controllers
 
         public ViewResult Photos(int id)
         {
-            Gallery gallery = db.Galleries.Single(g => g.id == id);
-            return View(gallery);
+            List<Photo> photos = db.Photos.Where(p => p.galleryId == id).OrderByDescending(p => p.no).ToList();
+            return View(photos);
         }
 
         //

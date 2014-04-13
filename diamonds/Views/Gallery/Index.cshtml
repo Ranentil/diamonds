@@ -1,28 +1,36 @@
 ﻿@model IEnumerable<Diamonds.Models.Entities.Gallery>
 @{
     ViewBag.Title = "Galerie zdjęć";
+    var year = "";
 }
 
 @section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#gallery a").hover(function () {
+                $(this).find("div").fadeIn();
+            }, function () {
+                $(this).find("div").fadeOut();
+            });
+        });
+    </script>
 }
-
-<ul id="site-nav">
-    <li>@Html.ActionLink("Galeria", "Index", "Gallery")
-    </li>
-</ul>
-
 
 @foreach (var gallery in Model)
 {
+if (year != gallery.startDate.ToString("yyyy"))
+{
+{year = gallery.startDate.Year.ToString(); }
+<h5>Sezon @gallery.startDate.ToString("yyyy")</h5>
+}
 <div id="gallery">
-    @if (gallery.Cover != null)
-    {
-    <img src="@Url.Action("Photo", new { id = gallery.coverId, size = "small" })" />
-    }
-    <div>
-        @gallery.name<br />
-        @gallery.place<br />
-        @gallery.startDate.ToShortDateString()
-    </div>
+    <a href="@Url.Action("Photos", "Gallery", new { id = gallery.id })">
+        <img src="@Url.Action("Photo", new { id = gallery.coverId, size = "small" })" />
+        <div>
+            @gallery.name<br />
+            @gallery.place<br />
+            @gallery.startDate.ToString("d MMMM yyyy")
+        </div>
+    </a>
 </div>
 }

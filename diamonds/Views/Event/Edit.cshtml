@@ -5,8 +5,12 @@
 }
 
 @section scripts{
+@Styles.Render("~/Content/themes/base/css")
+@Scripts.Render("~/bundles/jqueryui")
 <script type="text/javascript">
     $(document).ready(function () {
+        $("#startDate").datepicker();
+        $("#endDate").datepicker();
     });
 </script>
 }
@@ -19,7 +23,7 @@
     <legend>@title zawodnika</legend>
     @Html.HiddenFor(m => m.id)
 
-    <table class="edit">
+    <table class="edit violet">
         <tr>
             <td>@Html.LabelFor(m => m.namePl, "Nazwa Pl")</td>
             <td>@Html.EditorFor(m => m.namePl) @Html.ValidationMessageFor(m => m.namePl)</td>
