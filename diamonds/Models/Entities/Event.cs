@@ -15,6 +15,7 @@ namespace Diamonds.Models.Entities
         public string placeEn { get; set; }
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
+        public DateTime? repetitiveEndDate { get; set; }
         public bool repetitive { get; set; }
         public byte eventTypeId { get; set; }
         public byte status { get; set; } 
@@ -28,8 +29,9 @@ namespace Diamonds.Models.Entities
 
         public Event() 
         {
-            this.startDate = DateTime.Now;
-            this.endDate = DateTime.Now;
+            this.startDate = DateTime.Today;
+            this.endDate = DateTime.Today;
+            this.status = 0;
         }
 
         private string lang(string pl, string en)
@@ -51,6 +53,7 @@ namespace Diamonds.Models.Entities
             item.status = this.status;
             item.startDate = this.startDate;
             item.endDate = this.endDate;
+            item.repetitiveEndDate = this.repetitiveEndDate;
 
             return item;
         }
@@ -65,6 +68,7 @@ namespace Diamonds.Models.Entities
         public byte status;
         public DateTime startDate;
         public DateTime endDate;
+        public DateTime? repetitiveEndDate;
     }
 
     public class EventMapping : EntityTypeConfiguration<Event>

@@ -10,7 +10,9 @@
     $(document).ready(function () {
         $(".featured div a").hover(function () {
         });
-        
+
+        var dates = @Html.Raw(Json.Encode(Model.EventClones))
+
         $(".calendar div:first-of-type").datepicker({
             beforeShowDay: daysToMark
         });
@@ -19,12 +21,14 @@
             $.datepicker.regional[''];
         };
 
-        var dates = @Html.Raw(Json.Encode(Model.EventClones));
-
         function daysToMark(date) {
-            
-            if (date.getDate() == 15) {
-                return [true, 'mark-training', ""];
+            for (var i = 0; i < dates.length; i++) {
+                var d = new Date(parseInt(dates[i].startDate.substr(6)));
+                if (d.toDateString() == date.toDateString()) {
+                    return [true, 'mark-training', ""];
+                }
+                if (dates[i].repetitive && d.getDay() == date.getDay())
+                    return [true, 'mark-training', ""];
             }
             return [true, '', ""];
         }
@@ -54,7 +58,7 @@
         }
     </div>
     <div>
-        <h5>@Html.ActionLink("Aktualności", "Index", "News")</h5>
+        <h5><a href="@Url.Action("Index", "News")">@ViewBag.Lang["home-aktualnosci"]</a></h5>
         @foreach (var item in Model.News)
         {
         <img src="@Url.Action("Photo", "Gallery", new { id = item.photoId, size = "small" })" id="@item.id" />
@@ -71,23 +75,30 @@
 <aside class="widget">
     <div class="calendar">
         <div></div>    
-        @foreach (var item in Model.EventClones)
+        @foreach (var item in Model.EventClones.Where(e => e.startDate > DateTime.Today || (e.repetitive && (e.repetitiveEndDate == null || e.repetitiveEndDate > DateTime.Today))))
         {
-        <div>@item.name @item.startDate.ToString("d MMMM HH:mm") - @item.endDate.ToString("HH:mm")</div>
+            if (item.repetitive)
+            {
+            <div>@item.name - @System.Globalization.DateTimeFormatInfo.CurrentInfo.GetDayName(item.startDate.DayOfWeek) @item.startDate.ToString("HH:mm") - @item.endDate.ToString("HH:mm")</div>
+            }
+            else
+            {
+            <div>@item.name @item.startDate.ToString("d MMMM HH:mm") - @item.endDate.ToString("HH:mm")</div>
+            }
         }
-        </div>
+    </div>
     <div>
-        <h5><a href="@Url.Action("Index", "Result")">Wyniki PLSK - sezon @DateTime.Now.Year</a></h5>
+        <h5><a href="@Url.Action("Index", "Result")">@ViewBag.Lang["home-results"] @DateTime.Now.Year</a></h5>
         <div>
             <table>
-                <tr><td>Rozegranych meczy:</td><td>@(Model.Team.won(DateTime.Now.Year) + Model.Team.lost(DateTime.Now.Year))</td></tr>
-                <tr><td>Wygranych:</td><td>@Model.Team.won(DateTime.Now.Year)</td></tr>
-                <tr><td>Przegranych:</td><td>@Model.Team.lost(DateTime.Now.Year)</td></tr>
+                <tr><td>@ViewBag.Lang["home-meczy"]:</td><td>@(Model.Team.won(DateTime.Now.Year) + Model.Team.lost(DateTime.Now.Year))</td></tr>
+                <tr><td>@ViewBag.Lang["home-wygranych"]:</td><td>@Model.Team.won(DateTime.Now.Year)</td></tr>
+                <tr><td>@ViewBag.Lang["home-przegranych"]:</td><td>@Model.Team.lost(DateTime.Now.Year)</td></tr>
             </table>
         </div>
     </div>
     <div>
-        <h5>1% na Diamonds</h5>
+        <h5>@ViewBag.Lang["home-1procent"]</h5>
         <p>Oddaj jeden procent</p>
     </div>
     <div>
@@ -99,7 +110,7 @@
 <article class="widget-gallery">
     <article class="widget">
         <div>
-            <h5>Ostatnio dodane galerie zdjęć</h5>
+            <h5>@ViewBag.Lang["home-ostatnie-galerie"]</h5>
             @foreach (var gallery in Model.Galleries)
             {
             <a href="@Url.Action("Photos", "Gallery", new { id = gallery.id })"><img src="@Url.Action("Photo", "Gallery", new { id = gallery.coverId, size = "small" })" /></a>
@@ -108,7 +119,7 @@
     </article>
     <aside class="widget">
         <div>
-            <h5>Losowe zdjęcie</h5>
+            <h5>@ViewBag.Lang["home-losowe-zdjecie"]</h5>
             <img src="@Url.Action("Photo", "Gallery", new { id = Model.FeaturedPhoto.id, size = "small" })" />
         </div>
     </aside>

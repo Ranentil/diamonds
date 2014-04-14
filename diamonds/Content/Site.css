@@ -227,7 +227,7 @@ ul#menu {
         margin: 0;
         padding: 0 10px 4px;
         position: absolute;
-        top: 58px;
+        top: 57px;
         left: 0;
     }
         ul#menu ul li {
@@ -457,21 +457,25 @@ h5 {
     padding: 0;
 }
 
+    .widget .calendar div:not(:first-of-type) {
+        padding: 4px 0;
+    }
+
 .mark-training a.ui-state-default {
     background: #f0efff; /* Old browsers */
-background: -moz-linear-gradient(top,  #f0efff 1%, #cbc3dd 50%, #f0efff 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#f0efff), color-stop(50%,#cbc3dd), color-stop(100%,#f0efff)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  #f0efff 1%,#cbc3dd 50%,#f0efff 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  #f0efff 1%,#cbc3dd 50%,#f0efff 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  #f0efff 1%,#cbc3dd 50%,#f0efff 100%); /* IE10+ */
-background: linear-gradient(to bottom,  #f0efff 1%,#cbc3dd 50%,#f0efff 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0efff', endColorstr='#f0efff',GradientType=0 ); /* IE6-9 */
-
+    background: -moz-linear-gradient(top,  #f0efff 1%, #cbc3dd 50%, #f0efff 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#f0efff), color-stop(50%,#cbc3dd), color-stop(100%,#f0efff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #f0efff 1%,#cbc3dd 50%,#f0efff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #f0efff 1%,#cbc3dd 50%,#f0efff 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #f0efff 1%,#cbc3dd 50%,#f0efff 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #f0efff 1%,#cbc3dd 50%,#f0efff 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0efff', endColorstr='#f0efff',GradientType=0 ); /* IE6-9 */
 }
 
-/*.marked a.ui-state-hover {
+.mark-training a.ui-state-hover, 
+.mark-training a.ui-state-active {
     background: wheat !important;
-}*/
+}
 
 /* gallery widget */
 .widget-gallery {

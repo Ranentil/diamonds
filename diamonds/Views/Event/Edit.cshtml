@@ -9,8 +9,21 @@
 @Scripts.Render("~/bundles/jqueryui")
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#startDate").datepicker();
-        $("#endDate").datepicker();
+        $("#DateFromStartDate").datepicker();
+        $("#DateFromEndDate").datepicker();
+
+        $("#DateFromStartDate").change(function () {
+            $("#startDate").val($(this).val() + " " + $("#TimeFromStartDate").val() + ":00");
+        });
+        $("#TimeFromStartDate").change(function () {
+            $("#startDate").val($("#DateFromStartDate").val() + " " + $(this).val() + ":00");
+        });
+        $("#DateFromEndDate").change(function () {
+            $("#endDate").val($(this).val() + " " + $("#TimeFromEndDate").val() + ":00");
+        });
+        $("#TimeFromEndDate").change(function () {
+            $("#endDate").val($("#DateFromEndDate").val() + " " + $(this).val() + ":00");
+        });
     });
 </script>
 }
@@ -20,8 +33,9 @@
 @using (Html.BeginForm()) 
 {
 <fieldset>
-    <legend>@title zawodnika</legend>
+    <legend>@title Wydarzenia</legend>
     @Html.HiddenFor(m => m.id)
+    @Html.HiddenFor(m => m.status)
 
     <table class="edit purple">
         <tr>
@@ -38,19 +52,27 @@
         </tr>
         <tr>
             <td>@Html.LabelFor(m => m.startDate, "Start")</td>
-            <td>@Html.EditorFor(m => m.startDate) @Html.ValidationMessageFor(m => m.startDate)</td>
+            <td>
+                @Html.HiddenFor(m => m.startDate) @Html.ValidationMessageFor(m => m.startDate)
+                @Html.TextBox("DateFromStartDate", Model.startDate.ToString("yyyy-MM-dd"), new { style = "width: 120px;" })
+                @Html.TextBox("TimeFromStartDate", Model.startDate.ToString("HH:mm"), new { style = "width: 80px;" })
+            </td>
             <td>@Html.LabelFor(m => m.endDate, "Koniec")</td>
-            <td>@Html.EditorFor(m => m.endDate) @Html.ValidationMessageFor(m => m.endDate)</td>
+            <td>
+                @Html.HiddenFor(m => m.endDate) @Html.ValidationMessageFor(m => m.endDate)
+                @Html.TextBox("DateFromEndDate", Model.endDate.ToString("yyyy-MM-dd"), new { style = "width: 120px;" })
+                @Html.TextBox("TimeFromEndDate", Model.endDate.ToString("HH:mm"), new { style = "width: 80px;" })
+            </td>
         </tr>
         <tr>
-            <td>@Html.LabelFor(m => m.repetitive, "Powtarzalne")</td>
+            <td>@Html.LabelFor(m => m.repetitive, "Powtarzalne") (co tydzień)</td>
             <td>@Html.CheckBoxFor(m => m.repetitive)@Html.ValidationMessageFor(m => m.repetitive)</td>
         </tr>
         <tr>
             <td>@Html.LabelFor(m => m.eventTypeId, "Typ")</td>
             <td>@Html.DropDownList("eventTypeId")@Html.ValidationMessageFor(m => m.eventTypeId)</td>
         </tr>
-        <tr>
+        @*<tr>
             <td>@Html.LabelFor(m => m.status, "Status")</td>
             <td>
                 <select id="status" name="status">
@@ -60,7 +82,7 @@
                     <option value="3">przeniesiony z innego terminu</option>
                 </select>
             </td>
-        </tr>
+        </tr>*@
     </table>
     <table class="edit">
         <tr>
