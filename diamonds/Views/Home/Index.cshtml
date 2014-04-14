@@ -11,7 +11,7 @@
         $(".featured div a").hover(function () {
         });
         
-        $(".calendar").datepicker({
+        $(".calendar div:first-of-type").datepicker({
             beforeShowDay: daysToMark
         });
 
@@ -19,16 +19,13 @@
             $.datepicker.regional[''];
         };
 
+        var dates = @Html.Raw(Json.Encode(Model.EventClones));
+
         function daysToMark(date) {
-        @foreach (var date in Model.Events)
-        {
-            <text>
-            if (date == @(date.startDate.ToString())) {
-                return [true, 'markedDay', ""];
-            }
-            </text>
-        }
             
+            if (date.getDate() == 15) {
+                return [true, 'mark-training', ""];
+            }
             return [true, '', ""];
         }
 
@@ -73,14 +70,21 @@
 
 <aside class="widget">
     <div class="calendar">
-        @foreach (var item in Model.Events)
+        <div></div>    
+        @foreach (var item in Model.EventClones)
         {
-            <div>@item.name</div>
+        <div>@item.name @item.startDate.ToString("d MMMM HH:mm") - @item.endDate.ToString("HH:mm")</div>
         }
-    </div>
+        </div>
     <div>
-        <h5>Wyniki</h5>
-        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+        <h5><a href="@Url.Action("Index", "Result")">Wyniki PLSK - sezon @DateTime.Now.Year</a></h5>
+        <div>
+            <table>
+                <tr><td>Rozegranych meczy:</td><td>@(Model.Team.won(DateTime.Now.Year) + Model.Team.lost(DateTime.Now.Year))</td></tr>
+                <tr><td>Wygranych:</td><td>@Model.Team.won(DateTime.Now.Year)</td></tr>
+                <tr><td>Przegranych:</td><td>@Model.Team.lost(DateTime.Now.Year)</td></tr>
+            </table>
+        </div>
     </div>
     <div>
         <h5>1% na Diamonds</h5>

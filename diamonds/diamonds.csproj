@@ -184,6 +184,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\SoftballController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -205,6 +206,8 @@
     <Compile Include="Models\Entities\Lineup.cs" />
     <Compile Include="Models\Entities\Localization.cs" />
     <Compile Include="Models\Entities\News.cs" />
+    <Compile Include="Models\Entities\Result.cs" />
+    <Compile Include="Models\Entities\Team.cs" />
     <Compile Include="Models\PermissionModels.cs" />
     <Compile Include="Models\Entities\Photo.cs" />
     <Compile Include="Models\Entities\Player.cs" />
@@ -531,6 +534,9 @@
     <Content Include="Views\Shared\_NavigationBar.cshtml" />
     <Content Include="Views\News\Admin.cshtml" />
     <Content Include="Views\Event\Admin.cshtml" />
+    <Content Include="Views\Result\Index.cshtml" />
+    <Content Include="Views\Result\Edit.cshtml" />
+    <Content Include="Views\Result\Admin.cshtml" />
     <None Include="Views\User\RoleEdit.cshtml" />
     <Content Include="Views\User\RoleGroupEdit.cshtml" />
     <Content Include="Views\User\RoleGroups.cshtml" />

@@ -40,6 +40,31 @@ namespace Diamonds.Models.Entities
                     return en;
             return pl;
         }
+
+        public EventClone Clone()
+        {
+            EventClone item = new EventClone();
+            item.name = this.name;
+            item.place = this.place;
+            item.repetitive = this.repetitive;
+            item.type = this.EventType.name;
+            item.status = this.status;
+            item.startDate = this.startDate;
+            item.endDate = this.endDate;
+
+            return item;
+        }
+    }
+
+    public class EventClone
+    {
+        public string name;
+        public string place;
+        public bool repetitive;
+        public string type;
+        public byte status;
+        public DateTime startDate;
+        public DateTime endDate;
     }
 
     public class EventMapping : EntityTypeConfiguration<Event>

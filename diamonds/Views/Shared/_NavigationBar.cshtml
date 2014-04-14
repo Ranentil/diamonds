@@ -15,7 +15,11 @@
             }
             @if (Model.name != "Event")
             {
-            <li><a href="@Url.Action("Index", "Event")">Event</a></li>
+            <li><a href="@Url.Action("Admin", "Event")">Event</a></li>
+            }
+            @if (Model.name != "Result")
+            {
+            <li><a href="@Url.Action("Admin", "Result")">Result</a></li>
             }
             @if (Model.name != "Team")
             {
