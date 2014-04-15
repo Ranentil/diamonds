@@ -3,8 +3,19 @@
     ViewBag.Title = "PhotosAdmin";
 }
 
+@section Scripts {
+<script src=@Url.Content("~/Scripts/jquery.fancybox.pack.js")></script>
+<link href=@Url.Content("~/Content/jquery.fancybox.css") rel="stylesheet" />
+@*@Scripts.Render("~/bundles/fancybox")
+@Styles.Render("~/Content/fancybox")*@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".fancybox").fancybox();
+    });
+</script>
+}
 
-@Html.Partial("_NavigationBar", new Diamonds.Models.NavigationModel("Gallery", "Lista Zdjęć", "MODERATOR", "AddPhotos/"+Model.id))
+@Html.Partial("_NavigationBar", new Diamonds.Models.NavigationModel("Gallery", "Lista Zdjęć", "MODERATOR", "AddPhotos/" + Model.id))
 
 <fieldset>
     <legend>Administracja zdjęciami</legend>
@@ -21,7 +32,9 @@
             <td>
             @if (photo.hasJpg)
             {
-            <img src="@Url.Action("Photo", new { id = photo.id, size = "small" })" />
+            <a href="@Url.Action("Photo", new { id = photo.id })" class="fancybox">
+                <img src="@Url.Action("Photo", new { id = photo.id, size = "small" })" />
+            </a>
             }
             </td>
             <td>@photo.descriptionPl<br />@photo.descriptionEn</td>

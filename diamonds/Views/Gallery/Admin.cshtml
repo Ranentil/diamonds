@@ -17,7 +17,6 @@
             <th>nazwa</th>
             <th>miejsce</th>
             <th>początek</th>
-            <th>koniec</th>
             <th>aktywny</th>
             <th></th>
         </tr>
@@ -41,8 +40,8 @@
             <td>@Html.CheckBox("isPublished", gallery.isPublished, new { disabled = "disabled" })</td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = gallery.id })
-                @Html.ActionLink("Pokaż zdjęcia", "PhotosAdmin", new { id = gallery.id })
-                @Html.ActionLink("Dodaj zdjęcia", "AddPhotos", new { id = gallery.id})
+                @*@Html.ActionLink("Pokaż zdjęcia", "PhotosAdmin", new { id = gallery.id })
+                @Html.ActionLink("Dodaj zdjęcia", "AddPhotos", new { id = gallery.id})*@
             </td>
         </tr>
         }

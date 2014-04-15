@@ -27,9 +27,20 @@ namespace Diamonds
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css",
-                        "~/Content/mobile.css"
-                        ));
+            bundles.Add(new ScriptBundle("~/bundles/fancybox").Include(
+                        "~/Scripts/jquery.fancybox.pack.js",
+                        "~/Scripts/jquery.fancybox-buttons.js",
+                        "~/Scripts/jquery.fancybox-media.js",
+                        "~/Scripts/jquery.fancybox-thumbs.js"));
+
+            bundles.Add(new StyleBundle("~/Content/fancybox").Include(
+                        "~/Content/jquery.fancybox.css",
+                        "~/Content/jquery.fancybox-buttons.css",
+                        "~/Content/jquery.fancybox-thumbs.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                        "~/Content/site.css",
+                        "~/Content/mobile.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
