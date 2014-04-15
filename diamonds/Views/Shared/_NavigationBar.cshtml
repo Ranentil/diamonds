@@ -1,5 +1,15 @@
 ﻿@model Diamonds.Models.NavigationModel
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#window1").click(function (event) {
+            var url = $(this).attr("href");
+            window.open(url, "popUp", "width=850,height=600,scrollbars=yes");
+            event.preventDefault();
+        });
+    });
+</script>
+
 <ul id="site-nav">
     <li>@Html.ActionLink("Panel Administracyjny", "Index", "Profile")</li>
     <li>
@@ -36,8 +46,12 @@
         </ul>
     </li>
     <li>@Model.page</li>
-    @if (User.IsInRole(Model.permission))
+    @if (Model.createAction.Length > 9 && Model.createAction.Substring(0, 9) == "AddPhotos" && User.IsInRole(Model.permission))
     {
-    <li class="site-nav-new"><a href="@Url.Action("Create", Model.name)">Dodaj</a></li>
+    <li class="site-nav-new"><a href="@Url.Action(Model.createAction, Model.name)" id="window1">Dodaj</a></li>
+    }
+    else if (User.IsInRole(Model.permission))
+    {
+    <li class="site-nav-new"><a href="@Url.Action(Model.createAction, Model.name)">Dodaj</a></li>
     }
 </ul>

@@ -18,7 +18,7 @@ namespace Diamonds.Models
         private int originalWidth;
         private int originalHeight;
 
-        private int quality = 100;
+        private int quality = 80;
         private int x = 0;
         private int y = 0;
 
@@ -38,7 +38,8 @@ namespace Diamonds.Models
         /// </summary>
         /// <param name="maxWidth">resize width.</param>
         /// <param name="maxHeight">resize height.</param>
-        public void SaveImage(int maxWidth, int maxHeight)
+        /// <param name="watermark">draw watermark</param>
+        public void SaveImage(int maxWidth, int maxHeight, bool watermark)
         {
             float ratioX = (float)maxWidth / (float)originalWidth; 
             float ratioY = (float)maxHeight / (float)originalHeight;
@@ -50,11 +51,16 @@ namespace Diamonds.Models
 
             // Processing image if original file is biger than new dimensions, else save original file
             if (originalWidth > newWidth || originalHeight > newHeight)
-                ProcessImage(newWidth, newHeight, quality);
-            else
-                image.Save(savingPath);
+                resizeImage(newWidth, newHeight);
+
+            drawWatermark(16, 1, 1);
+
+            saveImage(quality);
         }
 
+        /// <summary>
+        /// Method to save tumbnail of size 200x200px
+        /// </summary>
         public void SaveThumbnail()
         {
             var maxWidth = 200;
@@ -68,13 +74,40 @@ namespace Diamonds.Models
             x = (int)((originalWidth - maxWidth / ratio) / 2);
             y = (int)((originalHeight - maxHeight / ratio) / 2);
 
-            image = cropImage(image, new Rectangle(x, y, (int)(maxWidth / ratio), (int)(maxHeight / ratio)));
+            cropImage(new Rectangle(x, y, (int)(maxWidth / ratio), (int)(maxHeight / ratio)));
 
-            ProcessImage(maxWidth, maxHeight, quality);
+            resizeImage(maxWidth, maxHeight);
+
+            saveImage(quality);
         }
-        
-            
-        private void ProcessImage(int newWidth, int newHeight, int quality)
+
+        /// <summary>
+        /// Method to save image
+        /// </summary>
+        /// <param name="quality">image quality max = 100</param>
+        private void saveImage(int quality)
+        {
+            // Get an ImageCodecInfo object that represents the JPEG codec.
+            ImageCodecInfo imageCodecInfo = GetEncoderInfo(ImageFormat.Jpeg);
+
+            // Create an Encoder object for the Quality parameter.
+            Encoder encoder = Encoder.Quality;
+
+            // Create an EncoderParameters object. 
+            EncoderParameters encoderParameters = new EncoderParameters(1);
+
+            // Save the image as a JPEG file with quality level.
+            EncoderParameter encoderParameter = new EncoderParameter(encoder, quality);
+            encoderParameters.Param[0] = encoderParameter;
+            image.Save(savingPath, imageCodecInfo, encoderParameters);
+        }
+
+        /// <summary>
+        /// Method to resize Image
+        /// </summary>
+        /// <param name="newWidth">new width of image</param>
+        /// <param name="newHeight">new height of image</param>
+        private void resizeImage(int newWidth, int newHeight)
         {
             // Convert other formats (including CMYK) to RGB.
             Bitmap newImage = new Bitmap(newWidth, newHeight, PixelFormat.Format24bppRgb);
@@ -88,26 +121,46 @@ namespace Diamonds.Models
                 graphics.DrawImage(image, 0, 0, newWidth, newHeight);
             }
 
-            // Get an ImageCodecInfo object that represents the JPEG codec.
-            ImageCodecInfo imageCodecInfo = GetEncoderInfo(ImageFormat.Jpeg);
-
-            // Create an Encoder object for the Quality parameter.
-            Encoder encoder = Encoder.Quality;
-
-            // Create an EncoderParameters object. 
-            EncoderParameters encoderParameters = new EncoderParameters(1);
-
-            // Save the image as a JPEG file with quality level.
-            EncoderParameter encoderParameter = new EncoderParameter(encoder, quality);
-            encoderParameters.Param[0] = encoderParameter;
-            newImage.Save(savingPath, imageCodecInfo, encoderParameters);
+            image = (Image)(newImage);
         }
 
-        private static Image cropImage(Image img, Rectangle cropArea)
+        /// <summary>
+        /// Method to crop Image
+        /// </summary>
+        /// <param name="cropArea"></param>
+        private void cropImage(Rectangle cropArea)
         {
-            Bitmap bmpImage = new Bitmap(img);
+            Bitmap bmpImage = new Bitmap(image);
             Bitmap bmpCrop = bmpImage.Clone(cropArea, bmpImage.PixelFormat);
-            return (Image)(bmpCrop);
+            image = (Image)(bmpCrop);
+        }
+
+        /// <summary>
+        /// Method to draw watermark softball.pl
+        /// </summary>
+        /// <param name="fontSize"></param>
+        /// <param name="position"></param>
+        private void drawWatermark(float fontSize, int x, int y)
+        {
+            Font crFont = new Font("calibri", fontSize, FontStyle.Bold);
+
+            int yPixlesFromBottom = (int)(image.Height * .05);
+            float yPosFromBottom = ((image.Height - yPixlesFromBottom) - (fontSize / 2));
+            float xCenterOfImg = (image.Width / 2);
+
+            StringFormat StrFormat = new StringFormat();
+            StrFormat.Alignment = StringAlignment.Center;
+
+            Bitmap wmImage = new Bitmap(image);
+            using (Graphics graphics = Graphics.FromImage(wmImage))
+            {
+                SolidBrush semiTransBrush2 = new SolidBrush(Color.FromArgb(120, 0, 0, 0));
+                graphics.DrawString("softball.pl", crFont, semiTransBrush2, new PointF(xCenterOfImg + 1, yPosFromBottom + 1), StrFormat);
+
+                SolidBrush semiTransBrush = new SolidBrush(Color.FromArgb(120, 255, 255, 255));
+                graphics.DrawString("softball.pl", crFont, semiTransBrush, new PointF(xCenterOfImg, yPosFromBottom), StrFormat);
+            }
+            image = (Image)(wmImage);
         }
 
         /// <summary>

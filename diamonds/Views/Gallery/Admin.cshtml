@@ -27,7 +27,9 @@
             <td>
             @if (gallery.Cover != null)
             {
-            <img src="@Url.Action("Photo", new { id = gallery.coverId, size = "small" })" />
+            <a href="@Url.Action("PhotosAdmin", new { id = gallery.id })">
+                <img src="@Url.Action("Photo", new { id = gallery.coverId, size = "small" })" />
+            </a>
             }
             </td>
             <td>@gallery.namePl<br />@gallery.nameEn</td>

@@ -10,6 +10,7 @@ namespace Diamonds.Models
         public string name;
         public string page;
         public string permission;
+        public string createAction;
 
 
         public NavigationModel(string name, string page, string permission)
@@ -17,6 +18,15 @@ namespace Diamonds.Models
             this.name = name;
             this.page = page;
             this.permission = permission;
+            this.createAction = "Edit";
+        }
+
+        public NavigationModel(string name, string page, string permission, string createAction)
+        {
+            this.name = name;
+            this.page = page;
+            this.permission = permission;
+            this.createAction = createAction;
         }
     }
 }
