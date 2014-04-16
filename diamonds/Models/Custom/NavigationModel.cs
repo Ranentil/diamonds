@@ -18,7 +18,7 @@ namespace Diamonds.Models
             this.name = name;
             this.page = page;
             this.permission = permission;
-            this.createAction = "Edit";
+            this.createAction = "Create";
         }
 
         public NavigationModel(string name, string page, string permission, string createAction)

@@ -1,20 +1,10 @@
 ﻿@model Diamonds.Models.NavigationModel
 
-@*<script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function () {
-        $("#window1").fancybox({
-            maxWidth: 800,
-            maxHeight: 600,
-            fitToView: false,
-            width: '70%',
-            height: '70%',
-            autoSize: false,
-            closeClick: false,
-            openEffect: 'none',
-            closeEffect: 'none'
-        });
+        $("#window1").fancybox();
     });
-</script>*@
+</script>
 
 <ul id="site-nav">
     <li>@Html.ActionLink("Panel Administracyjny", "Index", "Profile")</li>

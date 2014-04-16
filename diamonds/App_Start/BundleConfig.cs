@@ -29,6 +29,7 @@ namespace Diamonds
 
             bundles.Add(new ScriptBundle("~/bundles/fancybox").Include(
                         "~/Scripts/jquery.fancybox.pack.js",
+                        "~/Scripts/jquery.mousewheel-{version}.pack.js",
                         "~/Scripts/jquery.fancybox-buttons.js",
                         "~/Scripts/jquery.fancybox-media.js",
                         "~/Scripts/jquery.fancybox-thumbs.js"));

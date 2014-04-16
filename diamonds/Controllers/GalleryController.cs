@@ -109,7 +109,7 @@ namespace Diamonds.Controllers
         public FileResult Photo(int id, string size)
         {
             Photo photo = db.Photos.Single(p => p.id == id);
-            string path = size == "small" ? photo.thumbPath : size == "big" ? photo.originalPath : photo.jpgPath;
+            string path = size == "small" ? photo.thumbPath : size == "big" ? photo.originalPath : photo.photoPath;
             return File(path, "image/jpeg");
         }
 
@@ -188,6 +188,22 @@ namespace Diamonds.Controllers
 
             TempData["Error"] = "Coś poszło nie tak! Nie zapisano zdjęcia.";
             return View();
+        }
+
+        //
+        // POST: /Gallery/Delete/
+
+        public ActionResult PhotoDelete(int id)
+        {
+            Photo photo = db.Photos.Single(p => p.id == id);
+            db.Photos.Remove(photo);
+            db.SaveChanges();
+
+            photo.deleteFiles();
+
+            TempData["Message"] = "Pomyślnie usunięto zdjęcie";
+
+            return RedirectToAction("PhotosAdmin", new { id = photo.galleryId });
         }
 
     }

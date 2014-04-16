@@ -40,13 +40,13 @@ namespace Diamonds.Models.Entities
 
         public string path { get { return Path.Combine(HttpContext.Current.Server.MapPath("~/App_Data/Galleries"), galleryId.ToString()); } }
 
-        public string jpgPath { get { return Path.Combine(path, id.ToString() + ".jpg"); } }
-
+        public string photoPath { get { return Path.Combine(path, id.ToString() + ".jpg"); } }
         public string thumbPath { get { return Path.Combine(path, id.ToString() + "_thumb.jpg"); } }
-
         public string originalPath { get { return Path.Combine(path, id.ToString() + "_original.jpg"); } }
 
-        public bool hasJpg { get { return File.Exists(jpgPath) || File.Exists(originalPath); } }
+        public bool hasPhoto { get { return File.Exists(photoPath); } }
+        public bool hasOriginal { get { return File.Exists(originalPath); } }
+        public bool hasThumb { get { return File.Exists(thumbPath); } }
 
         public void saveJpg(HttpPostedFileBase file)
         {
@@ -56,17 +56,39 @@ namespace Diamonds.Models.Entities
                     Directory.CreateDirectory(path);
                 file.SaveAs(originalPath);
                 new ImageHandler(originalPath, thumbPath).SaveThumbnail();
-                new ImageHandler(originalPath, jpgPath).SaveImage(1200, 1000, true);
+                new ImageHandler(originalPath, photoPath).SaveImage(1200, 1000, true);
             }
         }
 
-        public void deleteFileJpg()
+        public void deletePhoto()
         {
-            if (hasJpg)
+            if (hasPhoto)
             {
-                FileInfo file = new FileInfo(jpgPath);
+                FileInfo file = new FileInfo(photoPath);
                 file.Delete();
             }
+        }
+        public void deleteOriginal()
+        {
+            if (hasOriginal)
+            {
+                FileInfo file = new FileInfo(originalPath);
+                file.Delete();
+            }
+        }
+        public void deleteThumb()
+        {
+            if (hasThumb)
+            {
+                FileInfo file = new FileInfo(thumbPath);
+                file.Delete();
+            }
+        }
+        public void deleteFiles()
+        {
+            deletePhoto();
+            deleteOriginal();
+            deleteThumb();
         }
 
         private string lang(string pl, string en)

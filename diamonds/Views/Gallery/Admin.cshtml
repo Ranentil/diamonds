@@ -24,12 +24,14 @@
         {
         <tr>
             <td>
-            @if (gallery.Cover != null)
-            {
+            
             <a href="@Url.Action("PhotosAdmin", new { id = gallery.id })">
-                <img src="@Url.Action("Photo", new { id = gallery.coverId, size = "small" })" />
+                @if (gallery.Cover != null)
+                {
+                <img src="@Url.Action("Photo", new { id = gallery.coverId, size = "small" })" style="width: 150px;" /> 
+                }
+                else { <text>Pokaż zdjęcia</text> }
             </a>
-            }
             </td>
             <td>@gallery.namePl<br />@gallery.nameEn</td>
             <td>@gallery.placePl<br />@gallery.placeEn</td>
