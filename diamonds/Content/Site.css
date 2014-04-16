@@ -311,6 +311,7 @@ ul#site-nav {
         border: solid 1px #666;
         position: absolute;
         left: 0;
+        top: 20px;
         list-style: none;
         padding: 2px;
     }
@@ -409,7 +410,7 @@ h5 {
         width: 30%;
         padding-top:34px;
     }
-        .featured img:not(:first-of-type) {
+        .featured .fancybox-list-item:not(:first-of-type) {
             display: none;
         }
     .featured div div {
@@ -492,8 +493,9 @@ h5 {
     .widget-gallery article img {
         width: 48.3%;
     }
-        .widget-gallery article img:last-of-type {
-            float: right;
+        .widget-gallery article a:last-of-type {
+            padding-left: 10px;
+            /*float: right;*/
         }
     .widget-gallery aside img {
         width: 100%;

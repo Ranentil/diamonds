@@ -8,6 +8,7 @@ using Diamonds.Models.Entities;
 
 namespace Diamonds.Controllers
 {
+    [Authorize(Roles = "MODERATOR")]
     public class LocalizationController : Controller
     {
         private DiamondsEntities db = new DiamondsEntities();
@@ -23,6 +24,7 @@ namespace Diamonds.Controllers
             return View(localizations);
         }
 
+        [Authorize(Roles = "ADMIN")]
         public ViewResult Create()
         {
             return View("Edit", new Localization());
@@ -30,6 +32,7 @@ namespace Diamonds.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
+        [Authorize(Roles = "ADMIN")]
         public ActionResult Create(Localization localization)
         {
             if (ModelState.IsValid)
@@ -42,6 +45,7 @@ namespace Diamonds.Controllers
             }
             return View("Edit", localization);
         }
+
 
         public ViewResult Edit(int id)
         {
@@ -60,9 +64,20 @@ namespace Diamonds.Controllers
                 db.SaveChanges();
 
                 TempData["Message"] = "Pomyślnie zapisano.";
-                return RedirectToAction("Admin", new { id = localization.id });
+                return RedirectToAction("Admin");
             }
             return View(localization);
+        }
+
+
+        [Authorize(Roles = "ADMIN")]
+        public ActionResult Delete(int id)
+        {
+            Localization localization = db.Localizations.Single(l => l.id == id);
+            db.Localizations.Remove(localization);
+            db.SaveChanges();
+
+            return RedirectToAction("Admin");
         }
     }
 }

@@ -8,6 +8,7 @@ using Diamonds.Models.Entities;
 
 namespace Diamonds.Controllers
 {
+    [Authorize(Roles = "MODERATOR")]
     public class EventController : Controller
     {
         private DiamondsEntities db = new DiamondsEntities();
@@ -15,6 +16,7 @@ namespace Diamonds.Controllers
         //
         // GET: /Event/
 
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var date = DateTime.Today;

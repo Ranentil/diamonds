@@ -8,6 +8,7 @@ using Diamonds.Models.Entities;
 
 namespace Diamonds.Controllers
 {
+    [Authorize(Roles = "MODERATOR")]
     public class ResultController : Controller
     {
         private DiamondsEntities db = new DiamondsEntities();
@@ -15,6 +16,7 @@ namespace Diamonds.Controllers
         //
         // GET: /Result/
 
+        [AllowAnonymous]
         public ActionResult Index()
         {
             List<Team> teams = db.Teams.Where(t => t.ResultsGuest.Any(r => r.eventDate.Year == DateTime.Now.Year)
@@ -76,6 +78,15 @@ namespace Diamonds.Controllers
             ViewBag.team1Id = new SelectList(db.Teams.OrderBy(t => t.name), "id", "name");
             ViewBag.team2Id = new SelectList(db.Teams.OrderBy(t => t.name), "id", "name");
             return View(result);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            Result result = db.Results.Single(r => r.id == id);
+            db.Results.Remove(result);
+            db.SaveChanges();
+
+            return RedirectToAction("Admin");
         }
 
     }

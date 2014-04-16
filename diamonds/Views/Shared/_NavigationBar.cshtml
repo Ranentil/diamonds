@@ -2,7 +2,10 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#window1").fancybox();
+        $("#window1").fancybox({
+            type: 'iframe', width: 350, height: 200,
+            fitToView: false, autoSize: false
+        });
     });
 </script>
 

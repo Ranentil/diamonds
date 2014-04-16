@@ -1,9 +1,12 @@
 ﻿@{
+    Layout = null;
     ViewBag.Title = "Dodawanie zdjęć";
 }
 
 @using (Html.BeginForm("AddPhotos", "Gallery", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <input type="file" id="photos" name="photos" multiple="multiple" />
-    <input type="submit" value="Wyślij" />
+    <div style="padding: 10px 40px;">
+        <input type="file" id="photos" name="photos" multiple="multiple" /><br /><br />
+        <input type="submit" value="Wyślij" />
+    </div>
 }

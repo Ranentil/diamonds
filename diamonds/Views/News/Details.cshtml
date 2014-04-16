@@ -1,0 +1,24 @@
+﻿@model Diamonds.Models.Entities.News
+@{
+    ViewBag.Title = Model.title;
+}
+
+<section class="page content-wrapper">
+    <div>
+        <h5>@Model.title
+            @if (User.IsInRole("MODERATOR"))
+            {
+            <span><a href="@Url.Action("Edit", new { id = Model.id })">@ViewBag.Lang["admin-edit"]</a></span>
+            }
+        </h5>
+        @if (Model.Photo != null)
+        {
+        <img src="@Model.Photo.path" />
+        }
+        <div>@Html.Raw(Model.text)</div>
+        <div class="page-footer" style="text-align: right;">
+            <div>@Model.addDate.ToString("d MMMM yy HH:mm")</div>
+            <div>@Model.User.name</div>
+        </div>
+    </div>
+</section>

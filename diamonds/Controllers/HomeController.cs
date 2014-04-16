@@ -22,7 +22,7 @@ namespace Diamonds.Controllers
             homeModel.Galleries = db.Galleries.Where(g => g.isPublished && g.coverId != null).OrderByDescending(g => g.startDate).Take(2).ToList();
             var random = new Random();
             var photos = db.Photos.ToList();
-            homeModel.FeaturedPhoto = db.Photos.OrderBy(p => Guid.NewGuid()).First();
+            homeModel.FeaturedPhoto = db.Photos.Any() ? db.Photos.OrderBy(p => Guid.NewGuid()).First() : null;
             homeModel.Team = db.Teams.Single(t => t.id == 1);
 
             return View(homeModel);

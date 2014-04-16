@@ -8,6 +8,7 @@ using Diamonds.Models.Entities;
 
 namespace Diamonds.Controllers
 {
+    [Authorize(Roles = "MODERATOR")]
     public class GalleryController : Controller
     {
         private DiamondsEntities db = new DiamondsEntities();
@@ -15,11 +16,34 @@ namespace Diamonds.Controllers
         //
         // GET: /Gallery/
 
+        [AllowAnonymous]
         public ActionResult Index()
         {
             List<Gallery> galleries = db.Galleries.Where(g => g.isPublished && g.Cover != null)
                 .OrderByDescending(g => g.startDate).ToList();
             return View(galleries); 
+        }
+
+        //
+        // GET: /Gallery/Photos/galleryId
+
+        [AllowAnonymous]
+        public ViewResult Photos(int id)
+        {
+            List<Photo> photos = db.Photos.Where(p => p.galleryId == id).OrderByDescending(p => p.no).ToList();
+            return View(photos);
+        }
+
+
+        //
+        // GET: /Gallery/Photo/photoId
+
+        [AllowAnonymous]
+        public FileResult Photo(int id, string size)
+        {
+            Photo photo = db.Photos.Single(p => p.id == id);
+            string path = size == "small" ? photo.thumbPath : size == "big" ? photo.originalPath : photo.photoPath;
+            return File(path, "image/jpeg");
         }
 
         //
@@ -86,31 +110,12 @@ namespace Diamonds.Controllers
         }
 
         //
-        // GET: /Gallery/Photos/galleryId
-
-        public ViewResult Photos(int id)
-        {
-            List<Photo> photos = db.Photos.Where(p => p.galleryId == id).OrderByDescending(p => p.no).ToList();
-            return View(photos);
-        }
-
-        //
         // GET: /Gallery/PhotosAdmin/galleryId
 
         public ViewResult PhotosAdmin(int id)
         {
             Gallery gallery = db.Galleries.Single(g => g.id == id);
             return View(gallery);
-        }
-
-        //
-        // GET: /Gallery/Photo/photoId
-
-        public FileResult Photo(int id, string size)
-        {
-            Photo photo = db.Photos.Single(p => p.id == id);
-            string path = size == "small" ? photo.thumbPath : size == "big" ? photo.originalPath : photo.photoPath;
-            return File(path, "image/jpeg");
         }
 
         //

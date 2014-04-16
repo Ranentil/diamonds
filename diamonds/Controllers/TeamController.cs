@@ -8,6 +8,7 @@ using Diamonds.Models.Entities;
 
 namespace Diamonds.Controllers
 {
+    [Authorize(Roles = "MODERATOR")]
     public class TeamController : Controller
     {
         private DiamondsEntities db = new DiamondsEntities();
@@ -15,6 +16,7 @@ namespace Diamonds.Controllers
         //
         // GET: /Team/
 
+        [AllowAnonymous]
         public ActionResult Index()
         {
             List<Player> players = db.Players.Where(p => p.isActive).OrderBy(p => p.lastName).ThenBy(p => p.firstName).ToList();
@@ -65,6 +67,15 @@ namespace Diamonds.Controllers
                 return RedirectToAction("Admin", new { id = player.id });
             }
             return View(player);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            Player player = db.Players.Single(p => p.id == id);
+            db.Players.Remove(player);
+            db.SaveChanges();
+
+            return RedirectToAction("Admin");
         }
 
     }

@@ -4,13 +4,11 @@
 }
 
 @section Scripts {
-@*<script src=@Url.Content("~/Scripts/jquery.fancybox.pack.js")></script>
-<link href=@Url.Content("~/Content/jquery.fancybox.css") rel="stylesheet" />*@
 @Scripts.Render("~/bundles/fancybox")
 @Styles.Render("~/Content/fancybox")
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".fancybox").fancybox();
+        $(".fancybox").fancybox({ type: 'image' });
         $(".delete").click(function (e) {
             if (!confirm("Na pewno chcesz usunąć zdjęcie?")) {
                 return false;

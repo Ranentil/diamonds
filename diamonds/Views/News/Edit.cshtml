@@ -25,6 +25,7 @@
             ],
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link @*image*@"
         });
+        $(".fancybox").fancybox({type : 'image'});
     });
 </script>
 }
@@ -41,6 +42,24 @@
     @Html.HiddenFor(m => m.photoId)
 
     <table class="edit purple">
+        <tr>
+            <td colspan="2">@Html.LabelFor(m => m.photoId, "Główne zdjęcie")</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                @if (Model.Photo.hasThumb)
+                {
+                <a href="@Url.Action("Photo", "Gallery", new {id = Model.photoId})" class="fancybox">
+                    <img src="@Url.Action("Photo", "Gallery", new { id = Model.photoId, size = "small" })" />
+                </a><br />
+                <a href="#" id="change-picture">Zmień zdjęcie</a>
+                }
+                else
+                {
+                <a href="#" id="add-picture">Dodaj zdjęcie</a>   
+                }
+            </td>
+        </tr>
         <tr>
             <td>@Html.LabelFor(m => m.titlePl, "Tytuł PL")</td>
             <td>@Html.EditorFor(m => m.titlePl) @Html.ValidationMessageFor(m => m.titlePl)</td>

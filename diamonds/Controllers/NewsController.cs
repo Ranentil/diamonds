@@ -8,6 +8,7 @@ using Diamonds.Models.Entities;
 
 namespace Diamonds.Controllers
 {
+    [Authorize(Roles = "MODERATOR")]
     public class NewsController : Controller
     {
         private DiamondsEntities db = new DiamondsEntities();
@@ -15,9 +16,20 @@ namespace Diamonds.Controllers
         //
         // GET: /News/
 
+        [AllowAnonymous]
         public ViewResult Index()
         {
             List<News> news = db.News.Where(n => n.isPublished).OrderByDescending(n => n.addDate).ToList();
+            return View(news);
+        }
+
+        //
+        // GET: /News/Details/id
+
+        [AllowAnonymous]
+        public ViewResult Details(int id)
+        {
+            News news = db.News.Single(n => n.id == id);
             return View(news);
         }
 
@@ -85,6 +97,15 @@ namespace Diamonds.Controllers
                 return RedirectToAction("Edit", new { id = news.id });
             }
             return View(news);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            News news = db.News.Single(n => n.id == id);
+            db.News.Remove(news);
+            db.SaveChanges();
+
+            return RedirectToAction("Admin");
         }
 
     }

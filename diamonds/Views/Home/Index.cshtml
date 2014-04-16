@@ -6,6 +6,8 @@
 @section scripts {
 @Styles.Render("~/Content/themes/base/css")
 @Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/fancybox")
+@Styles.Render("~/Content/fancybox")
 <script type="text/javascript">
     $(document).ready(function () {
         $(".featured div a").hover(function () {
@@ -34,12 +36,14 @@
         }
 
         $(".list-of-news a").hover(function () {
-            $(this).parent().parent().children("img").hide();
+            $(".fancybox-list-item").hide();
             $(this).parent().find("a").css("text-decoration", "none");
             var s = $(this).data("newsid");
             $("#" + s).show();
             $(this).css("text-decoration", "underline");
         });
+        $(".fancybox").fancybox({ type: 'image' });
+        $(".fancybox-list-item").fancybox({ type: 'image' });
     });
 </script>
 }
@@ -49,7 +53,9 @@
         <h5>@Html.ActionLink(Model.FeaturedNews.title, "Index", "News", new { id = Model.FeaturedNews.id }, null) </h5>
         @if (Model.FeaturedNews.Photo != null)
         {
-        <img src="@Url.Action("Photo", "Gallery", new { id = Model.FeaturedNews.photoId, size = "small" })" />
+        <a href="@Url.Action("Photo", "Gallery", new { id = Model.FeaturedNews.photoId })" class="fancybox">
+            <img src="@Url.Action("Photo", "Gallery", new { id = Model.FeaturedNews.photoId, size = "small" })" />
+        </a>
         <div>@Html.Raw(Model.FeaturedNews.text.Length > 500 ? Model.FeaturedNews.text.Substring(0, 500) : Model.FeaturedNews.text)</div>
         }
         else 
@@ -61,7 +67,9 @@
         <h5><a href="@Url.Action("Index", "News")">@ViewBag.Lang["home-aktualnosci"]</a></h5>
         @foreach (var item in Model.News)
         {
-        <img src="@Url.Action("Photo", "Gallery", new { id = item.photoId, size = "small" })" id="@item.id" />
+        <a href="@Url.Action("Photo", "Gallery", new { id = item.photoId })" id="@item.id" class="fancybox-list-item">
+            <img src="@Url.Action("Photo", "Gallery", new { id = item.photoId, size = "small" })" />
+        </a>
         }
         <div class="list-of-news">
             @foreach (var item in Model.News)
@@ -120,7 +128,9 @@
     <aside class="widget">
         <div>
             <h5>@ViewBag.Lang["home-losowe-zdjecie"]</h5>
-            <img src="@Url.Action("Photo", "Gallery", new { id = Model.FeaturedPhoto.id, size = "small" })" />
+            <a href="@Url.Action("Photo", "Gallery", new { id = Model.FeaturedPhoto.id })" class="fancybox">
+                <img src="@Url.Action("Photo", "Gallery", new { id = Model.FeaturedPhoto.id, size = "small" })" />
+            </a>
         </div>
     </aside>
 </article>

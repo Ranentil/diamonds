@@ -9,6 +9,7 @@ using Diamonds.Models.PermissionModels;
 
 namespace Diamonds.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class UserController : Controller
     {
         private DiamondsEntities db = new DiamondsEntities();
