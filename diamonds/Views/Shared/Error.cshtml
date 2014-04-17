@@ -1,10 +1,42 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 @{
+    Layout = null;
     ViewBag.Title = "Error";
 }
-
-<hgroup class="title">
-    <h1 class="error">Error.</h1>
-    <h2 class="error">An error occurred while processing your request.</h2>
-</hgroup>
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8" />
+        <title>Warsaw Diamonds - @ViewBag.Title</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        <style type="text/css">
+            body {
+                background-color: initial;
+            }
+            .site-title a, .site-title a:hover, header {
+                position: initial;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title"><a href="@Url.Action("Index", "Home")"><img src="@Url.Content("~/Content/images/layout/logo.png")" /></a></p>
+                </div>
+            </div>
+        </header>
+<h2>
+    Niestety wystąpił błąd podczas działania aplikacji.
+</h2>
+<div style="margin: 30px 20%; text-align: center;">
+    <a href="@Url.Action("Index", "Home")">Przejdź do strony głównej</a>
+</div>
+@if (User.IsInRole("ADMIN"))
+{
+<div style="margin: 80px 20%; width: 800px;">@Model.Exception</div>
+}
+</body></html>

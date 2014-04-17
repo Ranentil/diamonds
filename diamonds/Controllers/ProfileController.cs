@@ -109,5 +109,12 @@ namespace Diamonds.Controllers
             else
                 return RedirectToAction("Index", "Profile");
         }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

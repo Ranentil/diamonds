@@ -17,6 +17,7 @@ namespace Diamonds
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new ControllerAttribute());
         }
 
         protected void Application_Start()

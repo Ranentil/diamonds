@@ -211,5 +211,11 @@ namespace Diamonds.Controllers
             return RedirectToAction("PhotosAdmin", new { id = photo.galleryId });
         }
 
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

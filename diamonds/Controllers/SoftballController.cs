@@ -20,5 +20,32 @@ namespace Diamonds.Controllers
             return View();
         }
 
+
+        public ViewResult Rules()
+        {
+            return View();
+        }
+
+
+        public ViewResult Dictionary()
+        {
+            return View();
+        }
+
+        #region Pages
+
+        public ViewResult WhatIsSoftball()
+        {
+            ViewData.Model = "co-to-softball";
+            return View("Page");
+        }
+
+        #region
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

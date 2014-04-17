@@ -50,18 +50,14 @@
 
 <article class="featured content-wrapper">
     <div>
-        <h5>@Html.ActionLink(Model.FeaturedNews.title, "Index", "News", new { id = Model.FeaturedNews.id }, null) </h5>
+        <h5>@Html.ActionLink(Model.FeaturedNews.title, "Details", "News", new { id = Model.FeaturedNews.id }, null) </h5>
         @if (Model.FeaturedNews.Photo != null)
         {
         <a href="@Url.Action("Photo", "Gallery", new { id = Model.FeaturedNews.photoId })" class="fancybox">
             <img src="@Url.Action("Photo", "Gallery", new { id = Model.FeaturedNews.photoId, size = "small" })" />
         </a>
+        }
         <div>@Html.Raw(Model.FeaturedNews.text.Length > 500 ? Model.FeaturedNews.text.Substring(0, 500) : Model.FeaturedNews.text)</div>
-        }
-        else 
-        {
-        <p>@Html.Raw(Model.FeaturedNews.text.Length > 500 ? Model.FeaturedNews.text.Substring(0, 500) : Model.FeaturedNews.text)</p>
-        }
     </div>
     <div>
         <h5><a href="@Url.Action("Index", "News")">@ViewBag.Lang["home-aktualnosci"]</a></h5>
@@ -74,7 +70,7 @@
         <div class="list-of-news">
             @foreach (var item in Model.News)
             {
-            @Html.ActionLink(item.title, "Details", "News", new { data_newsid = item.id })
+            @Html.ActionLink(item.title, "Details", "News", new { id = item.id}, new { data_newsid = item.id })
             }
         </div>
     </div>

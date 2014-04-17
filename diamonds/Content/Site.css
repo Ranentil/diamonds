@@ -160,9 +160,10 @@ footer {
 ----------------------------------------------------------*/
 #login {
     display: block;
-    font-size: .85em;
+    font-size: 10pt;
     margin: 0 0 10px;
     text-align: right;
+    color: #aaa;
 }
     #login a {
         font-weight: 500;
@@ -175,13 +176,6 @@ footer {
         #login a:hover {
             background-color: rgba(207, 157, 247, 0.3);
         }
-
-    #login a.username {
-        background: none;
-        margin: 0;
-        padding: 0;
-        text-decoration: underline;
-    }
 
     #login ul {
         margin: 0;
@@ -196,18 +190,18 @@ footer {
 /* menu
 ----------------------------------------------------------*/
 ul#menu {
-    font-size: 1.2em;
-    font-weight: 600;
+    font-size: 13pt;
+    font-weight: normal;
     margin: 0;
     text-align: right;
-    padding: 15px 0 20px;
+    padding-top: 15px;
 }
 
     ul#menu > li {
         display: inline;
         list-style: none;
         position: relative;
-        padding: 15px 0 20px 20px;
+        margin-left: 20px;
     }
     ul#menu a {
         background: none;
@@ -218,6 +212,10 @@ ul#menu {
             color: #eee;
             text-decoration: none;
         }
+    ul#menu > li > a {
+        display: inline-block;
+        padding-bottom: 20px;
+    }
 
     ul#menu ul {
         list-style: none;
@@ -227,14 +225,13 @@ ul#menu {
         margin: 0;
         padding: 0 10px 4px;
         position: absolute;
-        top: 57px;
-        left: 0;
+        left: -12px;
     }
         ul#menu ul li {
             padding: 4px;
         }
         ul#menu ul a {
-            font-size: 0.8em;
+            font-size: 11pt;
             white-space: nowrap;
         }
 
@@ -311,7 +308,7 @@ ul#site-nav {
         border: solid 1px #666;
         position: absolute;
         left: 0;
-        top: 20px;
+        top: 18px;
         list-style: none;
         padding: 2px;
     }
@@ -419,8 +416,9 @@ h5 {
         left: 32%;
     }
     .featured div p {
-        display: block;
-        padding-top:16px;
+        margin-top: 0;
+        text-align: justify;
+        text-indent: 26px;
     }
     .featured div a {
         display: block;
@@ -777,6 +775,18 @@ tr.pager td {
 h5 span {
     float: right
 }
+
+.page div img {
+    float: left;
+    margin-right: 12px;
+}
+
+.page p {
+    text-align: justify;
+    text-indent: 26px;
+    line-height: 24px;
+}
+
 .page-footer {
     text-align: right;
 }

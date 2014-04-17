@@ -1,6 +1,6 @@
 ﻿@if (Request.IsAuthenticated) {
     <text>
-        Witaj, @Html.ActionLink(Membership.GetUser().UserName ?? Membership.GetUser().Email, "Index", "Profile", null, new { @class = "username" })!
+        @Html.ActionLink(Membership.GetUser().UserName ?? Membership.GetUser().Email, "Index", "Profile", null, new { @class = "username" })
         @using (Html.BeginForm("LogOff", "Profile", FormMethod.Post, new { id = "logoutForm" })) {
             @Html.AntiForgeryToken()
             <a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a>

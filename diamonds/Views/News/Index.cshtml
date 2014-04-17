@@ -3,6 +3,14 @@
     ViewBag.Title = "Aktualności";
 }
 
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("img").fancybox({ type: 'image' });
+    });
+</script>
+}
+
 <section class="page content-wrapper">
     @foreach (var news in Model)
     {
@@ -15,7 +23,9 @@
         </h5>
         @if (news.Photo != null)
         {
-        <img src="@news.Photo.path" />
+        <a href="@Url.Action("Photo", "Gallery", new { id = news.photoId})">
+            <img src="@Url.Action("Photo", "Gallery", new { id = news.photoId, size = "small" }) />
+        </a>
         }
         <div>@Html.Raw(news.text)</div>
         <div class="page-footer" style="text-align: right;">

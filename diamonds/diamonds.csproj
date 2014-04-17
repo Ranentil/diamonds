@@ -43,6 +43,9 @@
       <HintPath>..\packages\BCrypt-Official.0.1.107\lib\BCrypt.Net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mvc.Mailer">
+      <HintPath>..\packages\MvcMailer.4.5\lib\45\Mvc.Mailer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -173,7 +176,7 @@
   <ItemGroup>
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\ControllerAttribute.cs" />
+    <Compile Include="Attributes\ControllerAttribute.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -191,6 +194,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mailers\IUserMailer.cs" />
+    <Compile Include="Mailers\UserMailer.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Custom\HomeModel.cs" />
     <Compile Include="Models\Custom\NavigationModel.cs" />
@@ -547,6 +552,11 @@
     <Content Include="Views\Result\Edit.cshtml" />
     <Content Include="Views\Result\Admin.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
+    <Content Include="Views\UserMailer\_Layout.cshtml" />
+    <Content Include="Views\UserMailer\Welcome.cshtml" />
+    <Content Include="Views\UserMailer\PasswordReset.cshtml" />
+    <Content Include="Views\Team\Page.cshtml" />
+    <Content Include="Views\Softball\Page.cshtml" />
     <None Include="Views\User\RoleEdit.cshtml" />
     <Content Include="Views\User\RoleGroupEdit.cshtml" />
     <Content Include="Views\User\RoleGroups.cshtml" />

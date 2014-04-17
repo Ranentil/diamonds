@@ -15,8 +15,8 @@ namespace Diamonds.Models.Entities
         public string placeEn { get; set; }
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
-        public DateTime? repetitiveEndDate { get; set; }
         public bool repetitive { get; set; }
+        public DateTime? repetitiveEndDate { get; set; }
         public byte eventTypeId { get; set; }
         public byte status { get; set; } 
 

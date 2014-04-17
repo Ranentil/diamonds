@@ -8,7 +8,6 @@ using Diamonds.Models.Entities;
 
 namespace Diamonds.Controllers
 {
-    [Authorize(Roles = "MODERATOR")]
     public class TeamController : Controller
     {
         private DiamondsEntities db = new DiamondsEntities();
@@ -29,12 +28,38 @@ namespace Diamonds.Controllers
             return View(players);
         }
 
+        #region Pages
+
+        public ViewResult Recruitment()
+        {
+            ViewData.Model = "rekrutacja";
+            return View("Page");
+        }
+
+        public ViewResult History()
+        {
+            ViewData.Model = "historia";
+            return View("Page");
+        }
+
+        public ViewResult Field()
+        {
+            ViewData.Model = "boisko";
+            return View("Page");
+        }
+
+        #endregion
+
+        #region Players Edit
+
+        [Authorize(Roles = "MODERATOR")]
         public ViewResult Create()
         {
             return View("Edit", new Player());
         }
 
         [HttpPost]
+        [Authorize(Roles = "MODERATOR")]
         public ActionResult Create(Player player)
         {
             if (ModelState.IsValid)
@@ -48,6 +73,7 @@ namespace Diamonds.Controllers
             return View("Edit", player);
         }
 
+        [Authorize(Roles = "MODERATOR")]
         public ViewResult Edit(int id)
         {
             Player player = db.Players.Single(p => p.id == id);
@@ -55,6 +81,7 @@ namespace Diamonds.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "MODERATOR")]
         public ActionResult Edit(Player player)
         {
             if (ModelState.IsValid)
@@ -69,6 +96,7 @@ namespace Diamonds.Controllers
             return View(player);
         }
 
+        [Authorize(Roles = "MODERATOR")]
         public ActionResult Delete(int id)
         {
             Player player = db.Players.Single(p => p.id == id);
@@ -78,5 +106,16 @@ namespace Diamonds.Controllers
             return RedirectToAction("Admin");
         }
 
+        #endregion
+
+        #region Others
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
+
+        #endregion
     }
 }

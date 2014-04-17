@@ -79,5 +79,12 @@ namespace Diamonds.Controllers
 
             return RedirectToAction("Admin");
         }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

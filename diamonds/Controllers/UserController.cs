@@ -265,5 +265,11 @@ namespace Diamonds.Controllers
 
         #endregion
 
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

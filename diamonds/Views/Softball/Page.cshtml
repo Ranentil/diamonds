@@ -1,0 +1,21 @@
+﻿@model string
+@{
+    ViewBag.Title = ViewBag.Lang["menu-" + Model];
+}
+
+@section Scripts {
+@Scripts.Render("~/bundles/fancybox")
+@Styles.Render("~/Content/fancybox")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".fancybox").fancybox({ type: 'image' });
+    });
+</script>
+}
+
+<section class="content-wrapper">
+    <div>
+        <h5>@ViewBag.Lang["menu-" + Model]</h5>
+        <div>@Html.Raw(ViewBag.Lang["page-" + Model])</div>
+    </div>
+</section>

@@ -4,6 +4,14 @@
     ViewBag.Title = "Photos";
 }
 
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".fancybox").fancybox({ type: 'image' });
+    });
+</script>
+}
+
 <h5>
     @Model.First().Gallery.name - 
     @Model.First().Gallery.place - 
@@ -12,7 +20,7 @@
 @foreach (var photo in Model)
 {
 <div id="gallery">
-    <a href="#">
+    <a href="@Url.Action("Photo", "Gallery", new { id = photo.id })" class="fancybox">
         <img src="@Url.Action("Photo", "Gallery", new { id = photo.id, size = "small" })" />
     </a>
 </div>

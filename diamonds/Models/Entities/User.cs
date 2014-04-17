@@ -14,6 +14,7 @@ namespace Diamonds.Models.Entities
         public DateTime createDate { get; set; }
         public DateTime lastLoginDate { get; set; }
         public short roleGroupId { get; set; }
+        public bool isConfirmed { get; set; }
 
         public virtual RoleGroup RoleGroup { get; set; }
         public virtual ICollection<user_role> user_role { get; set; }
@@ -35,6 +36,7 @@ namespace Diamonds.Models.Entities
             this.lastLoginDate = DateTime.Parse("1900-01-01 00:00:00");
             this.createDate = DateTime.Now;
             this.roleGroupId = 1;
+            this.isConfirmed = false;
         }
 
         public void setPassword(string password)

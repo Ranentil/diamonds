@@ -3,6 +3,14 @@
     ViewBag.Title = Model.title;
 }
 
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".fancybox").fancybox({ type: 'image' });
+    });
+</script>
+}
+
 <section class="page content-wrapper">
     <div>
         <h5>@Model.title
@@ -13,7 +21,9 @@
         </h5>
         @if (Model.Photo != null)
         {
-        <img src="@Model.Photo.path" />
+        <a href="@Url.Action("Photo", "Gallery", new { id = Model.photoId})" class="fancybox">
+            <img src="@Url.Action("Photo", "Gallery", new { id = Model.photoId, size = "small" })" />
+        </a>
         }
         <div>@Html.Raw(Model.text)</div>
         <div class="page-footer" style="text-align: right;">
