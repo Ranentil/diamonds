@@ -40,12 +40,16 @@ namespace Diamonds.Controllers
             return View("Page");
         }
 
-        #region
+        #endregion
+
+        #region Others
 
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        #endregion
     }
 }

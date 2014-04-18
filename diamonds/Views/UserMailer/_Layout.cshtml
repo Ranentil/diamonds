@@ -1,6 +1,30 @@
+@model Diamonds.Models.Entities.User
+@using Mvc.Mailer
+
 <html>
-	<head></head>
+	<head>
+        <title>softball.pl</title>
+	</head>
 	<body>
-		@RenderBody()
+        <table style="border-collapse: collapse; width: 600px">
+            <tr>
+                <td style="background-color: rgba(38, 18, 40, 0.70);">
+                    <a href="http://softball.pl">
+                        <img src="@Url.Abs(Url.Content("~/Content/images/mailer/logo.png"))" />
+                    </a>
+                </td>
+                <td style="background-color: rgba(38, 18, 40, 0.70);">
+                    <h3 style="color: #fff;">Warsaw Diamonds - softball.pl</h3>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+		            @RenderBody()
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+            </tr>
+        </table>
 	</body>
 </html>

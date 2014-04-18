@@ -12,23 +12,25 @@ namespace Diamonds.Mailers
 		
 		public virtual MvcMailMessage Welcome(User user)
 		{
-			//ViewBag.Data = someObject;
+            ViewData.Model = user;
+
 			return Populate(x =>
 			{
 				x.Subject = "Welcome";
 				x.ViewName = "Welcome";
-				x.To.Add("some-email@example.com");
+				x.To.Add(user.email);
 			}); 
 		}
  
-		public virtual MvcMailMessage PasswordReset()
+		public virtual MvcMailMessage PasswordReset(User user)
 		{
-			//ViewBag.Data = someObject;
+            ViewData.Model = user;
+
 			return Populate(x =>
 			{
 				x.Subject = "PasswordReset";
 				x.ViewName = "PasswordReset";
-				x.To.Add("some-email@example.com");
+				x.To.Add(user.email);
 			});
 		}
  	}

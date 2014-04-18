@@ -121,8 +121,9 @@ namespace Diamonds.Controllers
         //
         // GET: /Gallery/AddPhotos/galleryId
 
-        public ViewResult AddPhotos(int id)
+        public ViewResult AddPhotos(int id, bool? multi)
         {
+            ViewBag.Multi = multi ?? true;
             Gallery gallery = db.Galleries.Single(g => g.id == id);
             return View(gallery);
         }
@@ -131,7 +132,7 @@ namespace Diamonds.Controllers
         // POST: /Gallery/AddPhotos/
 
         [HttpPost]
-        public ActionResult AddPhotos(int id, IEnumerable<HttpPostedFileBase> photos)
+        public ActionResult AddPhotos(int id, IEnumerable<HttpPostedFileBase> photos, bool? multi)
         {
             Gallery gallery = db.Galleries.Single(g => g.id == id);
             foreach (var file in photos)
@@ -143,7 +144,14 @@ namespace Diamonds.Controllers
                 photo.saveJpg(file);
             }
 
+            ViewBag.Multi = multi ?? true;
             return View(gallery);
+        }
+
+        public ViewResult Select(int id)
+        {
+            List<Photo> photos = db.Photos.Where(p => p.galleryId == id).ToList();
+            return View(photos);
         }
 
         //

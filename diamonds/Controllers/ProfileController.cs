@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Microsoft.Web.WebPages.OAuth;
+using Mvc.Mailer;
 using Diamonds.Models;
 using Diamonds.Models.Entities;
 
@@ -74,13 +75,28 @@ namespace Diamonds.Controllers
                 db.Users.Add(user);
                 db.SaveChanges();
 
+                new Diamonds.Mailers.UserMailer().Welcome(user);
                 // Send verification mail
                 // Information about send mail
             }
-            TempData["Message"] = "Rejestracja powiodła się, sprawdź skrzynkę pocztową";
+            TempData["Message"] = "Rejestracja powiodła się, sprawdź skrzynkę pocztową, aby potwiedzić Twój adres e-mail.";
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult ConfirmEmail(string email, string hash)
+        {
+            User user = db.Users.SingleOrDefault(u => u.email == email);
+
+            if (user != null && user.checkEmail(hash))
+            {
+                user.isConfirmed = true;
+                db.SaveChanges();
+                TempData["Message"] = ViewBag.Lang["user-confirm-email"];
+            }
+
+            TempData["Message"] = "Wystąpił błąd i nie udało się potwiedzić Twojego e-maila.";
+            return RedirectToAction("Index", "Home");
+        }
         
         public ViewResult Admin()
         {

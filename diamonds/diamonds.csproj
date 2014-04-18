@@ -238,6 +238,7 @@
     <Content Include="Content\images\layout\bx_controls.png" />
     <Content Include="Content\images\layout\lang-pl.png" />
     <Content Include="Content\images\layout\logo.png" />
+    <Content Include="Content\images\mailer\logo.png" />
     <Content Include="Content\jquery.bxslider.css" />
     <Content Include="Content\jquery.fancybox-buttons.css" />
     <Content Include="Content\jquery.fancybox-thumbs.css" />
@@ -309,6 +310,7 @@
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\test.softball.pl - Web Deploy.pubxml" />
     <Content Include="Scripts\default-onload.js" />
+    <Content Include="scaffolding.config" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
@@ -524,7 +526,6 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
-    <Content Include="Views\Shared\_SiteNavigation.cshtml" />
     <Content Include="Views\Profile\Register.cshtml" />
     <Content Include="Views\Gallery\AddPhotos.cshtml" />
     <Content Include="Views\User\Admin.cshtml" />
@@ -557,6 +558,8 @@
     <Content Include="Views\UserMailer\PasswordReset.cshtml" />
     <Content Include="Views\Team\Page.cshtml" />
     <Content Include="Views\Softball\Page.cshtml" />
+    <Content Include="Views\Gallery\Select.cshtml" />
+    <Content Include="Views\Shared\_Window.cshtml" />
     <None Include="Views\User\RoleEdit.cshtml" />
     <Content Include="Views\User\RoleGroupEdit.cshtml" />
     <Content Include="Views\User\RoleGroups.cshtml" />

@@ -50,6 +50,7 @@ namespace Diamonds.Models
                 newUser.setPassword(password);
                 newUser.email = email;
                 newUser.createDate = newUser.lastLoginDate = DateTime.Now;
+                newUser.isConfirmed = isApproved;
 
                 db.Users.Add(newUser);
                 db.SaveChanges();
@@ -81,7 +82,7 @@ namespace Diamonds.Models
             if (user != null)
             {
                 MembershipUser memUser = new MembershipUser("DMembershipProvider", user.name, user.id, user.email,
-                    string.Empty, string.Empty, true, false, DateTime.MinValue,
+                    string.Empty, string.Empty, user.isConfirmed, false, DateTime.MinValue,
                     DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
                 return memUser;
             }
@@ -102,7 +103,7 @@ namespace Diamonds.Models
             if (user != null)
             {
                 MembershipUser memUser = new MembershipUser("DMembershipProvider", user.name, user.id, user.email,
-                    string.Empty, string.Empty, true, false, DateTime.MinValue,
+                    string.Empty, string.Empty, user.isConfirmed, false, DateTime.MinValue,
                     DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
                 return memUser;
             }
@@ -124,7 +125,7 @@ namespace Diamonds.Models
             foreach (User user in db.Users.OrderBy(u => u.name).Skip(pageIndex * pageSize).Take(pageSize))
             {
                 userColl.Add(new MembershipUser("DMembershipProvider", user.name, user.id, user.email,
-                                string.Empty, string.Empty, true, false, DateTime.MinValue,
+                                string.Empty, string.Empty, user.isConfirmed, false, DateTime.MinValue,
                                 DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue));
             }
 

@@ -55,6 +55,17 @@ namespace Diamonds.Models.Entities
             return false;
         }
 
+        public bool checkEmail(string hash)
+        {
+            try
+            {
+                return BCrypt.Net.BCrypt.Verify(this.createDate + this.name, hash);
+            }
+            catch (BCrypt.Net.SaltParseException e) { }
+
+            return false;
+        }
+
         public bool hasAccess(string code)
         {
             user_role ur = this.user_role.SingleOrDefault(r => r.Role.code == code);

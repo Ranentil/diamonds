@@ -1,10 +1,11 @@
 using Mvc.Mailer;
+using Diamonds.Models.Entities;
 
 namespace Diamonds.Mailers
 { 
     public interface IUserMailer
     {
-			MvcMailMessage Welcome(Diamonds.Models.Entities.User user);
-			MvcMailMessage PasswordReset();
+			MvcMailMessage Welcome(User user);
+			MvcMailMessage PasswordReset(User user);
 	}
 }

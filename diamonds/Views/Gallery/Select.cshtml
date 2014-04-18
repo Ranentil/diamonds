@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Diamonds.Models.Entities.Photo>
+@{
+    Layout = "~/Views/Shared/_Window.cshtml";
+    ViewBag.Title = "Select photo";
+}
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#fancybox-iframe-new-photo").fancybox({
+            type: 'iframe', width: 350, height: 150,
+            fitToView: false, autoSize: false
+        });
+        $("#gallery a").click(function () {
+            $("#photoId").val($(this).data("id"));
+        });
+    });
+</script>
+}
+
+<div id="window-fancybox-nav">
+    <a id="fancybox-iframe-new-photo" href="@Url.Action("AddPhotos", "Gallery", new { id = Model.First().galleryId, multi = false })">Dodaj zdjęcie</a>
+</div>
+<form>
+    @Html.Hidden("photoId")
+</form>
+<div id="gallery">
+@foreach (var photo in Model)
+{
+    <a href="#" data-id="@photo.id"><img src="@Url.Action("Photo", "Gallery", new { id = photo.id, size = "small" })" style="width: 150px;"/></a>
+}
+</div>

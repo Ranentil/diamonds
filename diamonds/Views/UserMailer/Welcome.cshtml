@@ -1,2 +1,12 @@
+@model Diamonds.Models.Entities.User
+@using Mvc.Mailer
 
-HTML View for UserMailer#Welcome
+Witaj, @Model.name<br /><br />
+
+Dziêkujemy za rejestracjê na stronie <a href="http://softball.pl">softball.pl</a>.<br />
+Dla potwierdzenia rejestracji kliknij na poni¿szy link:<br /><br />
+
+<a href="@Url.Abs(Url.Action("ConfirmEmail", "Profile", new { email = Model.email, hash = BCrypt.Net.BCrypt.HashString(Model.createDate + Model.name) }))">Link aktywacyjny</a>
+<br /><br />
+
+Jeœli nie rejestrowa³eœ(aœ) siê na stronie <a href="http://softball.pl">softball.pl</a>, to oznacza, ¿e ktoœ poda³ Twój e-mail. W takim przypadku prosimy zignorowaæ tê wiadomoœæ.

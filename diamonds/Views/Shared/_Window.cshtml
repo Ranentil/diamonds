@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "_Window";
+    Layout = null;
+}
+<html>
+    <head>
+        @Styles.Render("~/Content/css")
+        @RenderSection("scripts", required: false)
+    </head>
+    <body>
+        <div id="body">
+            @RenderBody()
+        </div>
+    </body>
+</html>

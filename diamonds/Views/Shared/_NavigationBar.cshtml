@@ -2,9 +2,12 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#window1").fancybox({
-            type: 'iframe', width: 350, height: 200,
-            fitToView: false, autoSize: false
+        $("#fancybox-iframe-new-photo").fancybox({
+            type: 'iframe', width: 350, height: 150,
+            fitToView: false, autoSize: false,
+            afterClose: function () {
+                parent.location.reload(true);
+            }
         });
     });
 </script>
@@ -47,7 +50,7 @@
     <li>@Model.page</li>
     @if (Model.createAction.Length > 9 && Model.createAction.Substring(0, 9) == "AddPhotos" && User.IsInRole(Model.permission))
     {
-    <li class="site-nav-new"><a href="@Url.Action(Model.createAction, Model.name)" id="window1">Dodaj</a></li>
+    <li class="site-nav-new"><a href="@Url.Action(Model.createAction, Model.name)" id="fancybox-iframe-new-photo">Dodaj</a></li>
     }
     else if (User.IsInRole(Model.permission))
     {
