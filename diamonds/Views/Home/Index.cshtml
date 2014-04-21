@@ -117,7 +117,9 @@
             <h5>@ViewBag.Lang["home-ostatnie-galerie"]</h5>
             @foreach (var gallery in Model.Galleries)
             {
-            <a href="@Url.Action("Photos", "Gallery", new { id = gallery.id })"><img src="@Url.Action("Photo", "Gallery", new { id = gallery.coverId, size = "small" })" /></a>
+            <a href="@Url.Action("Photos", "Gallery", new { id = gallery.id })">
+                <img src="@Url.Action("Photo", "Gallery", new { id = gallery.photoId, size = "small" })" />
+            </a>
             }
         </div>
     </article>

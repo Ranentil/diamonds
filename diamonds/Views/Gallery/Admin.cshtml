@@ -26,9 +26,9 @@
             <td>
             
             <a href="@Url.Action("PhotosAdmin", new { id = gallery.id })">
-                @if (gallery.Cover != null)
+                @if (gallery.Photo != null)
                 {
-                <img src="@Url.Action("Photo", new { id = gallery.coverId, size = "small" })" style="width: 150px;" /> 
+                <img src="@Url.Action("Photo", new { id = gallery.photoId, size = "small" })" style="width: 150px;" /> 
                 }
                 else { <text>Pokaż zdjęcia</text> }
             </a>

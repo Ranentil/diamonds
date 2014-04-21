@@ -25,7 +25,7 @@
             <td>
             @if (player.Photo != null)
             {
-            <img src="@Url.Action("Photo", new { id = player.photoId, size = "small" })" />
+            <img src="@Url.Action("Photo", "Gallery", new { id = player.photoId, size = "small" })" style="width: 100px;" />
             }
             </td>
             <td>@player.number</td>
@@ -35,7 +35,7 @@
             <td>
                 @foreach (var position in player.Positions)
                 {
-                    @position.name;
+                    @position.name@: 
                 }
             </td>
             <td>@Html.CheckBox("isActive", player.isActive, new { disabled = "disabled" })</td>

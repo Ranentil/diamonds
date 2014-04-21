@@ -7,8 +7,74 @@
 @section scripts{
 <script type="text/javascript">
     $(document).ready(function () {
+        $(".fancybox").fancybox({ type: 'image' });
+        $(".fancybox-select-photo").fancybox({
+            type: 'iframe',
+            beforeClose: function () {
+                var id = $(".fancybox-iframe").contents().find("#photoId").val();
+                if (id != "") {
+                    $("#photoId").val(id);
+                    link = "/Gallery/Photo/";
+                    $(".selected-photo").attr("href", link + id).show();
+                    $(".selected-photo img").attr("src", link + id + "?size=small");
+                }
+            }
+        });
+        
+        $("#add-position").click(function (e) {
+            e.preventDefault();
+            div = $("<div/>");
+
+            input = $("#select-positions").clone();
+            input.show();
+            div.append(input);
+            div.append(" ");
+
+            a = $("<a/>");
+            a.attr("href", "#");
+            a.attr("id", "save-position");
+            a.html("Zapisz");
+            a.click(function (e) {
+                e.preventDefault();
+                save_position($(this).closest("div"));
+            });
+            div.append(a);
+
+            $("#positions").append(div);
+        });
+
+        $(".remove-position").click(function (e) {
+            e.preventDefault();
+            remove_position($(this).closest("div"));
+        });
+
+        function save_position(div) {
+            select = div.find("select");
+            $.post("/Team/SavePosition/" + $("#id").val() + "?positionId=" + select.val(),
+                function (data) {
+                    if (data == true) {
+                        div.append(select.find('option:selected').text());
+                        select.hide();
+                        select.next().hide();
+                    }
+                }
+            );
+        }
+
+        function remove_position(div) {
+            $.post("/Team/DeletePosition/" + $("#id").val() + "?positionId=" + div.data("position-id"),
+                function (data) {
+                    if (data == true) {
+                        div.html("Usunięto");
+                    }
+                }
+            );
+        }
     });
 </script>
+<style type="text/css">
+    select { width:80px;}
+</style>
 }
 
 @Html.Partial("_NavigationBar", new Diamonds.Models.NavigationModel("Team", title, "MODERATOR"))
@@ -18,8 +84,18 @@
 <fieldset>
     <legend>@title zawodnika</legend>
     @Html.HiddenFor(m => m.id)
+    @Html.HiddenFor(m => m.photoId)
 
     <table class="edit purple">
+        <tr>
+            <td>@Html.LabelFor(m => m.photoId, "Zdjęcie")</td>
+            <td>
+                <a href="@Url.Action("Photo", "Gallery", new {id = Model.photoId})" class="fancybox selected-photo" @(Model.Photo== null ? "style=display: none;" :"")>
+                    <img src="@Url.Action("Photo", "Gallery", new { id = Model.photoId, size = "small" })" />
+                </a><br />
+                <a href="@Url.Action("Select", "Gallery", new { id = 5 })" class="fancybox-select-photo">Edytuj zdjęcie</a>
+            </td>
+        </tr>
         <tr>
             <td>@Html.LabelFor(m => m.firstName, "Imię")</td>
             <td>@Html.EditorFor(m => m.firstName) @Html.ValidationMessageFor(m => m.firstName)</td>
@@ -41,17 +117,42 @@
             <td>@Html.EditorFor(m => m.isActive) @Html.ValidationMessageFor(m => m.isActive)</td>
         </tr>
         <tr>
-            <td>@Html.LabelFor(m => m.photoId, "Zdjęcie")</td>
+            <td>@Html.LabelFor(m => m.throwing, "Ręka rzucająca")</td>
             <td>
-                @if (Model.Photo != null)
+                <select name="throwing">
+                    <option value="true" @(Model.throwing == true ? "selected=\"selected\"" : "")>prawa</option>
+                    <option value="false" @(Model.throwing == false ? "selected=\"selected\"" : "")>lewa</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.batting, "Odbijanie")</td>
+            <td>
+                <select name="batting">
+                    <option value="true" @(Model.batting == true ? "selected=\"selected\"" : "")>prawa</option>
+                    <option value="false" @(Model.batting == false ? "selected=\"selected\"" : "")>lewa</option>
+                    <option value="" @(Model.batting == null ? "selected=\"selected\"" : "")>obie</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.Positions, "Pozycje")</td>
+            <td id="positions">
+                @foreach (var position in Model.Positions)
                 {
-                <img src="@Url.Action("Photo", new { id = Model.photoId, size = "small" })" />
-                <a href="#">Edytuj zdjęcie</a>
+                <div data-position-id="@position.id">@position.name &nbsp; <a href="#" class="remove-position">Usuń</a></div>   
                 }
-                else
-                {
-                <a href="#">Dodaj zdjęcie</a>
-                }
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><a href="#" id="add-position">Dodaj pozycję</a>
+                <select id="select-positions" style="display: none;">
+                    @foreach (var item in (List<Diamonds.Models.Entities.Position>)ViewBag.Positions)
+                    {
+                    <option value="@item.id">@item.name</option>
+                    }
+                </select>
             </td>
         </tr>
     </table>

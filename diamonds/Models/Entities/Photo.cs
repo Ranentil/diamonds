@@ -36,6 +36,7 @@ namespace Diamonds.Models.Entities
             this.descriptionPl = "";
             this.descriptionEn = "";
             this.userId = userId;
+            this.no = 1;
         }
 
         public string path { get { return Path.Combine(HttpContext.Current.Server.MapPath("~/App_Data/Galleries"), galleryId.ToString()); } }
@@ -111,7 +112,7 @@ namespace Diamonds.Models.Entities
             this.HasRequired(e => e.User).WithMany(e => e.Photos).HasForeignKey(e => e.userId);
 
             this.HasMany(e => e.News).WithOptional(e => e.Photo).HasForeignKey(e => e.photoId);
-            this.HasMany(e => e.Galleries).WithOptional(e => e.Cover).HasForeignKey(e => e.coverId);
+            this.HasMany(e => e.Galleries).WithOptional(e => e.Photo).HasForeignKey(e => e.photoId);
             this.HasMany(e => e.Players).WithOptional(e => e.Photo).HasForeignKey(e => e.photoId);
         }
     }

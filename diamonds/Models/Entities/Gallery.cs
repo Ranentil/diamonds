@@ -15,13 +15,13 @@ namespace Diamonds.Models.Entities
         public string placeEn { get; set; }
         public DateTime startDate { get; set; }
         public Nullable<DateTime> endDate { get; set; }
-        public Nullable<int> coverId { get; set; }
+        public Nullable<int> photoId { get; set; }
         public bool isPublished { get; set; }
 
         public string name { get { return lang(namePl, nameEn); } }
         public string place { get { return lang(placePl, placeEn); } }
 
-        public virtual Photo Cover { get; set; }
+        public virtual Photo Photo { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
 
         public Gallery()
@@ -44,7 +44,7 @@ namespace Diamonds.Models.Entities
         public GalleryMapping()
             : base()
         {
-            this.HasOptional(e => e.Cover).WithMany(e => e.Galleries).HasForeignKey(e => e.coverId);
+            this.HasOptional(e => e.Photo).WithMany(e => e.Galleries).HasForeignKey(e => e.photoId);
             this.HasMany(e => e.Photos).WithRequired(e => e.Gallery).HasForeignKey(e => e.galleryId);
         }
     }

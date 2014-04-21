@@ -26,8 +26,19 @@
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link @*image*@"
         });
         $(".fancybox").fancybox({ type: 'image' });
-        $(".fancybox-select-photo").fancybox({ type: 'iframe' });
-        $(".fancybox-iframe").find("#photoId").val();
+        $(".fancybox-select-photo").fancybox({
+            type: 'iframe',
+            beforeClose: function () {
+                var id = $(".fancybox-iframe").contents().find("#photoId").val();
+                if (id != "") {
+                    $("#photoId").val(id);
+                    link = "/Gallery/Photo/";
+                    $(".selected-photo").attr("href", link + id).show();
+                    $(".selected-photo img").attr("src", link + id + "?size=small");
+                }
+            }
+        });
+        
     });
 </script>
 }
@@ -49,12 +60,9 @@
         </tr>
         <tr>
             <td colspan="2">
-                @if (Model.Photo != null && Model.Photo.hasThumb)
-                {
-                <a href="@Url.Action("Photo", "Gallery", new {id = Model.photoId})" class="fancybox">
+                <a href="@Url.Action("Photo", "Gallery", new {id = Model.photoId})" class="fancybox selected-photo" @(Model.Photo== null ? "style=display: none;" :"")>
                     <img src="@Url.Action("Photo", "Gallery", new { id = Model.photoId, size = "small" })" />
                 </a><br />
-                }
                 <a href="@Url.Action("Select", "Gallery", new { id = 1 })" class="fancybox-select-photo">Wybierz zdęcie</a>
             </td>
         </tr>

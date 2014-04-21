@@ -5,14 +5,24 @@
 }
 
 @section Scripts {
+@Scripts.Render("~/bundles/fancybox")
+@Styles.Render("~/Content/fancybox")
 <script type="text/javascript">
     $(document).ready(function () {
         $("#fancybox-iframe-new-photo").fancybox({
             type: 'iframe', width: 350, height: 150,
-            fitToView: false, autoSize: false
+            fitToView: false, autoSize: false,
+            afterClose: function () {
+                location.reload(true);
+            }
+        });
+        $("#fancybox-iframe-select").click(function () {
+            $("#photoId").val($(".selected").data("id"));
+            parent.$.fancybox.close();
         });
         $("#gallery a").click(function () {
-            $("#photoId").val($(this).data("id"));
+            $("a.selected").removeClass("selected");
+            $(this).addClass("selected");
         });
     });
 </script>
@@ -20,13 +30,16 @@
 
 <div id="window-fancybox-nav">
     <a id="fancybox-iframe-new-photo" href="@Url.Action("AddPhotos", "Gallery", new { id = Model.First().galleryId, multi = false })">Dodaj zdjęcie</a>
+    <a id="fancybox-iframe-select" href="#">Wybierz</a>
 </div>
 <form>
     @Html.Hidden("photoId")
 </form>
-<div id="gallery">
+<div id="gallery" class="fancybox-iframe-photos">
 @foreach (var photo in Model)
 {
-    <a href="#" data-id="@photo.id"><img src="@Url.Action("Photo", "Gallery", new { id = photo.id, size = "small" })" style="width: 150px;"/></a>
+    <a href="#" data-id="@photo.id">
+        <img src="@Url.Action("Photo", "Gallery", new { id = photo.id, size = "small" })" style="width: 150px;"/>
+    </a>
 }
 </div>

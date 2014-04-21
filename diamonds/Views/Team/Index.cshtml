@@ -3,19 +3,32 @@
     ViewBag.Title = "Zawodnicy";
 }
 
-@foreach (var player in Model)
-{
-<div id="gallery">
-    @if (player.Photo != null)
-    {
-    <img src="@Url.Action("Photo", new { id = player.photoId, size = "small" })" />
-    }
-    <div>
-        @player.firstName @player.nickName @player.lastName<br />
-        @foreach (var position in player.Positions)
-        {
-            @position.name;
-        }
-    </div>
-</div>
+@section scripts{
+<script type="text/javascript">
+    $(document).ready(function () {
+    });
+</script>
 }
+
+<div id="players">
+    @foreach (var player in Model)
+    {
+    <a href="@Url.Action("Details", new { id = player.id })">
+        @if (player.Photo != null)
+        {
+        <img src="@Url.Action("Photo", "Gallery", new { id = player.photoId, size = "small" })" />
+        }
+        else
+        {
+        <img src="@Url.Content("~/Content/images/player.jpg")" />
+        }
+        <div>
+            @player.firstName "@player.nickName" @player.lastName<br />
+            @*@foreach (var position in player.Positions)
+            {
+                @position.name@: 
+            }*@
+        </div>
+    </a>
+    }
+</div>

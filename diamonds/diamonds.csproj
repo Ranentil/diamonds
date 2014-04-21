@@ -227,12 +227,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fancybox\blank.gif" />
-    <Content Include="Content\fancybox\fancybox_buttons.png" />
+    <Content Include="Content\fancybox_buttons.png" />
     <Content Include="Content\fancybox\fancybox_loading%402x.gif" />
     <Content Include="Content\fancybox\fancybox_loading.gif" />
     <Content Include="Content\fancybox\fancybox_overlay.png" />
     <Content Include="Content\fancybox\fancybox_sprite%402x.png" />
     <Content Include="Content\fancybox\fancybox_sprite.png" />
+    <Content Include="Content\images\player.jpg" />
     <Content Include="Content\images\layout\lang-en.png" />
     <Content Include="Content\images\layout\bx_loader.gif" />
     <Content Include="Content\images\layout\bx_controls.png" />
@@ -560,6 +561,7 @@
     <Content Include="Views\Softball\Page.cshtml" />
     <Content Include="Views\Gallery\Select.cshtml" />
     <Content Include="Views\Shared\_Window.cshtml" />
+    <Content Include="Views\Team\Details.cshtml" />
     <None Include="Views\User\RoleEdit.cshtml" />
     <Content Include="Views\User\RoleGroupEdit.cshtml" />
     <Content Include="Views\User\RoleGroups.cshtml" />

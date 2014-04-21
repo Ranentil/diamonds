@@ -6,7 +6,7 @@
 @using (Html.BeginForm("AddPhotos", "Gallery", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div style="padding: 10px 40px;">
-        <input type="file" id="photos" name="photos" @( ViewBag.Multi ? "multiple=\"multiple\"" : "") />
+        <input type="file" id="photos" name="photos" multiple="multiple" /><br /><br />
         <br /><br />
         <input type="submit" value="Wyślij" />
     </div>

@@ -28,6 +28,12 @@ namespace Diamonds.Controllers
             return View(players);
         }
 
+        public ViewResult Details(int id)
+        {
+            Player player = db.Players.Single(p => p.id == id);
+            return View(player);
+        }
+
         #region Pages
 
         public ViewResult Recruitment()
@@ -77,6 +83,7 @@ namespace Diamonds.Controllers
         public ViewResult Edit(int id)
         {
             Player player = db.Players.Single(p => p.id == id);
+            ViewBag.Positions = db.Positions.ToList();
             return View(player);
         }
 
@@ -94,6 +101,26 @@ namespace Diamonds.Controllers
                 return RedirectToAction("Admin", new { id = player.id });
             }
             return View(player);
+        }
+
+        public JsonResult SavePosition(int id, short positionId)
+        {
+            Player player = db.Players.Single(p => p.id == id);
+            Position position = db.Positions.Single(p => p.id == positionId);
+            player.Positions.Add(position);
+            db.SaveChanges();
+
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DeletePosition(int id, short positionId)
+        {
+            Player player = db.Players.Single(p => p.id == id);
+            Position position = db.Positions.Single(p => p.id == positionId);
+            player.Positions.Remove(position);
+            db.SaveChanges();
+
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize(Roles = "MODERATOR")]

@@ -19,7 +19,7 @@ namespace Diamonds.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            List<Gallery> galleries = db.Galleries.Where(g => g.isPublished && g.Cover != null)
+            List<Gallery> galleries = db.Galleries.Where(g => g.isPublished && g.Photo != null)
                 .OrderByDescending(g => g.startDate).ToList();
             return View(galleries); 
         }
@@ -121,9 +121,8 @@ namespace Diamonds.Controllers
         //
         // GET: /Gallery/AddPhotos/galleryId
 
-        public ViewResult AddPhotos(int id, bool? multi)
+        public ViewResult AddPhotos(int id)
         {
-            ViewBag.Multi = multi ?? true;
             Gallery gallery = db.Galleries.Single(g => g.id == id);
             return View(gallery);
         }
@@ -139,6 +138,8 @@ namespace Diamonds.Controllers
             {
                 User user = db.Users.Single(u => u.email == User.Identity.Name);
                 Photo photo = new Photo(id, user.id, file);
+                if (db.Photos.Any(p => p.galleryId == id))
+                    photo.no = (short)db.Photos.Where(p => p.galleryId == id).Max(p => p.no + 1);
                 gallery.Photos.Add(photo);
                 db.SaveChanges();
                 photo.saveJpg(file);
@@ -150,7 +151,8 @@ namespace Diamonds.Controllers
 
         public ViewResult Select(int id)
         {
-            List<Photo> photos = db.Photos.Where(p => p.galleryId == id).ToList();
+            List<Photo> photos = db.Photos.Where(p => p.galleryId == id)
+                .OrderByDescending(p => p.no).ToList();
             return View(photos);
         }
 

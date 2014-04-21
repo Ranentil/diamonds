@@ -1,0 +1,51 @@
+﻿@model Diamonds.Models.Entities.Player
+@{
+    ViewBag.Title = Model.firstName + " " + Model.lastName;
+}
+
+@section scripts{
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".fancybox").fancybox({ type: 'image' });
+    });
+</script>
+}
+
+<fieldset>
+    <legend>@Model.firstName "@Model.nickName" @Model.lastName</legend>
+    <table>
+        <tr>
+            <td rowspan="4">
+                @if (Model.Photo != null)
+                {
+                <a href="@Url.Action("Photo", "Gallery", new { id = Model.photoId })" class="fancybox">
+                    <img src="@Url.Action("Photo", "Gallery", new { id = Model.photoId, size = "small" })" />
+                </a>
+                }
+                else
+                {
+                <img src="@Url.Content("~/Content/images/player.jpg")" />
+                }
+            </td>
+            <td>@ViewBag.Lang["player-numer"]</td>
+            <td>@Model.number</td>
+        </tr>
+        <tr>
+            <td>@ViewBag.Lang["player-pozycje"]</td>
+            <td>
+                @foreach (var position in Model.Positions)
+                {
+                    @position.name@: 
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>@ViewBag.Lang["player-reka"]</td>
+            <td>@(Model.throwing == true ? ViewBag.Lang["player-prawa"] : ViewBag.Lang["player-lewa"])</td>
+        </tr>
+        <tr>
+            <td>@ViewBag.Lang["player-odbijanie"]</td>
+            <td>@(Model.batting == true ? ViewBag.Lang["player-prawa"] : Model.batting == false ? ViewBag.Lang["player-lewa"] : ViewBag.Lang["player-obie"])</td>
+        </tr>
+    </table>
+</fieldset>

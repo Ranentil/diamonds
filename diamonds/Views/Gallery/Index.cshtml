@@ -25,7 +25,7 @@ if (year != gallery.startDate.ToString("yyyy"))
 }
 <div id="gallery">
     <a href="@Url.Action("Photos", "Gallery", new { id = gallery.id })">
-        <img src="@Url.Action("Photo", new { id = gallery.coverId, size = "small" })" />
+        <img src="@Url.Action("Photo", new { id = gallery.photoId, size = "small" })" />
         <div>
             @gallery.name<br />
             @gallery.place<br />

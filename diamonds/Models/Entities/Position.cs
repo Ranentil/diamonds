@@ -39,7 +39,7 @@ namespace Diamonds.Models.Entities
             this.HasMany(e => e.Lineups).WithOptional(e => e.Position).HasForeignKey(e => e.positionId);
 
             this.HasMany(e => e.Players).WithMany(e => e.Positions).
-                Map(e => e.MapLeftKey("positionId").MapRightKey("playerId").ToTable("players_positions"));
+                Map(e => e.MapLeftKey("playerId").MapRightKey("positionId").ToTable("players_positions"));
         }
     }
 }
