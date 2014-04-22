@@ -432,21 +432,37 @@ h5 {
 .widget {
 }
     .widget > div {
-        position: relative;
         margin-bottom: 10px;
     }
     .widget h5 {
-        position: absolute;
-        top: 0;
     }
-    .widget div div {
-        padding: 38px 10px 4px;
+    .widget > div > div {
+        padding: 4px 10px;
     }
     .widget div p {
         display: block;
-        padding-top:40px;
     }
     .widget div img {
+        width: 100%;
+    }
+.widget-flow {
+}
+    .widget-flow > div {
+        position: relative;
+        margin-bottom: 10px;
+    }
+    .widget-flow h5 {
+        position: absolute;
+        top: 0;
+    }
+    .widget-flow > div > div {
+        padding: 38px 10px 4px;
+    }
+    .widget-flow div p {
+        display: block;
+        padding-top:40px;
+    }
+    .widget-flow div img {
         width: 100%;
         padding-top: 34px;
     }
@@ -498,6 +514,25 @@ h5 {
     .widget-gallery aside img {
         width: 100%;
     }
+/* facebook wigdet */
+.fb-like {
+    margin: 10px 0;
+    min-height: 50px;
+}
+
+/* gallery widget */
+.sponsor {
+    padding: 0;
+}
+.sponsor li {
+    left: 0;
+    display: none;
+    text-align: center;
+}
+.sponsor img {
+    width: auto;
+    margin-bottom: 10px;
+}
 
 /* login page */
 #loginForm {

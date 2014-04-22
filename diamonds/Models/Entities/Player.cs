@@ -19,11 +19,13 @@ namespace Diamonds.Models.Entities
 
         public virtual Photo Photo { get; set; }
         public virtual ICollection<Position> Positions { get; set; }
+        public virtual ICollection<Photo> Tags { get; set; }
         public virtual ICollection<Lineup> Lineups { get; set; }
         public virtual ICollection<Action> BattingPlayers { get; set; }
 
         public Player() 
         {
+            Positions = new HashSet<Position>();
             isActive = true;
             throwing = true;
             batting = true;
@@ -40,6 +42,8 @@ namespace Diamonds.Models.Entities
 
             this.HasMany(e => e.Positions).WithMany(e => e.Players).
                 Map(e => e.MapLeftKey("positionId").MapRightKey("playerId").ToTable("players_positions"));
+            this.HasMany(e => e.Tags).WithMany(e => e.Tags).
+                Map(e => e.MapLeftKey("photoId").MapRightKey("playerId").ToTable("players_photos"));
         }
     }
 }

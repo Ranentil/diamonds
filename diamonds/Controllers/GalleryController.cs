@@ -144,7 +144,7 @@ namespace Diamonds.Controllers
                 db.SaveChanges();
                 photo.saveJpg(file);
             }
-
+            TempData["Message"] = "Zapisano";
             ViewBag.Multi = multi ?? true;
             return View(gallery);
         }

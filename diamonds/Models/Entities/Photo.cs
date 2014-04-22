@@ -27,6 +27,7 @@ namespace Diamonds.Models.Entities
         public virtual ICollection<News> News { get; set; }
         public virtual ICollection<Gallery> Galleries { get; set; }
         public virtual ICollection<Player> Players { get; set; }
+        public virtual ICollection<Player> Tags { get; set; }
 
         public Photo() { }
 
@@ -114,6 +115,9 @@ namespace Diamonds.Models.Entities
             this.HasMany(e => e.News).WithOptional(e => e.Photo).HasForeignKey(e => e.photoId);
             this.HasMany(e => e.Galleries).WithOptional(e => e.Photo).HasForeignKey(e => e.photoId);
             this.HasMany(e => e.Players).WithOptional(e => e.Photo).HasForeignKey(e => e.photoId);
+
+            this.HasMany(e => e.Tags).WithMany(e => e.Tags).
+                Map(e => e.MapLeftKey("playerId").MapRightKey("photoId").ToTable("players_photos"));
         }
     }
 }

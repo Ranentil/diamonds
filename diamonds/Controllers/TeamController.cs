@@ -74,7 +74,7 @@ namespace Diamonds.Controllers
                 db.SaveChanges();
 
                 TempData["Message"] = "Pomyślnie zapisano";
-                return RedirectToAction("Admin");
+                return RedirectToAction("Edit", new { id = player.id });
             }
             return View("Edit", player);
         }

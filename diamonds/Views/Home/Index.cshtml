@@ -44,9 +44,18 @@
         });
         $(".fancybox").fancybox({ type: 'image' });
         $(".fancybox-list-item").fancybox({ type: 'image' });
+        $(".sponsor ul").bxSlider({ pager: false, controls: false, randomStart: true });
     });
 </script>
 }
+<div id="fb-root"></div>
+<script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/pl_PL/all.js#xfbml=1&appId=400105420015788";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <article class="featured content-wrapper">
     <div>
@@ -83,11 +92,17 @@
         {
             if (item.repetitive)
             {
-            <div>@item.name - @System.Globalization.DateTimeFormatInfo.CurrentInfo.GetDayName(item.startDate.DayOfWeek) @item.startDate.ToString("HH:mm") - @item.endDate.ToString("HH:mm")</div>
+            <div>
+                <b>@item.name</b> - @System.Globalization.DateTimeFormatInfo.CurrentInfo.GetDayName(item.startDate.DayOfWeek) @item.startDate.ToString("HH:mm") - @item.endDate.ToString("HH:mm")
+                @item.place
+            </div>
             }
             else
             {
-            <div>@item.name @item.startDate.ToString("d MMMM HH:mm") - @item.endDate.ToString("HH:mm")</div>
+            <div>
+                <b>@item.name</b> - @item.startDate.ToString("d MMMM HH:mm") - @item.endDate.ToString("HH:mm")<br />
+                @item.place
+            </div>
             }
         }
     </div>
@@ -103,11 +118,31 @@
     </div>
     <div>
         <h5>@ViewBag.Lang["home-1procent"]</h5>
-        <p>Oddaj jeden procent</p>
+        <a href="@Url.Action("Percent", "Home")">
+            <img src="@Url.Content("~/Content/images/percent.png")" />
+        </a>
     </div>
     <div>
         <h5>Diamonds na Facebooku</h5>
-        <div></div>
+        <div class="fb-like" data-href="http://www.facebook.com/WarsawDiamonds" data-width="240" data-layout="standard" data-action="like" data-show-faces="true" data-share="false"></div>
+    </div>
+    <div class="sponsor">
+        <h5>Sponsorzy</h5>
+        <ul>
+            <li>
+                <a href="http://www.javacoffee.pl/" target="_blank" title="Java Coffee Company">
+                    <img src="@Url.Content("~/Content/images/logos/JCC.png")" />
+                </a>
+            </li>
+            <li>
+                <a href="https://www.um.warszawa.pl/" target="_blank" title="Zakochaj się w Warszawie">
+                    <img src="@Url.Content("~/Content/images/logos/warszawa.png")" />
+                </a>
+            </li>
+            <li>
+                    <img src="@Url.Content("~/Content/images/logos/mokotow.png")" />
+            </li>
+        </ul>
     </div>
 </aside>
 

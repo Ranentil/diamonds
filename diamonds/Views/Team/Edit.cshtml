@@ -90,7 +90,7 @@
         <tr>
             <td>@Html.LabelFor(m => m.photoId, "Zdjęcie")</td>
             <td>
-                <a href="@Url.Action("Photo", "Gallery", new {id = Model.photoId})" class="fancybox selected-photo" @(Model.Photo== null ? "style=display: none;" :"")>
+                <a href="@Url.Action("Photo", "Gallery", new {id = Model.photoId})" class="fancybox selected-photo" @(Model.Photo == null ? "style=display:none" : "")>
                     <img src="@Url.Action("Photo", "Gallery", new { id = Model.photoId, size = "small" })" />
                 </a><br />
                 <a href="@Url.Action("Select", "Gallery", new { id = 5 })" class="fancybox-select-photo">Edytuj zdjęcie</a>
@@ -135,6 +135,8 @@
                 </select>
             </td>
         </tr>
+        @if (Model.id != 0)
+        {
         <tr>
             <td>@Html.LabelFor(m => m.Positions, "Pozycje")</td>
             <td id="positions">
@@ -155,6 +157,7 @@
                 </select>
             </td>
         </tr>
+        }
     </table>
     <table class="edit">
         <tr>

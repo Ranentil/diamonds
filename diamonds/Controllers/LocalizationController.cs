@@ -20,7 +20,7 @@ namespace Diamonds.Controllers
 
         public ActionResult Admin()
         {
-            List<Localization> localizations = db.Localizations.OrderBy(l => l.name).ToList();
+            List<Localization> localizations = db.Localizations.OrderBy(l => l.code).ToList();
             return View(localizations);
         }
 
