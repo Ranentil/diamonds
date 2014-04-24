@@ -816,19 +816,22 @@ h5 span {
     margin-right: 12px;
 }
 
-.page p {
-    text-align: justify;
-    text-indent: 26px;
+.page > div {
+    min-height: 250px;
+}
+
+.page > div> div:first-of-type, .page p {
     line-height: 24px;
 }
 
 .page-footer {
     text-align: right;
+    font-style: italic;
+    font-size: 10pt;
 }
     .page-footer div:last-of-type {
         font-weight: bold;
-        font-style: italic;
-        padding-top: 4px;
+        padding: 4px 0 8px;
         font-size: 12pt;
         font-family: 'Book Antiqua';
     }

@@ -6,7 +6,7 @@
 @section Scripts {
 <script type="text/javascript">
     $(document).ready(function () {
-        $("img").fancybox({ type: 'image' });
+        $(".fancybox").fancybox({ type: 'image' });
     });
 </script>
 }
@@ -15,7 +15,8 @@
     @foreach (var news in Model)
     {
     <div>
-        <h5>@news.title
+        <h5>
+            @Html.ActionLink(news.title, "Details", new { id = news.id })
             @if (User.IsInRole("MODERATOR"))
             {
             <span>@Html.ActionLink("Edit", "Edit", new { id = news.id })</span>
@@ -23,8 +24,8 @@
         </h5>
         @if (news.Photo != null)
         {
-        <a href="@Url.Action("Photo", "Gallery", new { id = news.photoId})">
-            <img src="@Url.Action("Photo", "Gallery", new { id = news.photoId, size = "small" }) />
+        <a href="@Url.Action("Photo", "Gallery", new { id = news.photoId})" class="fancybox">
+            <img src="@Url.Action("Photo", "Gallery", new { id = news.photoId, size = "small" })" />
         </a>
         }
         <div>@Html.Raw(news.text)</div>

@@ -9,14 +9,15 @@
 <script type="text/javascript">
     $(document).ready(function () {
         tinymce.init({
-            selector: "textarea", menubar: false, statusbar: false, forced_root_block: "",
+            selector: "textarea", statusbar: false, forced_root_block: "",
+            //menubar: false,
             force_br_newlines: true, force_p_newlines: false, oninit: "setPlainText",
             plugins: [
                 "advlist autolink lists link image charmap print preview anchor",
                 "searchreplace visualblocks code",
                 "insertdatetime media contextmenu paste"
             ],
-            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link @*image*@"
+            toolbar: "insertfile undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link @*image*@"
 
         });
     });
@@ -33,15 +34,15 @@
 
     <table class="edit purple">
         <tr>
-            <td>@Html.LabelFor(m => m.name, "Nazwa")</td>
+            <td>@Html.LabelFor(m => m.code, "Nazwa")</td>
             <td>
                 @if (User.IsInRole("ADMIN"))
                 {
-                @Html.EditorFor(m => m.name) 
+                @Html.EditorFor(m => m.code) 
                 } else {
-                @Html.DisplayFor(m => m.name) @Html.HiddenFor(m => m.name)
+                @Html.DisplayFor(m => m.code) @Html.HiddenFor(m => m.code)
                 }
-                @Html.ValidationMessageFor(m => m.name)</td>
+                @Html.ValidationMessageFor(m => m.code)</td>
         </tr>
         <tr>
             <td colspan="2">@Html.LabelFor(m => m.pl, "Treść PL")
