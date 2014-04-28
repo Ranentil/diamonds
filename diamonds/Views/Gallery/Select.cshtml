@@ -6,7 +6,8 @@
 
 @section Scripts {
 @Scripts.Render("~/bundles/fancybox")
-@Styles.Render("~/Content/fancybox")
+@*@Styles.Render("~/Content/fancybox")*@
+<link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
 <script type="text/javascript">
     $(document).ready(function () {
         $("#fancybox-iframe-new-photo").fancybox({

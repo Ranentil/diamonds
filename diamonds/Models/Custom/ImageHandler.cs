@@ -65,6 +65,7 @@ namespace Diamonds.Models
         {
             var maxWidth = 200;
             var maxHeight = 200;
+            quality = 90;
 
             float ratioX = (float)maxWidth / (float)originalWidth;
             float ratioY = (float)maxHeight / (float)originalHeight;

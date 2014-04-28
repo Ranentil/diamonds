@@ -10,7 +10,8 @@
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/fancybox")
-        @Styles.Render("~/Content/fancybox")
+        @*@Styles.Render("~/Content/fancybox")*@
+        <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
         @RenderSection("scripts", required: false)
     </head>
     <body>
