@@ -10,25 +10,29 @@
 </script>
 }
 
-<div id="players">
-    @foreach (var player in Model)
-    {
-    <a href="@Url.Action("Details", new { id = player.id })">
-        @if (player.Photo != null)
+<fieldset>
+    <legend>@ViewBag.Lang["menu-sklad"]</legend>
+    <div id="players">
+        @foreach (var player in Model)
         {
-        <img src="@Url.Action("Photo", "Gallery", new { id = player.photoId, size = "small" })" />
-        }
-        else
-        {
-        <img src="@Url.Content("~/Content/images/player.png")" />
-        }
-        <div>
-            @player.firstName "@player.nickName" @player.lastName<br />
-            @*@foreach (var position in player.Positions)
+        <a href="@Url.Action("Details", new { id = player.id })">
+            @if (player.Photo != null)
             {
-                @position.name@: 
-            }*@
-        </div>
-    </a>
-    }
-</div>
+            <img src="@Url.Action("Photo", "Gallery", new { id = player.photoId, size = "small" })" />
+            }
+            else
+            {
+            <img src="@Url.Content("~/Content/images/player.png")" />
+            }
+            <div>
+                @player.firstName "@player.nickName" @player.lastName<br />
+                @foreach (var position in player.Positions)
+                {
+                    @position.name@: 
+                }
+            </div>
+        </a>
+        }
+    </div>
+    
+</fieldset>

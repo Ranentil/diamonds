@@ -17,7 +17,9 @@
             $('ul', this).slideUp("fast");
         });
         tinymce.init({
-            selector: "textarea", menubar: false, statusbar: false, oninit: "setPlainText",
+            selector: "textarea", statusbar: false, oninit: "setPlainText",
+            //menubar: false,
+            entity_encoding : "raw",
             plugins: [
                 "advlist autolink lists link image charmap print preview anchor",
                 "searchreplace visualblocks code",
@@ -60,7 +62,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <a href="@Url.Action("Photo", "Gallery", new {id = Model.photoId})" class="fancybox selected-photo" @(Model.Photo== null ? "style=display: none;" :"")>
+                <a href="@Url.Action("Photo", "Gallery", new {id = Model.photoId})" class="fancybox selected-photo" @(Model.Photo== null ? "style=display:none;" :"")>
                     <img src="@Url.Action("Photo", "Gallery", new { id = Model.photoId, size = "small" })" />
                 </a><br />
                 <a href="@Url.Action("Select", "Gallery", new { id = 1 })" class="fancybox-select-photo">Wybierz zdęcie</a>

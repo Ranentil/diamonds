@@ -22,7 +22,7 @@
                     <a href="#"><img src="@Url.Content("~/Content/images/layout/lang-en.png")" title="Change language to English" /></a>
                 </div>
                 <div class="float-left">
-                    <p class="site-title"><a href="@Url.Action("Index", "Home", null)"><img src="@Url.Content("~/Content/images/layout/logo.png")" /></a></p>
+                    <p class="site-title"><a href="@Url.Action("Index", "Home", null)" title="@ViewBag.Lang["menu-strona-glowna"]"><img src="@Url.Content("~/Content/images/layout/logo.png")" /></a></p>
                 </div>
                 <div class="float-right">
                     <section id="login">
@@ -69,7 +69,7 @@
             </ul>
         </div>
         <div id="body">
-            <section class="message">
+            <section class="message content-wrapper">
                 @if (TempData["Message"] != null)
                 {
                     <div class="message-success">@TempData["Message"]</div>

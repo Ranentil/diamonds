@@ -19,7 +19,7 @@
         <li><a href="@Url.Action("Admin", "Event")">Wydarzenia</a></li>
         <li><a href="@Url.Action("Admin", "Result")">Wyniki</a></li>
         <li><a href="@Url.Action("Admin", "Team")">Zawodnicy</a></li>
-        <li><a href="@Url.Action("Admin", "Localization")">Localizacje</a></li>      
+        <li><a href="@Url.Action("Admin", "Localization")">Lokalizacje</a></li>      
         @if (User.IsInRole("ADMIN"))
         {
         <li>@Html.ActionLink("Użytkownicy", "Admin", "User")</li>

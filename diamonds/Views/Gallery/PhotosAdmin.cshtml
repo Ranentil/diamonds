@@ -1,12 +1,16 @@
-﻿@model Diamonds.Models.Entities.Gallery
+﻿@model List<Diamonds.Models.Entities.Photo>
 @{
     ViewBag.Title = "Zdjęcia";
 }
 
 @section Scripts {
+@Scripts.Render("~/bundles/jqueryui")
+@Styles.Render("~/Content/themes/base/css")
 <script type="text/javascript">
     $(document).ready(function () {
         $(".fancybox").fancybox({ type: 'image' });
+        $(".sortable").sortable();
+        $(".sortable").disableSelection();
         $(".delete").click(function (e) {
             if (!confirm("Na pewno chcesz usunąć zdjęcie?")) {
                 return false;
@@ -16,35 +20,50 @@
 </script>
 }
 
-@Html.Partial("_NavigationBar", new Diamonds.Models.NavigationModel("Gallery", "Lista Zdjęć", "MODERATOR", "AddPhotos/" + Model.id))
+@Html.Partial("_NavigationBar", new Diamonds.Models.NavigationModel("Gallery", "Lista Zdjęć", "MODERATOR", "AddPhotos/" + Html.ViewContext.RouteData.Values["id"].ToString()))
 
+@using (Html.BeginForm()) 
+{
+var i = 0;
 <fieldset>
     <legend>Administracja zdjęciami</legend>
-
-    <table class="purple">
-        <tr>
-            <th>zdjęcie</th>
-            <th>opis</th>
-            <th></th>
-        </tr>
-        @foreach (var photo in Model.Photos)
-        {
-        <tr>
-            <td>
+    <input type="submit" value="Zapisz kolejność" style="float:right;" />
+    <ol class="sortable" style="float:left; width:50%;">
+    @foreach (var photo in Model.Where(p => p.no <= Model.Count / 2))
+    {
+        <li>
             @if (photo.hasThumb)
             {
-            <a href="@Url.Action("Photo", new { id = photo.id })" class="fancybox" rel="group">
+            <a href="@Url.Action("Photo", new { id = photo.id })" title="@photo.descriptionPl @photo.descriptionEn" class="fancybox" rel="group">
                 <img src="@Url.Action("Photo", new { id = photo.id, size = "small" })" style="width:150px;" />
-            </a>
+            </a><br />
             }
-            </td>
-            <td>@photo.descriptionPl<br />@photo.descriptionEn</td>
-            <td>
-                <a href="@Url.Action("PhotoEdit", new { id = photo.id })">@ViewBag.Lang["admin-edit"]</a>
-                <a href="@Url.Action("PhotoDelete", new { id = photo.id})" class="delete">@ViewBag.Lang["admin-delete"]</a>
-            </td>
-        </tr>
-        }
+            <a href="@Url.Action("PhotoEdit", new { id = photo.id })">@ViewBag.Lang["admin-edycja"]</a>
+            <a href="@Url.Action("PhotoDelete", new { id = photo.id})" class="delete">@ViewBag.Lang["admin-usun"]</a>
+            @Html.Hidden("[" + i + "].id", photo.id)
+            @Html.Hidden("[" + i++ + "].no", photo.no)
+        </li>
+    }
+    </ol>
 
-    </table>
+    <ol class="sortable" style="float:right; width:50%;">
+    @foreach (var photo in Model.Where(p => p.no > Model.Count / 2))
+    {
+        <li>
+            @if (photo.hasThumb)
+            {
+            <a href="@Url.Action("Photo", new { id = photo.id })" title="@photo.descriptionPl \n @photo.descriptionEn" class="fancybox" rel="group">
+                <img src="@Url.Action("Photo", new { id = photo.id, size = "small" })" style="width:150px;" />
+            </a><br />
+            }
+            <a href="@Url.Action("PhotoEdit", new { id = photo.id })">@ViewBag.Lang["admin-edycja"]</a>
+            <a href="@Url.Action("PhotoDelete", new { id = photo.id})" class="delete">@ViewBag.Lang["admin-usun"]</a>
+            @Html.Hidden("[" + i + "].id", photo.id)
+            @Html.Hidden("[" + i++ + "].no", photo.no)
+        </li>
+    }
+    </ol>
+
+    <input type="submit" value="Zapisz kolejność" style="float:right;" />
 </fieldset>
+}

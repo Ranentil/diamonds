@@ -11,6 +11,7 @@
         tinymce.init({
             selector: "textarea", statusbar: false, forced_root_block: "",
             //menubar: false,
+            entity_encoding : "raw",
             force_br_newlines: true, force_p_newlines: false, oninit: "setPlainText",
             plugins: [
                 "advlist autolink lists link image charmap print preview anchor",

@@ -19,8 +19,8 @@
 </h5>
 @foreach (var photo in Model)
 {
-<div id="gallery">
-    <a href="@Url.Action("Photo", "Gallery", new { id = photo.id })" class="fancybox">
+<div class="gallery">
+    <a href="@Url.Action("Photo", "Gallery", new { id = photo.id })" class="fancybox" rel="group">
         <img src="@Url.Action("Photo", "Gallery", new { id = photo.id, size = "small" })" />
     </a>
 </div>

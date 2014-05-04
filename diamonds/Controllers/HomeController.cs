@@ -17,7 +17,7 @@ namespace Diamonds.Controllers
         {
             HomeModel homeModel = new HomeModel();
             homeModel.FeaturedNews = db.News.Where(n => n.isPublished).OrderByDescending(n => n.addDate).First();
-            homeModel.News = db.News.Where(n => n.isPublished).OrderByDescending(n => n.addDate).Skip(1).Take(5).ToList();
+            homeModel.News = db.News.Where(n => n.isPublished).OrderByDescending(n => n.addDate).Skip(1).Take(7).ToList();
             homeModel.Events = db.Events.ToList();
             homeModel.Galleries = db.Galleries.Where(g => g.isPublished && g.photoId != null).OrderByDescending(g => g.startDate).Take(2).ToList();
             var random = new Random();

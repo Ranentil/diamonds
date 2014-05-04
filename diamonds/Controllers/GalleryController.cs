@@ -75,7 +75,7 @@ namespace Diamonds.Controllers
                 db.SaveChanges();
 
                 TempData["Message"] = "Pomyślnie zapisano galerię.";
-                return RedirectToAction("Admin");
+                return RedirectToAction("PhotosAdmin", new { id = gallery.id });
             }
             TempData["Error"] = "Coś poszło nie tak! Nie zapisano galerii.";
             return View("Edit", gallery);
@@ -114,8 +114,24 @@ namespace Diamonds.Controllers
 
         public ViewResult PhotosAdmin(int id)
         {
-            Gallery gallery = db.Galleries.Single(g => g.id == id);
-            return View(gallery);
+            List<Photo> photos = db.Photos.Where(g => g.galleryId == id).OrderByDescending(p => p.no).ToList();
+            return View(photos);
+        }
+
+        [HttpPost]
+        public ActionResult PhotosAdmin(int id, IEnumerable<Photo> photos)
+        {
+            foreach (var photo in photos)
+            {
+                Photo dbPhoto = db.Photos.Single(p => p.id == photo.id);
+                dbPhoto.no = photo.no;
+                db.SaveChanges();
+
+                TempData["Message"] = "Zapisano kolejność";
+                return RedirectToAction("PhotosAdmin", new { id = id });
+            }
+            TempData["Error"] = "Coś poszło nie tak! Nie zapisano galerii.";
+            return RedirectToAction("PhotosAdmin", new { id = id });
         }
 
         //

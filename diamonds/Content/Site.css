@@ -427,6 +427,14 @@ h5 {
     .featured div a:before {
         content: "";
     }
+    .featured .notphoto {
+        position: relative;
+        left: 0;
+        margin-bottom: 60px;
+    }
+    .featured .list-of-news {
+        line-height: 26px;
+    }
     
 /* widget */
 .widget {
@@ -692,14 +700,12 @@ textarea {
     color: #e80c4d;
     font-size: 1.1em;
     font-weight: bold;
-    margin: 20px 0 10px 0;
 }
 
 .message-success {
-    color: #7ac0da;
+    color: #129c24;
     font-size: 1.3em;
     font-weight: bold;
-    margin: 20px 0 10px 0;
 }
 
 .error {
@@ -805,25 +811,37 @@ tr.pager td {
     color: #eee;
 }
 
+/* admin */
+
+.admin td {
+    vertical-align: top;
+}
+.admin p {
+    margin-top: 0;
+}
+.admin .admin-text {
+    height: 140px;
+    overflow: auto;
+    padding: 2px;
+    width: 360px;
+    background-color: rgba(38, 18, 40, 0.2);
+}
+
 /* pages
 ----------------------------------------------------------*/
 h5 span {
     float: right
 }
-
 .page div img {
     float: left;
     margin-right: 12px;
 }
-
 .page > div {
     min-height: 250px;
 }
-
 .page > div> div:first-of-type, .page p {
     line-height: 24px;
 }
-
 .page-footer {
     text-align: right;
     font-style: italic;
@@ -835,6 +853,9 @@ h5 span {
         font-size: 12pt;
         font-family: 'Book Antiqua';
     }
+.page-flow {
+
+}
 
 /* news */
 .news {
@@ -842,17 +863,17 @@ h5 span {
 }
 
 /* gallery */
-#gallery {
+.gallery {
     display: inline;
 }
-    #gallery a {
+    .gallery a {
         position: relative;
         display: inline-block;
     }
-    #gallery img {
+    .gallery img {
         padding: 8px;
     }
-    #gallery div {
+    .gallery div {
         position: absolute;
         display: none;
         left: 16px;
@@ -877,7 +898,7 @@ h5 span {
     #players div {
         text-align: center;
     }
-
+    
 /* window fancybox iframe
 ----------------------------------------------------------*/
 #window-fancybox-nav a,

@@ -94,7 +94,7 @@ namespace Diamonds.Controllers
                 db.SaveChanges();
 
                 TempData["Message"] = "Pomyślnie zapisano artykuł.";
-                return RedirectToAction("Edit", new { id = news.id });
+                return RedirectToAction("Admin");
             }
             return View(news);
         }

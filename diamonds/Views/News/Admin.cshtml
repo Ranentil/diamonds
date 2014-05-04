@@ -8,35 +8,37 @@
 <fieldset>
     <legend>Administracja galeriami</legend>
 
-    <table class="purple">
+    <table class="purple admin">
         <tr>
             <th>zdjęcie</th>
-            <th>tytuł</th>
-            <th>tekst</th>
-            <th>data</th>
-            <th>użytkownik</th>
-            <th></th>
+            <th>PL</th>
+            <th>EN</th>
+            <th>dane</th>
         </tr>
 
         @foreach (var item in Model)
         {
         <tr>
-            <td>
+            <td rowspan="2">
                 @if (item.Photo != null)
                 {
                 <a href="@Url.Action("Edit", new { id = item.id })">
-                    <img src="@Url.Action("Photo", "Gallery", new { id = item.photoId, size = "small" })" />
+                    <img src="@Url.Action("Photo", "Gallery", new { id = item.photoId, size = "small" })" style="width: 100px;" />
                 </a>
                 }
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.id })
             </td>
-            <td>@item.titlePl<br />@item.titleEn</td>
-            <td>
-                @(item.textPl.Length > 200 ? item.textPl.Substring(0, 200) : item.textPl)<br />
-                @(item.textEn.Length > 200 ? item.textPl.Substring(0, 200) : item.textEn)
+            <td>@item.titlePl</td>
+            <td>@item.titleEn</td>
+            <td rowspan="2">
+                Data dodania: <b>@item.addDate.ToShortDateString()</b><br />
+                Użytkownik: <b>@item.User.name</b><br />
+                Opublikowany: <b>@item.isPublished</b>
             </td>
-            <td>@item.addDate.ToShortDateString()</td>
-            <td>@item.User.name</td>
-            <td>@Html.ActionLink("Edytuj", "Edit", new { id = item.id })</td>
+        </tr>
+        <tr>
+            <td><div class="admin-text">@Html.Raw(item.textPl)</div></td>
+            <td><div class="admin-text">@Html.Raw(item.textEn)</div></td>
         </tr>
         }
 
