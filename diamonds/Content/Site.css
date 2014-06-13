@@ -862,29 +862,6 @@ h5 span {
 
 }
 
-/* gallery */
-.gallery {
-    display: inline;
-}
-    .gallery a {
-        position: relative;
-        display: inline-block;
-    }
-    .gallery img {
-        padding: 8px;
-    }
-    .gallery div {
-        position: absolute;
-        display: none;
-        left: 16px;
-        top: 8%;
-        line-height: 54px;
-        color: white;
-        font-size: 14pt;
-        font-weight: bold;
-        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    }
-
 /* players */
 #players {
     display: inline;

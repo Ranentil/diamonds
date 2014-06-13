@@ -6,15 +6,29 @@
 @section Scripts {
 @Scripts.Render("~/bundles/jqueryui")
 @Styles.Render("~/Content/themes/base/css")
+<script src="~/Scripts/noty/jquery.noty.js"></script>
+    <script src="~/Scripts/noty/themes/default.js"></script>
+    <script src="~/Scripts/noty/layouts/topRight.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".fancybox").fancybox({ type: 'image' });
         $(".sortable").sortable();
         $(".sortable").disableSelection();
         $(".delete").click(function (e) {
+            e.preventDefault();
             if (!confirm("Na pewno chcesz usunąć zdjęcie?")) {
                 return false;
             }
+            link = $(this).attr("href");
+            elem = $(this).closest("li");
+            $.post(link,
+                function (data) {
+                    if (data == true) {
+                        elem.hide();
+                        noty({ text: "Usunięto", type: "success" });
+                    }
+                }
+            );
         });
     });
 </script>
@@ -29,7 +43,7 @@ var i = 0;
     <legend>Administracja zdjęciami</legend>
     <input type="submit" value="Zapisz kolejność" style="float:right;" />
     <ol class="sortable" style="float:left; width:50%;">
-    @foreach (var photo in Model.Where(p => p.no <= Model.Count / 2))
+    @foreach (var photo in Model.Where(p => p.no <= Math.Ceiling((float)Model.Count / 2.0)))
     {
         <li>
             @if (photo.hasThumb)
@@ -47,7 +61,7 @@ var i = 0;
     </ol>
 
     <ol class="sortable" style="float:right; width:50%;">
-    @foreach (var photo in Model.Where(p => p.no > Model.Count / 2))
+    @foreach (var photo in Model.Where(p => p.no > Math.Ceiling((float)Model.Count / 2.0)))
     {
         <li>
             @if (photo.hasThumb)
