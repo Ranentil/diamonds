@@ -5,13 +5,12 @@
         <title>Warsaw Diamonds - @ViewBag.Title</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/default")
         @Scripts.Render("~/bundles/default")
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/fancybox")
-        @*@Styles.Render("~/Content/fancybox")*@
-        <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+        @Styles.Render("~/Content/fancybox/css")
         @RenderSection("scripts", required: false)
     </head>
     <body>
