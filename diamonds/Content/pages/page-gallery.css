@@ -1,0 +1,114 @@
+﻿/* gallery */
+.gl-grid {
+    margin: 20px 0 0 0;
+    padding: 0;
+    list-style: none;
+    display: block;
+    width: 100%;
+}
+.gl-grid:after,
+.gl-grid:before {
+    content: '';
+    display: table;
+}
+.gl-grid:after {
+    clear: both;
+}
+.gl-grid li {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    margin: 10px 20px;
+    text-align: center;
+}
+.gl-item {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    cursor: default;
+}
+.gl-info-wrap {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    perspective: 800px;
+    transition: all 0.4s ease-in-out;
+    top: 20px;
+    left: 20px;
+    background: rgba(102,51,153,0.8);
+    box-shadow:
+        0 0 0 20px rgba(102,51,153,0.2),
+        inset 0 0 3px rgba(115,114, 23, 0.8);
+}
+.gl-info {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    transition: all 0.4s ease-in-out;
+    transform-style: preserve-3d;
+}
+.gl-info > div {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-position: center center;
+    backface-visibility: hidden;
+}
+.gl-info .gl-info-back {
+    transform: rotate3d(0,1,0,180deg);
+    background: #000;
+}
+.gl-info h3 {
+    color: #fff;
+    text-transform: uppercase;
+    vertical-align: bottom;
+    letter-spacing: 2px;
+    font-size: 14px;
+    margin: 0 15px;
+    padding: 20px 0 0 0;
+    height: 50px;
+    font-family: 'Open Sans', Arial, sans-serif;
+    text-shadow:
+        0 0 1px #fff,
+        0 1px 2px rgba(0,0,0,0.3);
+}
+ 
+.gl-info p {
+    color: #fff;
+    padding: 10px 5px;
+    font-style: italic;
+    margin: 0 30px;
+    font-size: 12px;
+    border-top: 1px solid rgba(255,255,255,0.5);
+}
+ 
+.gl-info p a {
+    display: block;
+    color: rgba(255,255,255,0.7);
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding-top: 4px;
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+ 
+.gl-info p a:hover {
+    color: rgba(255,242,34, 0.8);
+}
+.gl-item:hover .gl-info-wrap {
+    box-shadow:
+        0 0 0 0 rgba(255,255,255,0.8),
+        inset 0 0 3px rgba(115,114, 23, 0.8);
+}
+ 
+.gl-item:hover .gl-info {
+    transform: rotate3d(0,1,0,-180deg);
+}
