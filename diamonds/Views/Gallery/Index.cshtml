@@ -7,7 +7,7 @@
 @section scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#gallery a").hover(function () {
+            $(".gallery a").hover(function () {
                 $(this).find("div").fadeIn();
             }, function () {
                 $(this).find("div").fadeOut();
@@ -23,7 +23,7 @@ if (year != gallery.startDate.ToString("yyyy"))
 {year = gallery.startDate.Year.ToString(); }
 <h5>Sezon @gallery.startDate.ToString("yyyy")</h5>
 }
-<div id="gallery">
+<div class="gallery">
     <a href="@Url.Action("Photos", "Gallery", new { id = gallery.id })">
         <img src="@Url.Action("Photo", new { id = gallery.photoId, size = "small" })" />
         <div>

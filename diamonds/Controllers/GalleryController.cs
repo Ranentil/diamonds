@@ -224,7 +224,8 @@ namespace Diamonds.Controllers
         //
         // POST: /Gallery/Delete/
 
-        public ActionResult PhotoDelete(int id)
+        [HttpPost]
+        public JsonResult PhotoDelete(int id)
         {
             Photo photo = db.Photos.Single(p => p.id == id);
             db.Photos.Remove(photo);
@@ -232,9 +233,7 @@ namespace Diamonds.Controllers
 
             photo.deleteFiles();
 
-            TempData["Message"] = "Pomyślnie usunięto zdjęcie";
-
-            return RedirectToAction("PhotosAdmin", new { id = photo.galleryId });
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
 
