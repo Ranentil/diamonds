@@ -46,9 +46,9 @@
                 @Html.ValidationMessageFor(m => m.code)</td>
         </tr>
         <tr>
-            <td colspan="2">@Html.LabelFor(m => m.pl, "Treść PL")
+            <td colspan="2" style="width: 50%">@Html.LabelFor(m => m.pl, "Treść PL")
                 @Html.TextAreaFor(m => m.pl) @Html.ValidationMessageFor(m => m.pl)</td>
-            <td colspan="2">@Html.LabelFor(m => m.en, "Treść EN")
+            <td colspan="2" style="width: 50%">@Html.LabelFor(m => m.en, "Treść EN")
                 @Html.TextAreaFor(m => m.en) @Html.ValidationMessageFor(m => m.en)</td>
         </tr>
     </table>

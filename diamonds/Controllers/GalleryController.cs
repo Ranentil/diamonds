@@ -154,8 +154,10 @@ namespace Diamonds.Controllers
             {
                 User user = db.Users.Single(u => u.email == User.Identity.Name);
                 Photo photo = new Photo(id, user.id, file);
+
                 if (db.Photos.Any(p => p.galleryId == id))
                     photo.no = (short)db.Photos.Where(p => p.galleryId == id).Max(p => p.no + 1);
+
                 gallery.Photos.Add(photo);
                 db.SaveChanges();
                 photo.saveJpg(file);

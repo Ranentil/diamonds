@@ -18,7 +18,7 @@
     @foreach (var gallery in Model.Where(g => g.startDate.Year == galleryYear))
     {
     <li>
-        <div class="gl-item" style="background-image: url(@Url.Action("Photo", new { id = gallery.photoId, size = "small" }))">
+        <div class="gl-item" onclick="location.href='@Url.Action("Photos", "Gallery", new { id = gallery.id })'" style="background-image: url(@Url.Action("Photo", new { id = gallery.photoId, size = "small" }))">
             <div class="gl-info-wrap">
                 <div class="gl-info">
                     <div class="gl-info-front" style="background-image: url(@Url.Action("Photo", new { id = gallery.photoId, size = "small" }))"></div>

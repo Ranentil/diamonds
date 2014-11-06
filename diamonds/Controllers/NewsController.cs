@@ -38,7 +38,7 @@ namespace Diamonds.Controllers
 
         public ViewResult Admin()
         {
-            List<News> news = db.News.Where(n => n.isPublished).OrderByDescending(n => n.addDate).ToList();
+            List<News> news = db.News.OrderByDescending(n => n.addDate).ToList();
             return View(news);
         }
 

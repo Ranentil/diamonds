@@ -41,7 +41,7 @@
         <tr>
             <td>@Html.LabelFor(m => m.namePl, "Nazwa Pl")</td>
             <td>@Html.EditorFor(m => m.namePl) @Html.ValidationMessageFor(m => m.namePl)</td>
-            <td>@Html.LabelFor(m => m.nameEn, "Nazwa En")</td>
+            <td>@Html.LabelFor(m => m.nameEn, "Name En")</td>
             <td>@Html.EditorFor(m => m.nameEn) @Html.ValidationMessageFor(m => m.nameEn)</td>
         </tr>
         <tr>
@@ -57,6 +57,8 @@
                 @Html.TextBox("DateFromStartDate", Model.startDate.ToString("yyyy-MM-dd"), new { style = "width: 120px;" })
                 @Html.TextBox("TimeFromStartDate", Model.startDate.ToString("HH:mm"), new { style = "width: 80px;" })
             </td>
+        </tr>
+        <tr>
             <td>@Html.LabelFor(m => m.endDate, "Koniec")</td>
             <td>
                 @Html.HiddenFor(m => m.endDate) @Html.ValidationMessageFor(m => m.endDate)

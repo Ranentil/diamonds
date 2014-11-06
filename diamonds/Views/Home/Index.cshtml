@@ -60,7 +60,7 @@
         <h5>@Html.ActionLink(Model.FeaturedNews.title, "Details", "News", new { id = Model.FeaturedNews.id }, null)</h5>
         @if (Model.FeaturedNews.Photo != null)
         {
-        <a href="@Url.Action("Photo", "Gallery", new { id = Model.FeaturedNews.photoId })" class="fancybox">
+        <a href="@Url.Action("Photo", "Gallery", new { id = Model.FeaturedNews.photoId })" class="fancybox block">
             <img src="@Url.Action("Photo", "Gallery", new { id = Model.FeaturedNews.photoId, size = "small" })" />
         </a>
         }
@@ -82,25 +82,26 @@
         {
         if (item.Photo != null)
         {
-        <a href="@Url.Action("Photo", "Gallery", new { id = item.photoId })" id="@item.id" class="fancybox-list-item">
+        <a href="@Url.Action("Photo", "Gallery", new { id = item.photoId })" id="@item.id" class="fancybox-list-item block">
             <img src="@Url.Action("Photo", "Gallery", new { id = item.photoId, size = "small" })" />
         </a>
         }
         else
         {
-        <a id="@item.id" class="fancybox-list-item"><img src="@Url.Content("~/Content/images/player.png")" /></a>
+        <a id="@item.id" class="fancybox-list-item block"><img src="@Url.Content("~/Content/images/player.png")" /></a>
         }
         }
         <div class="list-of-news">
             @foreach (var item in Model.News)
             {
-            <a href="@Url.Action("Details", "News", new { id = item.id})" data-newsid="@item.id">@item.title - <i style="font-size:8pt;">@item.addDate.ToString("d MMMM")</i></a>
+            <a href="@Url.Action("Details", "News", new { id = item.id})" data-newsid="@item.id" class="block">@item.title - <i style="font-size:8pt;">@item.addDate.ToString("d MMMM")</i></a>
             }
         </div>
     </div>
 </article>
 
 <aside class="widget">
+
     <div class="calendar">
         <div></div>    
         @foreach (var item in Model.EventClones.Where(e => e.startDate > DateTime.Today || (e.repetitive && (e.repetitiveEndDate == null || e.repetitiveEndDate > DateTime.Today))))
@@ -108,7 +109,7 @@
             if (item.repetitive)
             {
             <div>
-                <b>@item.name</b> - @System.Globalization.DateTimeFormatInfo.CurrentInfo.GetDayName(item.startDate.DayOfWeek) @item.startDate.ToString("HH:mm") - @item.endDate.ToString("HH:mm")
+                <b>@item.name</b> - @System.Globalization.DateTimeFormatInfo.CurrentInfo.GetDayName(item.startDate.DayOfWeek) @item.startDate.ToString("HH:mm") - @item.endDate.ToString("HH:mm")<br />
                 @item.place
             </div>
             }
@@ -121,26 +122,12 @@
             }
         }
     </div>
+
     <div>
-        <h5><a href="@Url.Action("Index", "Result")">@ViewBag.Lang["home-results"] @DateTime.Now.Year</a></h5>
-        <div>
-            <table>
-                <tr><td>@ViewBag.Lang["home-meczy"]:</td><td>@(Model.Team.won(DateTime.Now.Year) + Model.Team.lost(DateTime.Now.Year))</td></tr>
-                <tr><td>@ViewBag.Lang["home-wygranych"]:</td><td>@Model.Team.won(DateTime.Now.Year)</td></tr>
-                <tr><td>@ViewBag.Lang["home-przegranych"]:</td><td>@Model.Team.lost(DateTime.Now.Year)</td></tr>
-            </table>
-        </div>
-    </div>
-    <div>
-        <h5>@ViewBag.Lang["home-1procent"]</h5>
-        <a href="@Url.Action("Percent", "Home")">
-            <img src="@Url.Content("~/Content/images/percent.png")" />
-        </a>
-    </div>
-    <div>
-        <h5><a href="http://www.facebook.com/WarsawDiamonds" target="_blank">Diamonds na Facebooku</a></h5>
+        <h5><a href="http://www.facebook.com/WarsawDiamonds" target="_blank">@ViewBag.Lang["home-diamonds-fb"]</a></h5>
         <div class="fb-like" data-href="http://www.facebook.com/WarsawDiamonds" data-width="240" data-layout="standard" data-action="like" data-show-faces="true" data-share="false"></div>
     </div>
+
     <div class="sponsor">
         <h5>Sponsorzy</h5>
         <ul>
@@ -159,6 +146,14 @@
             </li>
         </ul>
     </div>
+    
+    <div>
+        <h5>@ViewBag.Lang["home-1procent"]</h5>
+        <a href="@Url.Action("Percent", "Home")">
+            <img src="@Url.Content("~/Content/images/percent.png")" />
+        </a>
+    </div>
+
 </aside>
 
 <article class="widget-gallery">
@@ -181,4 +176,11 @@
             </a>
         </div>
     </aside>
+</article>
+
+<article>
+    <h5><a href="@Url.Action("Results", "Team")">@ViewBag.Lang["home-results"]</a></h5>
+    <div>
+        <iframe src="//www.gamechanger.io/team-5357de2fd6e81b3cbca1e8cb/scoreboard?g=5&p=535257ea19b3a325f22fcd9e" width="680" height="90" scrolling="no" frameborder="0"></iframe>
+    </div>
 </article>

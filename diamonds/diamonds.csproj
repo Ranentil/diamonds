@@ -187,7 +187,6 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ResultController.cs" />
     <Compile Include="Controllers\SoftballController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -239,6 +238,7 @@
     <Content Include="Content\images\logos\JCC.png" />
     <Content Include="Content\images\logos\mokotow.png" />
     <Content Include="Content\images\logos\warszawa.png" />
+    <Content Include="Content\images\pages\diament.png" />
     <Content Include="Content\images\percent.png" />
     <Content Include="Content\images\layout\lang-en.png" />
     <Content Include="Content\images\layout\bx_loader.gif" />
@@ -577,9 +577,6 @@
     <Content Include="Views\Shared\_NavigationBar.cshtml" />
     <Content Include="Views\News\Admin.cshtml" />
     <Content Include="Views\Event\Admin.cshtml" />
-    <Content Include="Views\Result\Index.cshtml" />
-    <Content Include="Views\Result\Edit.cshtml" />
-    <Content Include="Views\Result\Admin.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\UserMailer\_Layout.cshtml" />
     <Content Include="Views\UserMailer\Welcome.cshtml" />

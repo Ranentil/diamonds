@@ -245,17 +245,34 @@ ul#menu {
         margin: 0;
         padding: 0;
     }
-    #featured-photos li {
+    #featured-photos li,
+    #featured-photos li span {
+        display: block;
         height: 420px;
         width: 100%;
-        max-width: 1600px;
+        /*max-width: 1600px;*/
         background-repeat: no-repeat;
         background-position: center;
         background-size: auto 100%;
     }
-    #featured-photos ul li {
-        float: left;
+    #featured-photos li {
+        transform: scaleX(-1);
+        background-repeat: repeat-x;
     }
+        #featured-photos li > span {
+            transform: scaleX(-1);
+        }
+            #featured-photos li > span > span {
+                background: -moz-linear-gradient(left, rgba(38,18,40,1) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,0) 75%, rgba(38,18,40,1) 100%); 
+                background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(38,18,40,1)), color-stop(25%,rgba(0,0,0,0)), color-stop(75%,rgba(0,0,0,0)), color-stop(100%,rgba(38,18,40,1))); 
+                background: -webkit-linear-gradient(left, rgba(38,18,40,1) 0%,rgba(0,0,0,0) 25%,rgba(0,0,0,0) 75%,rgba(38,18,40,1) 100%); 
+                background: -o-linear-gradient(left, rgba(38,18,40,1) 0%,rgba(0,0,0,0) 25%,rgba(0,0,0,0) 75%,rgba(38,18,40,1) 100%);
+                background: -ms-linear-gradient(left, rgba(38,18,40,1) 0%,rgba(0,0,0,0) 25%,rgba(0,0,0,0) 75%,rgba(38,18,40,1) 100%); 
+                background: linear-gradient(to right, rgba(38,18,40,1) 0%,rgba(0,0,0,0) 25%,rgba(0,0,0,0) 75%,rgba(38,18,40,1) 100%);
+            }
+    /*#featured-photos ul li {
+        float: left;
+    }*/
         #featured-photos ul li:not(:first-of-type) {
             display:none;
         }
@@ -345,9 +362,9 @@ h5 {
     padding: 0 20px;
     /*position: absolute;
     top: 0;*/
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
     -webkit-box-shadow: 2px 3px 5px 0px rgba(50, 50, 50, 0.75);
     -moz-box-shadow:    2px 3px 5px 0px rgba(50, 50, 50, 0.75);
     box-shadow:         2px 3px 5px 0px rgba(50, 50, 50, 0.75);
@@ -420,11 +437,11 @@ h5 {
         text-align: justify;
         text-indent: 26px;
     }
-    .featured div a {
+    .featured div a.block {
         display: block;
         font-size: 11pt;
     }
-    .featured div a:before {
+    .featured div a.block:before {
         content: "";
     }
     .featured .notphoto {
@@ -862,18 +879,45 @@ h5 span {
 
 }
 
-/* players */
-#players {
+/* gallery */
+.gallery {
     display: inline;
 }
-    #players a {
+    .gallery a {
+        position: relative;
         display: inline-block;
     }
-    #players img {
+    .gallery img {
         padding: 8px;
     }
-    #players div {
-        text-align: center;
+    .gallery div {
+        position: absolute;
+        display: none;
+        left: 16px;
+        top: 8%;
+        line-height: 54px;
+        color: white;
+        font-size: 14pt;
+        font-weight: bold;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+
+/* players */
+.players {
+    display: inline-block;
+    vertical-align: top;
+    width: 45%
+}
+    .players > a {
+        float: left;
+    }
+    .players img {
+        padding: 8px;
+    }
+    .players .desc {
+        display: block;
+        line-height: 20pt;
+        padding: 2% 0;
     }
     
 /* window fancybox iframe

@@ -36,6 +36,12 @@ namespace Diamonds.Controllers
 
         #region Pages
 
+        public ViewResult Results()
+        {
+            ViewData.Model = "wyniki";
+            return View("Page");
+        }
+
         public ViewResult Recruitment()
         {
             ViewData.Model = "rekrutacja";

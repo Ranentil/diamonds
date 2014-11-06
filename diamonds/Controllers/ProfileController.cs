@@ -245,7 +245,21 @@ namespace Diamonds.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Edit(LocalPasswordModel model)
         {
+            if (ModelState.IsValid)
+            {
+                MembershipUser currentUser = Membership.GetUser(User.Identity.Name, true /* userIsOnline */);
+                bool changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
 
+                if (changePasswordSucceeded)
+                {
+                    TempData["Message"] = "Hasło zostało zmienione";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Niepoprawne stare lub nowe hasło.");
+                }
+            }
             return View(model);
         }
 

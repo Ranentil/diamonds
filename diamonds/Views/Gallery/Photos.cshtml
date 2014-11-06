@@ -12,7 +12,7 @@
 </script>
 }
 
-<h5>
+<h5>@Html.ActionLink("Galeria", "Index", null, new { title = "Powrót do galerii" }):
     @Model.First().Gallery.name - 
     @Model.First().Gallery.place - 
     @Model.First().Gallery.startDate.ToString("d MMMM yyyy")

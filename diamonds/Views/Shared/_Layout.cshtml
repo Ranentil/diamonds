@@ -34,7 +34,7 @@
                                     <li><a href="@Url.Action("Recruitment", "Team")">@ViewBag.Lang["menu-rekrutacja"]</a></li>
                                     <li><a href="@Url.Action("History", "Team")">@ViewBag.Lang["menu-historia"]</a></li>
                                     <li><a href="@Url.Action("Index", "Team")">@ViewBag.Lang["menu-sklad"]</a></li>
-                                    <li><a href="@Url.Action("Index", "Results")">@ViewBag.Lang["menu-wyniki"]</a></li>
+                                    <li><a href="@Url.Action("Results", "Team")">@ViewBag.Lang["menu-wyniki"]</a></li>
                                     <li><a href="@Url.Action("Field", "Team")">@ViewBag.Lang["menu-boisko"]</a></li>
                                     <li><a href="@Url.Action("Index", "Team")">@ViewBag.Lang["menu-dokumenty"]</a></li>
                                 </ul>
@@ -63,7 +63,9 @@
             <ul>
                 @foreach (var photo in ViewBag.Slider)
                 {
-                <li style="background-image:url('@Url.Action("Photo", "Gallery", new { id = photo.id, size = "big" })')"></li>
+                <li style="background-image:url('@Url.Action("Photo", "Gallery", new { id = photo.id, size = "big" })')">
+                    <span style="background-image:url('@Url.Action("Photo", "Gallery", new { id = photo.id, size = "big" })')"><span></span></span>
+                </li>
                 }
             </ul>
         </div>
@@ -104,7 +106,7 @@
                     $('ul', this).slideUp("fast");
                 });
 
-                $("#featured-photos ul").bxSlider();
+                $("#featured-photos ul").bxSlider({ randomStart: true });
 
                 $(".language a:first-of-type").click(function (e) {
                     cdCreateCookie('diamonds-lang', 'pl', 365);

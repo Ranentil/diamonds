@@ -9,7 +9,7 @@
 
 <section id="loginForm">
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
-    @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()<link href="~/Content/Site.css" rel="stylesheet" />
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Zaloguj się</legend>
@@ -31,13 +31,13 @@
         </ol>
         <input type="submit" value="Log in" />
         <p>
-            @Html.ActionLink("Zarejestruj się", "Register") if you don't have an account.
+            @Html.ActionLink("Zarejestruj się", "Register") jeśli jeszcze nie masz konta.
         </p>
     </fieldset>
 }
 </section>
 
-<section class="social" id="socialLoginForm">
+@*<section class="social" id="socialLoginForm">
     <h2>Use another service to log in.</h2>
-    @*@Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })*@
-</section>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+</section>*@

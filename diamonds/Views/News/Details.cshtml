@@ -16,7 +16,7 @@
         <h5>@Model.title
             @if (User.IsInRole("MODERATOR"))
             {
-            <span><a href="@Url.Action("Edit", new { id = Model.id })">@ViewBag.Lang["admin-edit"]</a></span>
+            <span><a href="@Url.Action("Edit", new { id = Model.id })">@ViewBag.Lang["admin-edycja"]</a></span>
             }
         </h5>
         @if (Model.Photo != null)

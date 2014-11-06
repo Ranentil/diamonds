@@ -226,7 +226,7 @@ namespace Diamonds.Models
         public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             DiamondsEntities db = new DiamondsEntities();
-            User user = db.Users.FirstOrDefault(u => u.email == username);
+            User user = db.Users.FirstOrDefault(u => u.email == username || u.name == username);
             if (!user.checkPassword(oldPassword))
                 return false;
             else

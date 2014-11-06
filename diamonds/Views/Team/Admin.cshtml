@@ -11,10 +11,9 @@
     <table class="purple">
         <tr>
             <th>zdjęcie</th>
-            <th>numer</th>
-            <th>imię</th>
+            <th>nazwisko, imię</th>
             <th>nick</th>
-            <th>nazwisko</th>
+            <th>numer</th>
             <th>pozycja</th>
             <th>aktywny</th>
             <th></th>
@@ -28,10 +27,9 @@
             <img src="@Url.Action("Photo", "Gallery", new { id = player.photoId, size = "small" })" style="width: 100px;" />
             }
             </td>
-            <td>@player.number</td>
-            <td>@player.firstName</td>
+            <td>@player.lastName, @player.firstName</td>
             <td>@player.nickName</td>
-            <td>@player.lastName</td>
+            <td>@player.number</td>
             <td>
                 @foreach (var position in player.Positions)
                 {

@@ -33,7 +33,7 @@
             <td rowspan="2">
                 Data dodania: <b>@item.addDate.ToShortDateString()</b><br />
                 Użytkownik: <b>@item.User.name</b><br />
-                Opublikowany: <b>@item.isPublished</b>
+                Opublikowany: <b>@Html.Raw(item.isPublished ? "<span style=color:green>TAK</span>" : "<span style=color:red>NIE</span>")</b>
             </td>
         </tr>
         <tr>
