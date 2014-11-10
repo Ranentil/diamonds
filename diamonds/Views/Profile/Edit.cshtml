@@ -6,9 +6,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-<p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
-
-Jeszcze nie działa zmiana hasła.
+<p>@ViewBag.Lang["login-zalogowany-jako"] <strong>@User.Identity.Name</strong>.</p>
 
 @*@if (ViewBag.HasLocalPassword)
 {*@

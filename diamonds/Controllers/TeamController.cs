@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Diamonds.Models;
 using Diamonds.Models.Entities;
 
 namespace Diamonds.Controllers
@@ -34,30 +36,58 @@ namespace Diamonds.Controllers
             return View(player);
         }
 
+        #region DocFiles
+
+        public ViewResult Docs()
+        {
+            return View(new DocumentFiles().Documents);
+        }
+
+        [HttpPost]
+        public JsonResult UploadFile(HttpPostedFileBase file)
+        {
+            new Document(file);
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult DeleteFile(string path)
+        {
+            new Document(path).Delete();
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public FilePathResult File(string path)
+        {
+            return File(path, System.Net.Mime.MediaTypeNames.Application.Octet, Path.GetFileName(path));
+        }
+
+        #endregion
+
         #region Pages
 
         public ViewResult Results()
         {
             ViewData.Model = "wyniki";
-            return View("Page");
+            return View("_Page");
         }
 
         public ViewResult Recruitment()
         {
             ViewData.Model = "rekrutacja";
-            return View("Page");
+            return View("_Page");
         }
 
         public ViewResult History()
         {
             ViewData.Model = "historia";
-            return View("Page");
+            return View("_Page");
         }
 
         public ViewResult Field()
         {
             ViewData.Model = "boisko";
-            return View("Page");
+            return View("_Page");
         }
 
         #endregion

@@ -20,8 +20,6 @@ namespace Diamonds.Models.Entities
         public virtual Photo Photo { get; set; }
         public virtual ICollection<Position> Positions { get; set; }
         public virtual ICollection<Photo> Tags { get; set; }
-        public virtual ICollection<Lineup> Lineups { get; set; }
-        public virtual ICollection<Action> BattingPlayers { get; set; }
 
         public Player() 
         {
@@ -38,7 +36,6 @@ namespace Diamonds.Models.Entities
             : base()
         {
             this.HasOptional(e => e.Photo).WithMany(e => e.Players).HasForeignKey(e => e.photoId);
-            this.HasMany(e => e.BattingPlayers).WithRequired(e => e.BattingPlayer).HasForeignKey(e => e.battingPlayerId);
 
             this.HasMany(e => e.Positions).WithMany(e => e.Players).
                 Map(e => e.MapLeftKey("positionId").MapRightKey("playerId").ToTable("players_positions"));

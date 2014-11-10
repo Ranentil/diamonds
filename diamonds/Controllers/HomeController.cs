@@ -23,16 +23,33 @@ namespace Diamonds.Controllers
             var random = new Random();
             var photos = db.Photos.ToList();
             homeModel.FeaturedPhoto = db.Photos.Any(p => p.Gallery.isPublished) ? db.Photos.Where(p => p.Gallery.isPublished).OrderBy(p => Guid.NewGuid()).First() : null;
-            homeModel.Team = db.Teams.Single(t => t.id == 1);
-
+            
             return View(homeModel);
         }
 
         public ActionResult Contact()
         {
-            return View();
+            ViewData.Model = "kontakt";
+            return View("_Page");
         }
 
+        public ActionResult Sponsor()
+        {
+            ViewData.Model = "sponsor";
+            return View("_Page");
+        }
+
+        public ActionResult Offer()
+        {
+            ViewData.Model = "oferta";
+            return View("_Page");
+        }
+
+        public ActionResult OnePercent()
+        {
+            ViewData.Model = "jeden-procent";
+            return View("_Page");
+        }
 
         protected override void Dispose(bool disposing)
         {

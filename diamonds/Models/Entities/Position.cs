@@ -16,8 +16,6 @@ namespace Diamonds.Models.Entities
         public string player { get { return lang(playerPl, playerEn); } }
 
         public virtual ICollection<Player> Players { get; set; }
-        public virtual ICollection<Action> Actions { get; set; }
-        public virtual ICollection<Lineup> Lineups { get; set; }
 
 
         private string lang(string pl, string en)
@@ -35,9 +33,6 @@ namespace Diamonds.Models.Entities
         public PositionMapping()
             : base()
         {
-            this.HasMany(e => e.Actions).WithOptional(e => e.ToPosition).HasForeignKey(e => e.toPositionId);
-            this.HasMany(e => e.Lineups).WithOptional(e => e.Position).HasForeignKey(e => e.positionId);
-
             this.HasMany(e => e.Players).WithMany(e => e.Positions).
                 Map(e => e.MapLeftKey("playerId").MapRightKey("positionId").ToTable("players_positions"));
         }

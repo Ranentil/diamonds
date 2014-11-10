@@ -2,7 +2,7 @@
 <html lang="pl">
     <head>
         <meta charset="utf-8" />
-        <title>Warsaw Diamonds - @ViewBag.Title</title>
+        <title>@ViewBag.Title - Warsaw Diamonds</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/default")
@@ -36,7 +36,7 @@
                                     <li><a href="@Url.Action("Index", "Team")">@ViewBag.Lang["menu-sklad"]</a></li>
                                     <li><a href="@Url.Action("Results", "Team")">@ViewBag.Lang["menu-wyniki"]</a></li>
                                     <li><a href="@Url.Action("Field", "Team")">@ViewBag.Lang["menu-boisko"]</a></li>
-                                    <li><a href="@Url.Action("Index", "Team")">@ViewBag.Lang["menu-dokumenty"]</a></li>
+                                    <li><a href="@Url.Action("Docs", "Team")">@ViewBag.Lang["menu-dokumenty"]</a></li>
                                 </ul>
                             </li>
                             <li><a href="@Url.Action("Index", "Gallery")">@ViewBag.Lang["menu-galeria"]</a></li>
@@ -49,8 +49,8 @@
                             </li>
                             <li><a href="@Url.Action("Sponsor", "Home")">@ViewBag.Lang["menu-sponsor"]</a>
                                 <ul>
-                                    <li><a href="@Url.Action("Index", "Home")">@ViewBag.Lang["menu-oferta"]</a></li>
-                                    <li><a href="@Url.Action("Index", "Home")">@ViewBag.Lang["menu-1podatku"]</a></li>
+                                    <li><a href="@Url.Action("Offer", "Home")">@ViewBag.Lang["menu-oferta"]</a></li>
+                                    <li><a href="@Url.Action("OnePercent", "Home")">@ViewBag.Lang["menu-jeden-procent"]</a></li>
                                 </ul>
                             </li>
                             <li><a href="@Url.Action("Contact", "Home")">@ViewBag.Lang["menu-kontakt"]</a></li>

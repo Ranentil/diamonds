@@ -2,66 +2,58 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using Diamonds.Models.Entities;
 
 namespace Diamonds.Models
 {
-
     public class ChangePasswordModel
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "{0} musi mieć conajmniej {2} znaków.", MinimumLength = 6)]
+        [StringLength(100, MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Nowe hasło")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Potwiedzenie hasła")]
-        [System.Web.Mvc.Compare("NewPassword", ErrorMessage = "Hasło i potwierdzenie hasła nie są takie same.")]
+        [System.Web.Mvc.Compare("NewPassword")]
         public string ConfirmPassword { get; set; }
+
     }
 
     public class LoginModel
     {
         [Required]
-        [Display(Name = "E-mail")]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterModel
     {
         [Required]
-        [Display(Name = "User name")]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
-        [Display(Name = "Email address")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "{0} musi mieć conajmniej {2} znaków.", MinimumLength = 6)]
+        [StringLength(100, MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Hasło")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Potwierdzenie hasła")]
-        [System.Web.Mvc.Compare("Password", ErrorMessage = "Hasło i potwierdzenie hasła nie są takie same.")]
+        [System.Web.Mvc.Compare("Password")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -70,25 +62,25 @@ namespace Diamonds.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        //[Display(Name = lang("login-obecne-haslo"))]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        //[StringLength(100, ErrorMessage = lang("login-za-krotkie-haslo"), MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        //[Display(Name = lang("login-nowe-haslo"))]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [System.Web.Mvc.Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        //[Display(Name = lang("login-potwierdzenie-hasla"))]
+        //[System.Web.Mvc.Compare("NewPassword", ErrorMessage = lang("login-hasla-nie-sa-takie-same"))]
         public string ConfirmPassword { get; set; }
     }
 
     public class RegisterExternalLoginModel
     {
         [Required]
-        [Display(Name = "User name")]
+        //[Display(Name = lang("login-login"))]
         public string UserName { get; set; }
 
         public string ExternalLoginData { get; set; }

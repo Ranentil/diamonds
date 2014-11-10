@@ -24,7 +24,6 @@ namespace Diamonds.Models.Entities
         public string place { get { return lang(placePl, placeEn); } }
 
         public virtual EventType EventType { get; set; }
-        public virtual ICollection<Lineup> Lineups { get; set; }
 
 
         public Event() 
@@ -77,7 +76,6 @@ namespace Diamonds.Models.Entities
             : base()
         {
             this.HasRequired(e => e.EventType).WithMany(e => e.Events).HasForeignKey(e => e.eventTypeId);
-            this.HasMany(e => e.Lineups).WithRequired(e => e.Event).HasForeignKey(e => e.eventId);
         }
     }
 }

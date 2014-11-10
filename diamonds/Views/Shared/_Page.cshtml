@@ -13,7 +13,13 @@
 
 <section class="content-wrapper page">
     <div>
-        <h5>@ViewBag.Lang["menu-" + Model]</h5>
+        <h5>
+            @ViewBag.Lang["menu-" + Model]
+            @if (User.IsInRole("MODERATOR"))
+            {
+            <span><a href="@Url.Action("EditPage", "Localization" , new { name = Model })">@ViewBag.Lang["admin-edycja"]</a></span>
+            }
+        </h5>
         <div>@Html.Raw(ViewBag.Lang["page-" + Model])</div>
     </div>
 </section>

@@ -23,7 +23,6 @@ namespace Diamonds.Models
         }
         public ICollection<Gallery> Galleries;
         public Photo FeaturedPhoto;
-        public Team Team;
 
         public HomeModel() { }
     }

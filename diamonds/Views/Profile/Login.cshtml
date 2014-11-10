@@ -1,6 +1,6 @@
 ﻿@model Diamonds.Models.LoginModel
 @{
-    ViewBag.Title = "Logowanie";
+    ViewBag.Title = ViewBag.Lang["login-tytul"];
 }
 
 @section scripts {
@@ -12,26 +12,26 @@
     @Html.AntiForgeryToken()<link href="~/Content/Site.css" rel="stylesheet" />
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Zaloguj się</legend>
+        <legend>@ViewBag.Lang["login-tytul"]</legend>
         <ol>
             <li>
-                @Html.LabelFor(m => m.Email)
+                @Html.LabelFor(m => m.Email, (string)ViewBag.Lang["login-mail"])
                 @Html.TextBoxFor(m => m.Email)
                 @Html.ValidationMessageFor(m => m.Email)
             </li>
             <li>
-                @Html.LabelFor(m => m.Password)
+                @Html.LabelFor(m => m.Password, (string)ViewBag.Lang["login-haslo"])
                 @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password, (string)ViewBag.Lang["login-haslo"])
             </li>
             <li>
                 @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                @Html.LabelFor(m => m.RememberMe, (string)ViewBag.Lang["login-pamietaj"], new { @class = "checkbox" })
             </li>
         </ol>
-        <input type="submit" value="Log in" />
+        <input type="submit" value="@ViewBag.Lang["login-zaloguj"]" />
         <p>
-            @Html.ActionLink("Zarejestruj się", "Register") jeśli jeszcze nie masz konta.
+            @Html.ActionLink((string)ViewBag.Lang["login-zarejestruj"], "Register") @ViewBag.Lang["login-nie-masz-konta"]
         </p>
     </fieldset>
 }

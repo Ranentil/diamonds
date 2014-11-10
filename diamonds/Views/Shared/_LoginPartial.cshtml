@@ -3,12 +3,12 @@
         @Html.ActionLink(Membership.GetUser().UserName ?? Membership.GetUser().Email, "Index", "Profile", null, new { @class = "username" })
         @using (Html.BeginForm("LogOff", "Profile", FormMethod.Post, new { id = "logoutForm" })) {
             @Html.AntiForgeryToken()
-            <a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a>
+            <a href="javascript:document.getElementById('logoutForm').submit()">@ViewBag.Lang["login-wyloguj"]</a>
         }
     </text>
 } else {
     <ul>
-        <li>@Html.ActionLink("Zarejestruj", "Register", "Profile")</li>
-        <li>@Html.ActionLink("Zaloguj", "Login", "Profile")</li>
+        <li>@Html.ActionLink((string)ViewBag.Lang["menu-zarejestruj"], "Register", "Profile")</li>
+        <li>@Html.ActionLink((string)ViewBag.Lang["menu-zaloguj"], "Login", "Profile")</li>
     </ul>
 }

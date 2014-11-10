@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Diamonds.Models.Document>
+@{
+    ViewBag.Title = "Dokumenty";
+}
+
+@section scripts {
+<script type="text/javascript">
+    function progressHandlingFunction(e) {
+        if (e.lengthComputable) {
+            $('progress').attr({ value: e.loaded, max: e.total });
+        }
+    }
+    $(document).ready(function () {
+        $("#saveFile").click(function () {
+            $('progress').show();
+            var formData = new FormData($('form')[0]);
+            $.ajax({
+                url: "/Team/UploadFile/",
+                type: 'POST',
+                xhr: function () {  // Custom XMLHttpRequest
+                    var myXhr = $.ajaxSettings.xhr();
+                    if (myXhr.upload) { // Check if upload property exists
+                        myXhr.upload.addEventListener('progress', progressHandlingFunction, false); // For handling the progress of the upload
+                    }
+                    return myXhr;
+                },
+                success: function () {
+                    $("#file").val("");
+                    noty({ text: "Zapisano plik", type: "success", dismissQueue: true });
+                    location.reload();
+                },
+                error: function () {
+                    noty({ text: "Nie zapisano pliku", type: "error", dismissQueue: true });
+                },
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+        $();
+        $('.removeFile').click(function () {
+            var path = $(this).data("path");
+            if (!confirm("Czy na pewno chcesz usunąć plik?"))
+                return false;
+            tbody = $(this).closest("tr");
+            $.post("/Product/DeleteFile/?path=" + path,
+                function (data) {
+                    if (data == true) {
+                        $(tbody).css("background-color", "#DB7093");
+                        $(tbody).hide(500, function () { $(tbody).remove(); });
+                        noty({ text: "Usunięto plik", type: "success", dismissQueue: true });
+                    }
+                });
+        });
+    });
+</script>
+}
+
+
+<table>
+    @if (User.IsInRole("MODERATOR"))
+    {
+        using (Html.BeginForm())
+        {
+        <tr>
+            <th colspan="5">
+                Dodaj nowy plik<br />
+            </th>
+        </tr>
+        <tr>
+            <td colspan="4" style="padding:10px;">
+                <input type="file" id="file" name="file" />
+                <input type="button" id="saveFile" value="Wyślij" />
+                <progress style="display:none" value="0"></progress>
+            </td>
+        </tr>
+        } 
+    }
+    <tr>
+        <th style="width:auto;" colspan="2">Nazwa</th>
+        <th>Data dodania</th>
+        <th>Rozmiar</th>
+        @if (User.IsInRole("MODERATOR"))
+        {
+        <th></th>
+        }
+    </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                <img src="@Url.Content("~/Content/icons/" + item.extension + "_32x32.png")" 
+                    alt="@item.extension" title="@item.extension" style="padding:6px" />
+            </td>
+            <td>
+                @Html.ActionLink(Path.GetFileNameWithoutExtension(item.path), "File", new { path = item.path })
+            </td>
+            <td style="padding:0 2px;">@item.date.ToShortDateString()</td>
+            <td style="text-align:center">@item.size</td>
+            @if (User.IsInRole("MODERATOR"))
+            {
+            <td style="text-align:right; padding:0 4px 0 8px;" class="action_icons">
+                <a class="removeFile" href="#" data-path="@item.path" class="fa fa-trash-o"></a>
+            </td>
+            }
+        </tr>
+    }
+</table>

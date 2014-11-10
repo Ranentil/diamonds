@@ -20,7 +20,7 @@ namespace Diamonds.Controllers
 
         public ActionResult Admin()
         {
-            List<Localization> localizations = db.Localizations.OrderBy(l => l.code).ToList();
+            List<Localization> localizations = db.Localizations.Where(l => l.code.Substring(0,4) != "page").OrderBy(l => l.code).ToList();
             return View(localizations);
         }
 
@@ -67,6 +67,12 @@ namespace Diamonds.Controllers
                 return RedirectToAction("Admin");
             }
             return View(localization);
+        }
+
+        public ActionResult EditPage(string name)
+        {
+            Localization local = db.Localizations.Single(l => l.code == "page-" + name);
+            return RedirectToAction("Edit", new { id = local.id });
         }
 
 
