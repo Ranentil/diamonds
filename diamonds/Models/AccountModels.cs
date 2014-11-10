@@ -62,18 +62,15 @@ namespace Diamonds.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        //[Display(Name = lang("login-obecne-haslo"))]
         public string OldPassword { get; set; }
 
         [Required]
-        //[StringLength(100, ErrorMessage = lang("login-za-krotkie-haslo"), MinimumLength = 6)]
+        [StringLength(100, MinimumLength = 6)]
         [DataType(DataType.Password)]
-        //[Display(Name = lang("login-nowe-haslo"))]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        //[Display(Name = lang("login-potwierdzenie-hasla"))]
-        //[System.Web.Mvc.Compare("NewPassword", ErrorMessage = lang("login-hasla-nie-sa-takie-same"))]
+        [System.Web.Mvc.Compare("NewPassword")]
         public string ConfirmPassword { get; set; }
     }
 

@@ -22,9 +22,9 @@ namespace Diamonds
             //    consumerKey: "",
             //    consumerSecret: "");
 
-            OAuthWebSecurity.RegisterFacebookClient(
-                appId: "220532104640788",
-                appSecret: "06d4c9a2b96c82768950730148286193");
+            //OAuthWebSecurity.RegisterFacebookClient(
+            //    appId: "410155512466336",
+            //    appSecret: "a9e4acd3c225b9a419f46cfa40b39f55");
 
             //OAuthWebSecurity.RegisterGoogleClient();
         }

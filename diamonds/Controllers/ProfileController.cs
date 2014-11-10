@@ -99,6 +99,63 @@ namespace Diamonds.Controllers
 
         #endregion
 
+        #region Manage Account
+
+        public ViewResult Admin()
+        {
+            return View();
+        }
+
+        public ViewResult Manage()
+        {
+            User user = db.Users.Single(u => u.email == User.Identity.Name);
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Manage(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Users.Attach(user);
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+
+                TempData["Message"] = "Zapisano";
+                return RedirectToAction("Index");
+            }
+            TempData["Error"] = "Błąd";
+            return View(user);
+        }
+
+        public ViewResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(LocalPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                MembershipUser currentUser = Membership.GetUser(User.Identity.Name, true /* userIsOnline */);
+                bool changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
+
+                if (changePasswordSucceeded)
+                {
+                    TempData["Message"] = "Hasło zostało zmienione";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Niepoprawne stare lub nowe hasło.");
+                }
+            }
+            return View(model);
+        }
+
+        #endregion
+
         #region External Logins
 
         //
@@ -116,32 +173,32 @@ namespace Diamonds.Controllers
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
-            //AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
-            //if (!result.IsSuccessful)
-            //{
-            //    return RedirectToAction("ExternalLoginFailure");
-            //}
+            var result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            if (!result.IsSuccessful)
+            {
+                return RedirectToAction("ExternalLoginFailure");
+            }
 
-            //if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
-            //{
-            //    return RedirectToLocal(returnUrl);
-            //}
+            if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
+            {
+                return RedirectToLocal(returnUrl);
+            }
 
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    // If the current user is logged in add the new account
-            //    OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
-            //    return RedirectToLocal(returnUrl);
-            //}
-            //else
-            //{
-            //    // User is new, ask for their desired membership name
-            //    string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
-            //    ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
-            //    ViewBag.ReturnUrl = returnUrl;
-            //    return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
-            //}
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                // If the current user is logged in add the new account
+                OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
+                return RedirectToLocal(returnUrl);
+            }
+            else
+            {
+                // User is new, ask for their desired membership name
+                string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
+                ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
+                ViewBag.ReturnUrl = returnUrl;
+                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
+            }
+            //return View();
         }
 
         //
@@ -151,41 +208,41 @@ namespace Diamonds.Controllers
         [AllowAnonymous, ValidateAntiForgeryToken]
         public ActionResult ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
         {
-            //string provider = null;
-            //string providerUserId = null;
+            string provider = null;
+            string providerUserId = null;
 
-            //if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out provider, out providerUserId))
-            //{
-            //    return RedirectToAction("Manage");
-            //}
+            if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out provider, out providerUserId))
+            {
+                return RedirectToAction("Manage");
+            }
 
-            //if (ModelState.IsValid)
-            //{
-            //    // Insert a new user into the database
-            //    using (UsersContext db = new UsersContext())
-            //    {
-            //        UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
-            //        // Check if user already exists
-            //        if (user == null)
-            //        {
-            //            // Insert name into the profile table
-            //            db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
-            //            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                // Insert a new user into the database
+                //using (UsersContext db = new UsersContext())
+                //{
+                //    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                //    // Check if user already exists
+                //    if (user == null)
+                //    {
+                //        // Insert name into the profile table
+                //        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                //        db.SaveChanges();
 
-            //            OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
-            //            OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
+                //        OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
+                //        OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
 
-            //            return RedirectToLocal(returnUrl);
-            //        }
-            //        else
-            //        {
-            //            ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
-            //        }
-            //    }
-            //}
+                //        return RedirectToLocal(returnUrl);
+                //    }
+                //    else
+                //    {
+                //        ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
+                //    }
+                //}
+            }
 
-            //ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;
-            //ViewBag.ReturnUrl = returnUrl;
+            ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;
+            ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
 
@@ -198,12 +255,12 @@ namespace Diamonds.Controllers
             return View();
         }
 
-        [AllowAnonymous, ChildActionOnly]
-        public ActionResult ExternalLoginsList(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            return PartialView("_ExternalLoginsListPartial", OAuthWebSecurity.RegisteredClientData);
-        }
+        //[AllowAnonymous, ChildActionOnly]
+        //public ActionResult ExternalLoginsList(string returnUrl)
+        //{
+        //    ViewBag.ReturnUrl = returnUrl;
+        //    return PartialView("_ExternalLoginsListPartial", OAuthWebSecurity.RegisteredClientData);
+        //}
 
         [ChildActionOnly]
         public ActionResult RemoveExternalLogins()
@@ -227,46 +284,6 @@ namespace Diamonds.Controllers
             return View();
         }
 
-        #endregion
-
-        #region Edit
-
-        public ViewResult Admin()
-        {
-            return View();
-        }
-
-        public ViewResult Edit()
-        {
-
-            return View();
-        }
-
-        [HttpPost, ValidateAntiForgeryToken]
-        public ActionResult Edit(LocalPasswordModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                MembershipUser currentUser = Membership.GetUser(User.Identity.Name, true /* userIsOnline */);
-                bool changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
-
-                if (changePasswordSucceeded)
-                {
-                    TempData["Message"] = "Hasło zostało zmienione";
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Niepoprawne stare lub nowe hasło.");
-                }
-            }
-            return View(model);
-        }
-
-        #endregion
-
-        #region Others
-
         internal class ExternalLoginResult : ActionResult
         {
             public ExternalLoginResult(string provider, string returnUrl)
@@ -283,6 +300,10 @@ namespace Diamonds.Controllers
                 OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
             }
         }
+
+        #endregion
+
+        #region Others
 
         private ActionResult RedirectToLocal(string returnUrl)
         {

@@ -1,0 +1,32 @@
+﻿@model Diamonds.Models.Entities.User
+@{
+    ViewBag.Title = "Dane konta";
+}
+
+@Html.Partial("_LeftMenu")
+
+<section class="content-form">
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary()
+    @Html.HiddenFor(m => m.id)
+
+    <fieldset>
+        <legend>Dane konta</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.email, (string)ViewBag.Lang["login-mail"])
+                @Html.EditorFor(m => m.email)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.name, (string)ViewBag.Lang["login-login"])
+                @Html.EditorFor(m => m.name)
+            </li>
+        </ol>
+        <input type="submit" class="button-default" value="Zapisz" />
+    </fieldset>
+}
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
