@@ -109,14 +109,14 @@
             if (item.repetitive)
             {
             <div>
-                <b>@item.name</b> - @System.Globalization.DateTimeFormatInfo.CurrentInfo.GetDayName(item.startDate.DayOfWeek) @item.startDate.ToString("HH:mm") - @item.endDate.ToString("HH:mm")<br />
+                <b>@item.name</b> - @System.Globalization.DateTimeFormatInfo.CurrentInfo.GetDayName(item.startDate.DayOfWeek) <b>@item.startDate.ToString("HH:mm") - @item.endDate.ToString("HH:mm")</b><br />
                 @item.place
             </div>
             }
             else
             {
             <div>
-                <b>@item.name</b> - @item.startDate.ToString("d MMMM HH:mm") - @item.endDate.ToString("HH:mm")<br />
+                <b>@item.name</b> - @item.startDate.ToString("d MMMM") <b>@item.startDate.ToString("HH:mm") - @item.endDate.ToString("HH:mm")</b><br />
                 @item.place
             </div>
             }

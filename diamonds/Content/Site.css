@@ -431,6 +431,8 @@ h5 {
         position: absolute;
         top: 44px;
         left: 32%;
+        right: 0;
+        word-wrap: break-word;
     }
     .featured div p {
         margin-top: 0;
@@ -903,18 +905,28 @@ h5 span {
     }
 
 /* players */
-.players {
+.player {
     display: inline-block;
-    vertical-align: top;
-    width: 45%
+    vertical-align: middle;
+    width: 48%;
 }
-    .players > a {
+    .player .wrapper {
+        height: 230px;
+    }
+    .player.t {
+        width: 24%;
+        text-align: center;
+    }
+    .player .l {
         float: left;
     }
-    .players img {
+    .player img {
         padding: 8px;
     }
-    .players .desc {
+    .player.t img {
+        padding-bottom: 0px;
+    }
+    .player .desc {
         display: block;
         line-height: 20pt;
         padding: 2% 0;

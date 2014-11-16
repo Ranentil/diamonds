@@ -12,8 +12,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(".fancybox").fancybox({ type: 'image' });
-        $(".sortable").sortable();
-        $(".sortable").disableSelection();
+        //$(".sortable").sortable();
+        //$(".sortable").disableSelection();
         $(".delete").click(function (e) {
             e.preventDefault();
             if (!confirm("Na pewno chcesz usunąć zdjęcie?")) {
@@ -41,43 +41,27 @@
 var i = 0;
 <fieldset>
     <legend>Administracja zdjęciami</legend>
-    <input type="submit" value="Zapisz kolejność" style="float:right;" />
-    <ol class="sortable" style="float:left; width:50%;">
-    @foreach (var photo in Model.Where(p => p.no <= Math.Ceiling((float)Model.Count / 2.0)))
+    @*<input type="submit" value="Zapisz kolejność" style="float:right;" />*@
+    <ol class="sortable">
+    @foreach (var photo in Model.OrderByDescending(m => m.no))
     {
-        <li>
-            @if (photo.hasThumb)
-            {
-            <a href="@Url.Action("Photo", new { id = photo.id })" title="@photo.descriptionPl @photo.descriptionEn" class="fancybox" rel="group">
-                <img src="@Url.Action("Photo", new { id = photo.id, size = "small" })" style="width:150px;" />
-            </a><br />
-            }
-            <a href="@Url.Action("PhotoEdit", new { id = photo.id })">@ViewBag.Lang["admin-edycja"]</a>
-            <a href="@Url.Action("PhotoDelete", new { id = photo.id})" class="delete">@ViewBag.Lang["admin-usun"]</a>
-            @Html.Hidden("[" + i + "].id", photo.id)
-            @Html.Hidden("[" + i++ + "].no", photo.no)
+        <li style="display: inline;">
+            <div style="display: inline-block; padding: 6px;">
+                @if (photo.hasThumb)
+                {
+                <a href="@Url.Action("Photo", new { id = photo.id })" title="@photo.descriptionPl @photo.descriptionEn" class="fancybox" rel="group">
+                    <img src="@Url.Action("Photo", new { id = photo.id, size = "small" })" style="width:150px;" />
+                </a><br />
+                }
+                <a href="@Url.Action("PhotoEdit", new { id = photo.id })">@ViewBag.Lang["admin-edycja"]</a>
+                <a href="@Url.Action("PhotoDelete", new { id = photo.id})" class="delete">@ViewBag.Lang["admin-usun"]</a>
+                @Html.Hidden("[" + i + "].id", photo.id)
+                @Html.Hidden("[" + i++ + "].no", photo.no)
+            </div>
         </li>
     }
     </ol>
 
-    <ol class="sortable" style="float:right; width:50%;">
-    @foreach (var photo in Model.Where(p => p.no > Math.Ceiling((float)Model.Count / 2.0)))
-    {
-        <li>
-            @if (photo.hasThumb)
-            {
-            <a href="@Url.Action("Photo", new { id = photo.id })" title="@photo.descriptionPl \n @photo.descriptionEn" class="fancybox" rel="group">
-                <img src="@Url.Action("Photo", new { id = photo.id, size = "small" })" style="width:150px;" />
-            </a><br />
-            }
-            <a href="@Url.Action("PhotoEdit", new { id = photo.id })">@ViewBag.Lang["admin-edycja"]</a>
-            <a href="@Url.Action("PhotoDelete", new { id = photo.id})" class="delete">@ViewBag.Lang["admin-usun"]</a>
-            @Html.Hidden("[" + i + "].id", photo.id)
-            @Html.Hidden("[" + i++ + "].no", photo.no)
-        </li>
-    }
-    </ol>
-
-    <input type="submit" value="Zapisz kolejność" style="float:right;" />
+    @*<input type="submit" value="Zapisz kolejność" style="float:right;" />*@
 </fieldset>
 }

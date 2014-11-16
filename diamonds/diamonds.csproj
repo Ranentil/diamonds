@@ -232,6 +232,10 @@
     <Content Include="Content\fancybox\fancybox_sprite%402x.png" />
     <Content Include="Content\fancybox\fancybox_sprite.png" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\icons\doc.png" />
+    <Content Include="Content\icons\pdf.png" />
+    <Content Include="Content\icons\ppt.png" />
+    <Content Include="Content\icons\xls.png" />
     <Content Include="Content\images\logos\JCC.png" />
     <Content Include="Content\images\logos\mokotow.png" />
     <Content Include="Content\images\logos\warszawa.png" />
@@ -317,7 +321,8 @@
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\fonts\FontAwesome.otf" />
-    <None Include="Properties\PublishProfiles\test.softball.pl - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\softball.pl - Web Deploy.pubxml" />
+    <Content Include="Scripts\analytics.js" />
     <Content Include="Scripts\default-onload.js" />
     <Content Include="scaffolding.config" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
@@ -594,7 +599,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Live\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

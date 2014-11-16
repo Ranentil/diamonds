@@ -27,7 +27,7 @@
 
 @Html.Partial("_NavigationBar", new Diamonds.Models.NavigationModel("Localization", title, "ADMIN"))
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) 
 {
 <fieldset>
     <legend>@title Lokalizacji</legend>

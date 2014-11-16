@@ -10,9 +10,9 @@
     });
 </script>
 }
-
+<h5>@Model.firstName @(!String.IsNullOrEmpty(Model.nickName) ? "\"" + Model.nickName + "\"" : "") @Model.lastName</h5>
 <fieldset>
-    <legend>@Model.firstName "@Model.nickName" @Model.lastName</legend>
+    <legend></legend>
     <table>
         <tr>
             <td rowspan="4">
@@ -28,7 +28,7 @@
                 }
             </td>
             <td>@ViewBag.Lang["player-numer"]</td>
-            <td>@Model.number</td>
+            <td>#@Model.number</td>
         </tr>
         <tr>
             <td>@ViewBag.Lang["player-pozycje"]</td>

@@ -47,15 +47,22 @@ namespace Diamonds.Controllers
         }
 
 
-        public ViewResult Edit(int id)
+        public ViewResult Edit(int id, string ReturnUrl)
         {
             Localization localization = db.Localizations.Single(l => l.id == id);
+            ViewBag.ReturnUrl = ReturnUrl;
             return View(localization);
+        }
+
+        public ActionResult EditPage(string name, string ReturnUrl)
+        {
+            Localization local = db.Localizations.Single(l => l.code == "page-" + name);
+            return RedirectToAction("Edit", new { id = local.id, ReturnUrl = ReturnUrl });
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit(Localization localization)
+        public ActionResult Edit(Localization localization, string ReturnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -64,16 +71,14 @@ namespace Diamonds.Controllers
                 db.SaveChanges();
 
                 TempData["Message"] = "Pomyślnie zapisano.";
+
+                if (!String.IsNullOrEmpty(ReturnUrl))
+                    return Redirect(ReturnUrl);
                 return RedirectToAction("Admin");
             }
             return View(localization);
         }
 
-        public ActionResult EditPage(string name)
-        {
-            Localization local = db.Localizations.Single(l => l.code == "page-" + name);
-            return RedirectToAction("Edit", new { id = local.id });
-        }
 
 
         [Authorize(Roles = "ADMIN")]

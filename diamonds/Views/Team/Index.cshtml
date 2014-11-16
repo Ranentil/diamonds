@@ -13,12 +13,13 @@
 </style>
 }
 
-<h5>Zawodniczki Warsaw Diamonds</h5>
+<h5>@ViewBag.Lang["player-zawodniczki"]</h5>
 
 @foreach (var player in Model.Where(p => !p.Positions.Any(x => x.name == "T" || x.name == "M")))
 {
-<div class="players">
-    <a href="@Url.Action("Details", new { id = player.id })">
+<div class="player">
+    <div class="wrapper">
+    <a href="@Url.Action("Details", new { id = player.id })" class="l">
         @if (player.Photo != null)
         {
         <img src="@Url.Action("Photo", "Gallery", new { id = player.photoId, size = "small" })" />
@@ -32,24 +33,25 @@
         <span style="font-weight:bold;">@player.firstName @player.lastName</span><br />
         @if (!String.IsNullOrEmpty(player.nickName))
         {
-        <span>Przewisko:</span> <span style="font-weight:bold;">@player.nickName</span><br />
+        <span>@ViewBag.Lang["player-przezwisko"]:</span> <span style="font-weight:bold;">@player.nickName</span><br />
         }
         @if (player.Positions.Any())
         {
-        <span>Pozycje:</span>
+        <span>@ViewBag.Lang["player-pozycje"]:</span>
         }
         @foreach (var position in player.Positions)
         {
         <span title="@position.player" style="cursor:help">@position.name</span>
         }
     </div>
+    </div>
 </div>
 }
 <p></p>
 <h5>Trenerzy i działacze</h5>
-<div class="players">
-    @foreach (var player in Model.Where(p => p.Positions.Any(x => x.name == "T" || x.name == "M")))
-    {
+@foreach (var player in Model.Where(p => p.Positions.Any(x => x.name == "T" || x.name == "M")))
+{
+<div class="player t">
     <a href="@Url.Action("Details", new { id = player.id })">
         @if (player.Photo != null)
         {
@@ -72,5 +74,5 @@
             }
         </div>
     </a>
-    }
 </div>
+}

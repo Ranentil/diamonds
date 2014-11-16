@@ -58,7 +58,7 @@
 }
 
 
-<table>
+<table style="width: 80%;">
     @if (User.IsInRole("MODERATOR"))
     {
         using (Html.BeginForm())
@@ -78,9 +78,10 @@
         } 
     }
     <tr>
-        <th style="width:auto;" colspan="2">Nazwa</th>
+        <th style="width: 40px"></th>
+        <th style="width:auto;">Nazwa</th>
         <th>Data dodania</th>
-        <th>Rozmiar</th>
+        @*<th>Rozmiar</th>*@
         @if (User.IsInRole("MODERATOR"))
         {
         <th></th>
@@ -90,14 +91,16 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                <img src="@Url.Content("~/Content/icons/" + item.extension + "_32x32.png")" 
-                    alt="@item.extension" title="@item.extension" style="padding:6px" />
+                <a href="@Url.Action("File", new { path = item.path })">
+                    <img src="@Url.Content("~/Content/icons/" + item.extension + ".png")" 
+                        alt="@item.extension" title="@item.extension" style="padding:2px" />
+                </a>
             </td>
             <td>
                 @Html.ActionLink(Path.GetFileNameWithoutExtension(item.path), "File", new { path = item.path })
             </td>
-            <td style="padding:0 2px;">@item.date.ToShortDateString()</td>
-            <td style="text-align:center">@item.size</td>
+            <td>@item.date.ToShortDateString()</td>
+            @*<td style="text-align:center">@item.size</td>*@
             @if (User.IsInRole("MODERATOR"))
             {
             <td style="text-align:right; padding:0 4px 0 8px;" class="action_icons">

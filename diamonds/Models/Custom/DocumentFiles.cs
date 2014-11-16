@@ -32,7 +32,10 @@ namespace Diamonds.Models
         public string dirPath = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/App_Data/Docs/"));
         public string path { get; set; }
 
-        public Document(string path) { }
+        public Document(string path) 
+        {
+            this.path = path;
+        }
         public Document(HttpPostedFileBase file)
         {
             this.path = Path.Combine(dirPath, file.FileName);
