@@ -2,13 +2,16 @@
 *   Mobile Styles   *
 ********************/
 @media only screen and (max-width: 850px) {
-
+    html, header {
+        width: 850px;
+    }
     /* header
     ----------------------------------------------------------*/
-    header .float-left,
+    
+    /*header .float-left,
     header .float-right {
         float: none;
-    }
+    }*/
 
     /* logo */
     header .site-title {
@@ -16,7 +19,7 @@
         text-align: center;
     }
     .site-title a, .site-title a:hover, .site-title a:active {
-        left: 2%;
+        left: 9%;
     }
     .site-title img {
         height: 70px;
@@ -24,7 +27,7 @@
 
     /* login */
     #login {
-        font-size: .7em;
+        /*font-size: .85em;*/
         margin: 0 0 12px;
         text-align: center;
     }
@@ -59,7 +62,7 @@
     }
 
     ul#menu {
-        font-size: 0.7em;
+        /*font-size: 1em;*/
         padding: 0 2px;
     }
         ul#menu ul {
@@ -71,7 +74,8 @@
         }
 
     /* slideshow*/
-    #featured-photos li {
+    #featured-photos li,
+    #featured-photos li span {
         height: 240px;
     }
 
@@ -96,30 +100,6 @@
         float: none;
         width: 100%;
     }
-
-    /* ordered list */
-    ol.round {
-        list-style-type: none;
-        padding-left: 0;
-    }
-
-        ol.round li {
-            padding-left: 10px;
-            margin: 25px 0;
-        }
-
-            ol.round li.zero,
-            ol.round li.one,
-            ol.round li.two,
-            ol.round li.three,
-            ol.round li.four,
-            ol.round li.five,
-            ol.round li.six,
-            ol.round li.seven,
-            ol.round li.eight,
-            ol.round li.nine {
-                background: none;
-            }
 
      /* features */
      section.feature {
@@ -158,6 +138,51 @@
         width: auto;
     }
 
+/* featured */
+    .featured .list-of-news {
+        line-height: 20px;
+        height: 100%;
+    }
+    
+/* widget */
+    .widget .calendar-widget h5 {
+    display: block;
+}
+    .widget .calendar-widget .calendar,
+    .widget .calendar-widget .event-text {
+        display: inline-block;
+        vertical-align: top;
+    }
+        .widget .calendar-widget .event-text div {
+            padding: 4px;
+        }
+
+    .widget .facebook,
+    .widget .sponsor,
+    .widget .one-percent {
+        width: 28%;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .widget .facebook,
+    .widget .sponsor {
+        padding: 0 5% 0 0;
+    }
+
+    .widget .facebook h5,
+    .widget .sponsor h5,
+    .widget .one-percent h5 {
+        font-size: 10pt;
+    }
+
+    .widget-gallery article {
+        display: inline-block;
+        padding-right: 5%;
+    }
+    .widget-gallery aside {
+        display: inline-block;
+    }
 
     /* footer
     ----------------------------------------------------------*/

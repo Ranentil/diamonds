@@ -13,7 +13,7 @@
 
         var dates = @Html.Raw(Json.Encode(Model.EventClones))
 
-        $(".calendar div:first-of-type").datepicker({
+        $(".calendar").datepicker({
             beforeShowDay: daysToMark
         });
 
@@ -101,9 +101,10 @@
 </article>
 
 <aside class="widget">
-
-    <div class="calendar">
-        <div></div>    
+    <div class="calendar-widget">
+        <h5>@ViewBag.Lang["home-kalendarz"]</h5>
+        <div class="calendar"></div>    
+        <div class="event-text">
         @foreach (var item in Model.EventClones.Where(e => e.startDate > DateTime.Today || (e.repetitive && (e.repetitiveEndDate == null || e.repetitiveEndDate > DateTime.Today))))
         {
             if (item.repetitive)
@@ -121,9 +122,10 @@
             </div>
             }
         }
+        </div>
     </div>
 
-    <div>
+    <div class="facebook">
         <h5><a href="http://www.facebook.com/WarsawDiamonds" target="_blank">@ViewBag.Lang["home-diamonds-fb"]</a></h5>
         <div class="fb-like" data-href="http://www.facebook.com/WarsawDiamonds" data-width="240" data-layout="standard" data-action="like" data-show-faces="true" data-share="false"></div>
     </div>
@@ -147,9 +149,9 @@
         </ul>
     </div>
     
-    <div>
+    <div class="one-percent">
         <h5>@ViewBag.Lang["home-1procent"]</h5>
-        <a href="@Url.Action("Percent", "Home")">
+        <a href="@Url.Action("OnePercent", "Home")">
             <img src="@Url.Content("~/Content/images/percent.png")" />
         </a>
     </div>

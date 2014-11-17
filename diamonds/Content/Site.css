@@ -495,13 +495,19 @@ h5 {
     }
 
 /* calendar wigget */
-.widget .calendar div {
+.widget .calendar-widget h5 {
+    display: none;
+}
+.widget .calendar-widget .calendar,
+.widget .calendar-widget .calendar div,
+.widget .calendar-widget .event-text {
     padding: 0;
 }
 
-    .widget .calendar div:not(:first-of-type) {
-        padding: 4px 0;
-    }
+.widget .calendar-widget .event-text div {
+    padding: 4px 0;
+}
+ 
 
 .mark-training a.ui-state-default {
     background: #f0efff; /* Old browsers */

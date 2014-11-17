@@ -325,6 +325,7 @@
     <Content Include="Scripts\analytics.js" />
     <Content Include="Scripts\default-onload.js" />
     <Content Include="scaffolding.config" />
+    <None Include="Properties\PublishProfiles\test.softball.pl - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
