@@ -30,7 +30,7 @@ namespace Diamonds.Controllers
         [AllowAnonymous]
         public ViewResult Photos(int id)
         {
-            List<Photo> photos = db.Photos.Where(p => p.galleryId == id).OrderByDescending(p => p.no).ToList();
+            List<Photo> photos = db.Photos.Where(p => p.galleryId == id).OrderBy(p => p.no).ToList();
             return View(photos);
         }
 
@@ -51,7 +51,7 @@ namespace Diamonds.Controllers
 
         public ActionResult Admin()
         {
-            List<Gallery> galleries = db.Galleries.OrderByDescending(g => g.startDate).ToList();
+            List<Gallery> galleries = db.Galleries.OrderBy(g => g.id != 5 && g.id != 2 && g.id != 1).ThenByDescending(g => g.startDate).ToList();
             return View(galleries);
         }
 
@@ -114,7 +114,7 @@ namespace Diamonds.Controllers
 
         public ViewResult PhotosAdmin(int id)
         {
-            List<Photo> photos = db.Photos.Where(g => g.galleryId == id).OrderByDescending(p => p.no).ToList();
+            List<Photo> photos = db.Photos.Where(g => g.galleryId == id).OrderBy(p => p.no).ToList();
             return View(photos);
         }
 
@@ -125,12 +125,10 @@ namespace Diamonds.Controllers
             {
                 Photo dbPhoto = db.Photos.Single(p => p.id == photo.id);
                 dbPhoto.no = photo.no;
-                db.SaveChanges();
-
-                TempData["Message"] = "Zapisano kolejność";
-                return RedirectToAction("PhotosAdmin", new { id = id });
             }
-            TempData["Error"] = "Coś poszło nie tak! Nie zapisano galerii.";
+
+            db.SaveChanges();
+            TempData["Message"] = "Zapisano kolejność";
             return RedirectToAction("PhotosAdmin", new { id = id });
         }
 

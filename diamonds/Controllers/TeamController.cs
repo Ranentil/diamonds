@@ -26,7 +26,7 @@ namespace Diamonds.Controllers
 
         public ActionResult Admin()
         {
-            List<Player> players = db.Players.Where(p => p.isActive).OrderBy(p => p.lastName).ThenBy(p => p.firstName).ToList();
+            List<Player> players = db.Players.OrderBy(p => p.lastName).ThenBy(p => p.firstName).ToList();
             return View(players);
         }
 

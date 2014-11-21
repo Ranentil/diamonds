@@ -12,8 +12,29 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $(".fancybox").fancybox({ type: 'image' });
-        //$(".sortable").sortable();
-        //$(".sortable").disableSelection();
+        $(".order").click(function () {
+            $(".sortable").sortable({
+                update: function (e, ui) {
+                    $(this).find("li").each(function () {
+                        $(this).find('[name$=".no"]').val($(this).index() + 1);
+                    });
+                }
+            });
+            $(".sortable").disableSelection();
+            $(".save-order").show();
+            $(".cancel-order").show();
+            $(".order").hide();
+            $(".edit").hide();
+            $(".delete").hide();
+        });
+        $(".cancel-order").click(function () {
+            $(".sortable").sortable("destroy");
+            $(".save-order").hide();
+            $(".cancel-order").hide();
+            $(".order").show();
+            $(".edit").show();
+            $(".delete").show();
+        });
         $(".delete").click(function (e) {
             e.preventDefault();
             if (!confirm("Na pewno chcesz usunąć zdjęcie?")) {
@@ -41,19 +62,21 @@
 var i = 0;
 <fieldset>
     <legend>Administracja zdjęciami</legend>
-    @*<input type="submit" value="Zapisz kolejność" style="float:right;" />*@
+    <input type="button" class="order" value="Edytuj kolejność"/>
+    <input type="submit" class="save-order" value="Zapisz kolejność" style="display: none;" />
+    <input type="button" class="cancel-order" value="Anuluj" style="display: none;" />
     <ol class="sortable">
-    @foreach (var photo in Model.OrderByDescending(m => m.no))
+    @foreach (var photo in Model)
     {
-        <li style="display: inline;">
+        <li style="display: inline-block;">
             <div style="display: inline-block; padding: 6px;">
                 @if (photo.hasThumb)
                 {
-                <a href="@Url.Action("Photo", new { id = photo.id })" title="@photo.descriptionPl @photo.descriptionEn" class="fancybox" rel="group">
+                <a href="@Url.Action("Photo", new { id = photo.id })" title="@photo.descriptionPl @photo.descriptionEn" class="fancybox" rel="group" style="display:block;">
                     <img src="@Url.Action("Photo", new { id = photo.id, size = "small" })" style="width:150px;" />
-                </a><br />
+                </a>
                 }
-                <a href="@Url.Action("PhotoEdit", new { id = photo.id })">@ViewBag.Lang["admin-edycja"]</a>
+                <a href="@Url.Action("PhotoEdit", new { id = photo.id })" class="edit">@ViewBag.Lang["admin-edycja"]</a>
                 <a href="@Url.Action("PhotoDelete", new { id = photo.id})" class="delete">@ViewBag.Lang["admin-usun"]</a>
                 @Html.Hidden("[" + i + "].id", photo.id)
                 @Html.Hidden("[" + i++ + "].no", photo.no)
@@ -62,6 +85,7 @@ var i = 0;
     }
     </ol>
 
-    @*<input type="submit" value="Zapisz kolejność" style="float:right;" />*@
+    <input class="save-order" type="submit" value="Zapisz kolejność" style="display:none;" />
+    <input type="button" class="cancel-order" value="Anuluj" style="display: none;" />
 </fieldset>
 }
