@@ -9,6 +9,7 @@ using Microsoft.Web.WebPages.OAuth;
 using Mvc.Mailer;
 using Diamonds.Models;
 using Diamonds.Models.Entities;
+using BotDetect.Web.UI.Mvc;
 
 namespace Diamonds.Controllers
 {
@@ -66,8 +67,12 @@ namespace Diamonds.Controllers
         }
 
         [HttpPost, AllowAnonymous]
+        [CaptchaValidation("CaptchaCode", "SampleCaptcha", "Incorrect CAPTCHA code!")]
         public ActionResult Register(RegisterModel model)
         {
+            if (db.Users.Any(u => u.email == model.Email))
+                ModelState.AddModelError("email", "Użytkownik o tym adresie już istnieje");
+
             if (ModelState.IsValid)
             {
                 User user = new User(model.UserName, model.Email, model.Password);
@@ -77,9 +82,14 @@ namespace Diamonds.Controllers
                 new Diamonds.Mailers.UserMailer().Welcome(user);
                 // Send verification mail
                 // Information about send mail
+
+                TempData["Message"] = "Rejestracja powiodła się, możesz się teraz zalogować."; 
+                //TempData["Message"] = "Rejestracja powiodła się, sprawdź skrzynkę pocztową, aby potwiedzić Twój adres e-mail.";
+                return RedirectToAction("Index", "Home");
             }
-            TempData["Message"] = "Rejestracja powiodła się, sprawdź skrzynkę pocztową, aby potwiedzić Twój adres e-mail.";
-            return RedirectToAction("Index", "Home");
+
+            TempData["Error"] = "Rejestracja nie powiodła się.";
+            return View(model);
         }
 
         public ActionResult ConfirmEmail(string email, string hash)

@@ -1,9 +1,11 @@
 ﻿@model Diamonds.Models.RegisterModel
+@using BotDetect.Web.UI.Mvc;
 @{
     ViewBag.Title = ViewBag.Lang["login-rejestracja"];
 }
 
 @section scripts {
+    <link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
     @Scripts.Render("~/bundles/jqueryval")
 }
 
@@ -43,6 +45,15 @@
             <div class="editor-field">
                 @Html.PasswordFor(m => m.ConfirmPassword)
                 @Html.ValidationMessageFor(m => m.ConfirmPassword, (string)ViewBag.Lang["login-hasla-nie-sa-takie-same"])
+            </div>
+
+            <div class="editor-label">
+                <label>@ViewBag.Lang["login-przepisz-tekst"]</label>
+            </div>
+            <div class="editor-field">
+                @{ MvcCaptcha sampleCaptcha = new MvcCaptcha("SampleCaptcha"); }
+                @Html.Captcha(sampleCaptcha)
+                @Html.TextBox("CaptchaCode")
             </div>
 
             <p>

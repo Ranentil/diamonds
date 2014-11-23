@@ -42,6 +42,12 @@
     <Reference Include="BCrypt.Net">
       <HintPath>..\packages\BCrypt-Official.0.1.107\lib\BCrypt.Net.dll</HintPath>
     </Reference>
+    <Reference Include="BotDetect">
+      <HintPath>..\packages\Captcha.3.0.16.0\lib\net45\BotDetect.dll</HintPath>
+    </Reference>
+    <Reference Include="BotDetect.Web.UI.Mvc">
+      <HintPath>..\packages\Captcha.3.0.16.0\lib\net45\BotDetect.Web.UI.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mvc.Mailer">
       <HintPath>..\packages\MvcMailer.4.5\lib\45\Mvc.Mailer.dll</HintPath>
