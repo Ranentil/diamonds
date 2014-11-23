@@ -1,0 +1,62 @@
+﻿@model Diamonds.Models.Entities.Dictionary
+
+@{
+    string title = Model.id == 0 ? "Tworzenie" : "Edycja";
+    ViewBag.Title = title + " wpisu słownika";
+}
+
+@section scripts{
+<script type="text/javascript" src="@Url.Content("~/Scripts/tinymce/tinymce.min.js")"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("ul#site-nav li").hover(function () {
+            $(this).children('ul').hide();
+            $(this).children("ul").slideDown("fast");
+        },
+        function () {
+            $('ul', this).slideUp("fast");
+        });
+        tinymce.init({
+            selector: "textarea", statusbar: false, forced_root_block: "",
+            //menubar: false,
+            entity_encoding: "raw",
+            force_br_newlines: true, force_p_newlines: false, oninit: "setPlainText",
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code",
+                "insertdatetime media contextmenu paste"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link @*image*@"
+
+        });
+    });
+</script>
+}
+
+@Html.Partial("_NavigationBar", new Diamonds.Models.NavigationModel("News", title, "MODERATOR"))
+
+@using (Html.BeginForm()) 
+{
+<fieldset>
+    <legend>@title Aktualności</legend>
+    @Html.HiddenFor(m => m.id)
+
+    <table class="edit purple">
+        <tr>
+            <td>@Html.LabelFor(m => m.titlePl, "Tytuł PL")</td>
+            <td>@Html.EditorFor(m => m.titlePl) @Html.ValidationMessageFor(m => m.titlePl)</td>
+            <td>@Html.LabelFor(m => m.titleEn, "Tytuł EN")</td>
+            <td>@Html.EditorFor(m => m.titleEn) @Html.ValidationMessageFor(m => m.titleEn)</td>
+        </tr>
+        <tr>
+            <td colspan="2">@Html.LabelFor(m => m.textPl, "Treść PL")
+                @Html.TextAreaFor(m => m.textPl) @Html.ValidationMessageFor(m => m.textPl)</td>
+            <td colspan="2">@Html.LabelFor(m => m.titleEn, "Treść EN")
+                @Html.TextAreaFor(m => m.textEn) @Html.ValidationMessageFor(m => m.textEn)</td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Zapisz" /></td>
+        </tr>
+    </table>
+</fieldset>
+}

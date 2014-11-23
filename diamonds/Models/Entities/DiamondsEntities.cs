@@ -33,6 +33,7 @@ namespace Diamonds.Models.Entities
         }
 
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Dictionary> Dictionaries { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<EventType> EventTypes { get; set; }
         public DbSet<Gallery> Galleries { get; set; }

@@ -210,6 +210,7 @@
     <Compile Include="Models\Entities\Comment.cs" />
     <Compile Include="Models\Entities\DiamondsEntities.cs" />
     <Compile Include="Models\EmptyStringModelBinder.cs" />
+    <Compile Include="Models\Entities\Dictionary.cs" />
     <Compile Include="Models\Entities\Event.cs" />
     <Compile Include="Models\Entities\EventType.cs" />
     <Compile Include="Models\Entities\Gallery.cs" />
@@ -588,7 +589,6 @@
     <Content Include="Views\UserMailer\_Layout.cshtml" />
     <Content Include="Views\UserMailer\Welcome.cshtml" />
     <Content Include="Views\UserMailer\PasswordReset.cshtml" />
-    <Content Include="Views\Softball\Page.cshtml" />
     <Content Include="Views\Gallery\Select.cshtml" />
     <Content Include="Views\Shared\_Window.cshtml" />
     <Content Include="Views\Team\Details.cshtml" />
@@ -599,6 +599,8 @@
     <Content Include="Views\Profile\ChangeForgottenPassword.cshtml" />
     <Content Include="Views\Profile\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Profile\Manage.cshtml" />
+    <Content Include="Views\Softball\Dictionary.cshtml" />
+    <Content Include="Views\Softball\DictionaryEdit.cshtml" />
     <None Include="Views\User\RoleEdit.cshtml" />
     <Content Include="Views\User\RoleGroupEdit.cshtml" />
     <Content Include="Views\User\RoleGroups.cshtml" />

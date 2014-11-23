@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Diamonds.Models.Entities.Dictionary>
+@{
+    ViewBag.Title = ViewBag.Lang["menu-slownik"];
+}
+
+@section Scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+    });
+</script>
+<style type="text/css">
+    label {
+        display: inline;
+    }
+    .entry {
+        margin: 4px 0 10px;
+    }
+    .edit {
+        float: right;
+        padding-left: 10px;
+    }
+</style>
+}
+
+<section class="content-wrapper">
+    <h5>@ViewBag.Lang["menu-slownik"]</h5>
+    @foreach (var item in Model)
+    {
+    <div class="entry">
+        @if (User.IsInRole("MODERATOR"))
+        {
+        <span class="edit">@Html.ActionLink("Edit", "DictionaryEdit", new { id = item.id })</span>
+        }
+        <label>@Html.Raw(item.title)</label> -
+        @Html.Raw(item.text)
+    </div>
+    }
+</section>

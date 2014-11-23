@@ -29,7 +29,32 @@ namespace Diamonds.Controllers
 
         public ViewResult Dictionary()
         {
-            return View();
+            List<Dictionary> dictionaries = db.Dictionaries.ToList();
+            return View(dictionaries.OrderBy(d => d.title));
+        }
+
+        [Authorize(Roles = "MODERATOR")]
+        public ViewResult DictionaryEdit(int id)
+        {
+            Dictionary dictionary = db.Dictionaries.Single(d => d.id == id);
+            return View(dictionary);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "MODERATOR")]
+        [ValidateInput(false)]
+        public ActionResult DictionaryEdit(Dictionary dictionary)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Dictionaries.Attach(dictionary);
+                db.Entry(dictionary).State = EntityState.Modified;
+                db.SaveChanges();
+
+                TempData["Message"] = "Pomyślnie zapisano wpis.";
+                return RedirectToAction("Dictionary");
+            }
+            return View(dictionary);
         }
 
         #region Pages
@@ -37,7 +62,7 @@ namespace Diamonds.Controllers
         public ViewResult WhatIsSoftball()
         {
             ViewData.Model = "co-to-softball";
-            return View("Page");
+            return View("_Page");
         }
 
         #endregion
