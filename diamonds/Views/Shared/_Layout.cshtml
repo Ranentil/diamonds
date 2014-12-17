@@ -77,11 +77,11 @@
             <section class="message content-wrapper">
                 @if (TempData["Message"] != null)
                 {
-                    <div class="message-success">@TempData["Message"]</div>
+                    <div class="message-success">@Html.Raw(TempData["Message"])</div>
                 }
                 @if (TempData["Error"] != null)
                 {
-                    <div class="message-error">@TempData["Error"]</div>
+                    <div class="message-error">@Html.Raw(TempData["Error"])</div>
                 }
             </section>
             <section class="main-content content-wrapper clear-fix">

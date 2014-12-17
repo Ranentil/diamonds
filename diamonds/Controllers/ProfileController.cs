@@ -164,6 +164,65 @@ namespace Diamonds.Controllers
             return View(model);
         }
 
+
+        [AllowAnonymous]
+        public JsonResult RemindPassword(string email)
+        {
+            User user = db.Users.SingleOrDefault(u => u.email == email);
+            if (user == null)
+                return Json(false, JsonRequestBehavior.AllowGet);
+
+            string salt = Crypto.sha256encrypt(user.email + user.lastLoginDate.ToString());
+            new Diamonds.Mailers.UserMailer().PasswordReset(user, salt).Send();
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
+        public ActionResult ChangeForgottenPassword(string email, string reset)
+        {
+            User user = db.Users.SingleOrDefault(u => u.email == email);
+            if (user == null)
+            {
+                TempData["Error"] = "Niepoprawny adres URL";
+                return RedirectToAction("Login");
+            }
+
+            string salt = Crypto.sha256encrypt(user.email + user.lastLoginDate.ToString());
+            if (salt != reset)
+            {
+                TempData["Error"] = "Niepoprawny adres URL";
+                return RedirectToAction("Login");
+            }
+
+            return View();
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult ChangeForgottenPassword(string email, string reset, ChangePasswordModel model)
+        {
+            User user = db.Users.SingleOrDefault(u => u.email == email);
+            if (user == null)
+            {
+                TempData["Error"] = "Niepoprawny adres URL";
+                return RedirectToAction("Login");
+            }
+
+            string salt = Crypto.sha256encrypt(user.email + user.lastLoginDate.ToString());
+            if (salt != reset)
+            {
+                TempData["Error"] = "Niepoprawny adres URL";
+                return RedirectToAction("Login");
+            }
+
+            user.setPassword(model.NewPassword);
+            db.SaveChanges();
+            TempData["Message"] = "Hasło zostało zresetowane! Zaloguj się używając swojego nowego hasła";
+
+            return RedirectToAction("Login");
+        }
+
         #endregion
 
         #region External Logins

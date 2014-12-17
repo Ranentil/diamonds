@@ -5,6 +5,24 @@
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#reset-link").click(function (e) {
+            e.preventDefault();
+            $("#resetPassword").val($("#Email").val());
+            $("#reset-password").slideDown();
+        });
+        $("#send-reset-link").click(function (e) {
+            e.preventDefault();
+            $.post("/Profile/RemindPassword/?email=" + $("#resetPassword").val(), null,
+                function () {
+                    $("#reset-password").slideUp();
+                    $("#reset-link").hide();
+                    $("#reset-confirm").show();
+                });
+        });
+    });
+</script>
 }
 
 <section id="loginForm">
@@ -34,6 +52,15 @@
             @Html.ActionLink((string)ViewBag.Lang["login-zarejestruj"], "Register") @ViewBag.Lang["login-nie-masz-konta"]
         </p>
     </fieldset>
+    
+    <br />
+    <a id="reset-link" href="#">Nie pamiętasz hasła?</a>
+    <div id="reset-confirm" style="display:none; color:#046900">Wiadomość e-mail została wysłana.</div>
+    <div id="reset-password" style="display:none;">
+        Podaj swój adres e-mail:<br />
+        @Html.TextBox("resetPassword")
+        <a href="#" id="send-reset-link">Wyślij</a>
+    </div>
 }
 </section>
 

@@ -6,6 +6,6 @@ namespace Diamonds.Mailers
     public interface IUserMailer
     {
 			MvcMailMessage Welcome(User user);
-			MvcMailMessage PasswordReset(User user);
+			MvcMailMessage PasswordReset(User user, string salt);
 	}
 }
